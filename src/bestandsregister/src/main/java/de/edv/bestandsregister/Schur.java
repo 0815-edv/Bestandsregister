@@ -11,42 +11,22 @@ import java.util.Date;
  *
  * @author lorenz
  */
-public class Impfungen {
+public class Schur {
+    private int schurID;
     private int schafID;
-    private int impfID;
-    private String impfstoff;
-    private String bemerkung;
     private Date datum;
     
-    public Impfungen(int schafID){
+    public Schur(int schafID){
         this.schafID = schafID;
-    }
-
-    public int getImpfID() {
-        return impfID;
-    }
-
-    public String getBemerkung() {
-        return bemerkung;
     }
 
     public Date getDatum() {
         return datum;
     }
 
-    public void setImpfstoff(String impfstoff) {
-        this.impfstoff = impfstoff;
-    }
-
-    public void setBemerkung(String bemerkung) {
-        this.bemerkung = bemerkung;
-    }
-
     public void setDatum(Date datum) {
         this.datum = datum;
     }
-    
-    
     
     
 }
