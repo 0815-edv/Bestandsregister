@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class Impfungen {
     private int schafID;
-    private int ImpfID;
+    private int impfID;
     private String impfstoff;
     private String bemerkung;
     private Date datum;
@@ -23,7 +23,7 @@ public class Impfungen {
     }
 
     public int getImpfID() {
-        return ImpfID;
+        return impfID;
     }
 
     public String getBemerkung() {
