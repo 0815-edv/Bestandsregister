@@ -7,4 +7,4 @@ Bestandsregister für Schäfer lol
 
 ### Klassendiagramm
 
-![](docs/ClassDiagram.png)
+![](docs/ClassDiagram.PNG)
