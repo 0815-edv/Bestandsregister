@@ -10,5 +10,5 @@ package de.edv.bestandsregister;
  * @author lorenz
  */
 public class impfungen {
-    
+    //test
 }
