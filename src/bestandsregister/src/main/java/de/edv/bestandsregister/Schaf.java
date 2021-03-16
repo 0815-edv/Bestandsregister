@@ -14,59 +14,59 @@ import java.util.Date;
 public class Schaf {
     
     private int schafID;
-    private Date DatumZugang;
-    private Date DatumAbgang;
-    private String GrundFürAbgang;
-    private String Kennung;
-    private String Bemerkung;
-    private String Mutterkennung;
+    private Date datumZugang;
+    private Date datumAbgang;
+    private String grundFürAbgang;
+    private String kennung;
+    private String bemerkung;
+    private String mutterkennung;
 
     public Date getDatumZugang() {
-        return DatumZugang;
+        return datumZugang;
     }
 
-    public void setDatumZugang(Date DatumZugang) {
-        this.DatumZugang = DatumZugang;
+    public void setDatumZugang(Date datumZugang) {
+        this.datumZugang = datumZugang;
     }
 
     public Date getDatumAbgang() {
-        return DatumAbgang;
+        return datumAbgang;
     }
 
-    public void setDatumAbgang(Date DatumAbgang) {
-        this.DatumAbgang = DatumAbgang;
+    public void setDatumAbgang(Date datumAbgang) {
+        this.datumAbgang = datumAbgang;
     }
 
     public String getGrundFürAbgang() {
-        return GrundFürAbgang;
+        return grundFürAbgang;
     }
 
-    public void setGrundFürAbgang(String GrundFürAbgang) {
-        this.GrundFürAbgang = GrundFürAbgang;
+    public void setGrundFürAbgang(String grundFürAbgang) {
+        this.grundFürAbgang = grundFürAbgang;
     }
 
     public String getKennung() {
-        return Kennung;
+        return kennung;
     }
 
-    public void setKennung(String Kennung) {
-        this.Kennung = Kennung;
+    public void setKennung(String kennung) {
+        this.kennung = kennung;
     }
 
     public String getBemerkung() {
-        return Bemerkung;
+        return bemerkung;
     }
 
-    public void setBemerkung(String Bemerkung) {
-        this.Bemerkung = Bemerkung;
+    public void setBemerkung(String bemerkung) {
+        this.bemerkung = bemerkung;
     }
 
     public String getMutterkennung() {
-        return Mutterkennung;
+        return mutterkennung;
     }
 
-    public void setMutterkennung(String Mutterkennung) {
-        this.Mutterkennung = Mutterkennung;
+    public void setMutterkennung(String mutterkennung) {
+        this.mutterkennung = mutterkennung;
     }
     
     

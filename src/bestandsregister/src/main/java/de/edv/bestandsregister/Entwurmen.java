@@ -12,14 +12,15 @@ import java.util.Date;
  * @author lorenz
  */
 public class Entwurmen {
+
     private int entwurmenID;
     private int schafID;
     private Date datum;
-    
-   public Entwurmen(int schafID) {
-       this.schafID = schafID;
-       
-   } 
+
+    public Entwurmen(int schafID) {
+        this.schafID = schafID;
+
+    }
 
     public Date getDatum() {
         return datum;
@@ -28,6 +29,5 @@ public class Entwurmen {
     public void setDatum(Date datum) {
         this.datum = datum;
     }
-   
-   
+
 }
