@@ -14,7 +14,7 @@ public class Betriebsnummer {
     private int betriebsID;
     private String betriebsnummer;
     private int schafID;
-    private String Bemerkung;
+    private String bemerkung;
 
     public String getBetriebsnummer() {
         return betriebsnummer;
@@ -25,11 +25,11 @@ public class Betriebsnummer {
     }
 
     public String getBemerkung() {
-        return Bemerkung;
+        return bemerkung;
     }
 
-    public void setBemerkung(String Bemerkung) {
-        this.Bemerkung = Bemerkung;
+    public void setBemerkung(String bemerkung) {
+        this.bemerkung = bemerkung;
     }
 
 }
