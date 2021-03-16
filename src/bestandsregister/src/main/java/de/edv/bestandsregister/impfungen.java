@@ -12,14 +12,14 @@ import java.util.Date;
  * @author lorenz
  */
 public class Impfungen {
-    int schafID;
-    int ImpfID;
-    String impfstoff;
-    String bemerkung;
-    Date datum;
+    private int schafID;
+    private int ImpfID;
+    private String impfstoff;
+    private String bemerkung;
+    private Date datum;
     
-    public void Impfungen(int SchafID){
-       //here the code for the method "impfungen" 
+    public Impfungen(int schafID){
+        this.schafID = schafID;
     }
 
     public int getImpfID() {
