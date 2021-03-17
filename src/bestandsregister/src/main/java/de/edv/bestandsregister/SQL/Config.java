@@ -134,6 +134,7 @@ public class Config {
                 + "	SchafID         INTEGER NOT NULL,\n"
                 + "	TransportMittel	TEXT NOT NULL,\n"
                 + "	Grund           TEXT\n"
+                + "	Datum           TEXT NOT NULL\n"
                 + ")");
 
         try (Connection conn = DriverManager.getConnection(CONNECTION);
