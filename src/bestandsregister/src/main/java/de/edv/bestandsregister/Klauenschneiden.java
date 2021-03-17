@@ -9,14 +9,19 @@ import java.sql.Date;
  *
  * @author flori
  */
-public class Klauenschneide {
+public class Klauenschneiden {
     
-    private int KlauenID;
-    private int SchafID;
+    private int klauenID;
+    private int schafID;
     private Date Datum;
 
-    public Klauenschneide(int SchafID) {
-        this.SchafID = SchafID;
+    public Klauenschneiden(int schafID) {
+        this.schafID = schafID;
+    }
+    
+    public Klauenschneiden(int schafID, int klauenID){
+        this.schafID = schafID;
+        this.klauenID = klauenID;
     }
 
     public Date getDatum() {

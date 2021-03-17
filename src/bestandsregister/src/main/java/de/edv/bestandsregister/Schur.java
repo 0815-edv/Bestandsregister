@@ -19,6 +19,11 @@ public class Schur {
     public Schur(int schafID){
         this.schafID = schafID;
     }
+    
+    public Schur(int schafID, int schurID){
+        this.schafID = schafID;
+        this.schurID = schurID;
+    }
 
     public Date getDatum() {
         return datum;
@@ -27,6 +32,4 @@ public class Schur {
     public void setDatum(Date datum) {
         this.datum = datum;
     }
-    
-    
 }

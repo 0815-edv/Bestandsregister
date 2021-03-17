@@ -19,7 +19,11 @@ public class Entwurmen {
 
     public Entwurmen(int schafID) {
         this.schafID = schafID;
-
+    }
+    
+    public Entwurmen(int schafID, int entwurmenID){
+        this.schafID = schafID;
+        this.entwurmenID = entwurmenID;
     }
 
     public Date getDatum() {
