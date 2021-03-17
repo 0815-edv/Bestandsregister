@@ -12,6 +12,7 @@ import de.edv.bestandsregister.Impfungen;
 import de.edv.bestandsregister.Klauenschneiden;
 import de.edv.bestandsregister.Schaf;
 import de.edv.bestandsregister.Schur;
+import de.edv.bestandsregister.Transport;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -46,6 +47,7 @@ public class Get {
                 s.setBemerkung(rs.getString("Bemerkung"));
                 s.setGrundFürAbgang(rs.getString("GrundFürAbgang"));
                 s.setMutterkennung(rs.getString("MutterKennung"));
+                // Cast from String Possible ???
                 s.setDatumAbgang(rs.getDate("DatumAbgang"));
                 s.setDatumZugang(rs.getDate("DatumZugang"));
 
@@ -92,11 +94,12 @@ public class Get {
         }
         return dbBetriebsnummer;
     }
-    
+
     /**
      * Get entwurmen objects from db
+     *
      * @param SchafID
-     * @return 
+     * @return
      */
     public ArrayList<Entwurmen> entwurmen(int SchafID) {
         Config.open();
@@ -123,11 +126,12 @@ public class Get {
         }
         return dbEntwurmen;
     }
-    
+
     /**
      * Get Gedeckt Objects from DB
+     *
      * @param SchafID
-     * @return 
+     * @return
      */
     public ArrayList<Gedeckt> gedeckt(int SchafID) {
         Config.open();
@@ -155,11 +159,12 @@ public class Get {
         }
         return dbGedeckt;
     }
-    
+
     /**
      * Get Impfungen Objects from DB
+     *
      * @param SchafID
-     * @return 
+     * @return
      */
     public ArrayList<Impfungen> impfungen(int SchafID) {
         Config.open();
@@ -188,13 +193,13 @@ public class Get {
         }
         return dbImpfung;
     }
-    
+
     /**
      * Get Klauenschneiden Objects from DB
+     *
      * @param SchafID
-     * @return 
+     * @return
      */
-    
     public ArrayList<Klauenschneiden> klauenschneiden(int SchafID) {
         Config.open();
         PreparedStatement stm = null;
@@ -220,11 +225,12 @@ public class Get {
         }
         return dbKlauenschneiden;
     }
-    
+
     /**
      * Get Schur Object from DB
+     *
      * @param SchafID
-     * @return 
+     * @return
      */
     public ArrayList<Schur> schur(int SchafID) {
         Config.open();
@@ -250,5 +256,39 @@ public class Get {
             Config.close();
         }
         return dbSchur;
+    }
+
+    /**
+     * Get Transport Objects From DB
+     *
+     * @param SchafID
+     * @return
+     */
+    public ArrayList<Transport> transport(int SchafID) {
+        Config.open();
+        PreparedStatement stm = null;
+        ArrayList<Transport> dbTransport = new ArrayList<Transport>();
+
+        try {
+            String sql = "SELECT * FROM Transport WHERE SchafID = ?;";
+            stm.setInt(1, SchafID);
+            ResultSet rs = stm.executeQuery(sql);
+
+            while (rs.next()) {
+                Transport s = new Transport(rs.getInt("SchafID"), rs.getInt("TransportID"));
+
+                s.setTransportMittel(rs.getString("TransportMittel"));
+                s.setGrund("Grund");
+                s.setDatum(rs.getDate("Datum"));
+
+                dbTransport.add(s);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Get.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            Config.close();
+        }
+        return dbTransport;
     }
 }
