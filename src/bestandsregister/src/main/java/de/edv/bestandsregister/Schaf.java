@@ -21,6 +21,13 @@ public class Schaf {
     private String bemerkung;
     private String mutterkennung;
 
+    public Schaf(){
+    }
+    
+    public Schaf(int schafID){
+        this.schafID = schafID;
+    }
+    
     public Date getDatumZugang() {
         return datumZugang;
     }
