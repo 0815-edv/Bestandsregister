@@ -8,6 +8,8 @@ package de.edv.bestandsregister.SQL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -16,6 +18,7 @@ import java.sql.SQLException;
 public class Config {
 
     private static Connection SQL;
+    private static final String CONNECTION = "jdbc:sqlite:register.db";
 
     /**
      * Return SQLite JDBC Connection
@@ -33,7 +36,9 @@ public class Config {
         Connection conn = null;
         if (SQL == null) {
             try {
-                SQL = DriverManager.getConnection("jdbc:sqlite:register.db");
+                // Initialize new SQL DB
+                init();
+                SQL = DriverManager.getConnection(CONNECTION);
                 conn = SQL;
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
@@ -65,6 +70,80 @@ public class Config {
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }
+        }
+    }
+
+    /**
+     * Initialize SQLite Database
+     */
+    protected static void init() {
+        // SQL statement for creating a new table
+        ArrayList<String> tables = new ArrayList<String>();
+        tables.add("CREATE TABLE IF NOT EXISTS  Betriebsnummer  (\n"
+                + "	 BetriebsID 	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n"
+                + "	 SchafID 	INTEGER NOT NULL,\n"
+                + "	 Betriebsnummer TEXT NOT NULL,\n"
+                + "	 Bemerkung 	TEXT\n"
+                + ");");
+
+        tables.add("CREATE TABLE IF NOT EXISTS  Gedeckt  (\n"
+                + "	 GedecktID 	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n"
+                + "	 SchafID 	INTEGER NOT NULL,\n"
+                + "	 VaterKennung 	TEXT NOT NULL,\n"
+                + "	 Datum          TEXT NOT NULL\n"
+                + ");");
+
+        tables.add("CREATE TABLE IF NOT EXISTS  Klauenschneiden  (\n"
+                + "	 KlauenID 	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n"
+                + "	 SchafID 	INTEGER NOT NULL,\n"
+                + "	 Datum          TEXT NOT NULL\n"
+                + ");");
+
+        tables.add("CREATE TABLE IF NOT EXISTS  Impfungen  (\n"
+                + "	 ImpfID 	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n"
+                + "	 SchafID 	INTEGER NOT NULL,\n"
+                + "	 Impfstoff 	TEXT NOT NULL,\n"
+                + "	 Bemerkung 	TEXT,\n"
+                + "	 Datum          TEXT NOT NULL\n"
+                + ");");
+
+        tables.add("CREATE TABLE IF NOT EXISTS  Entwurmen  (\n"
+                + "	 EntwurmenID 	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n"
+                + "	 SchafID 	INTEGER NOT NULL,\n"
+                + "	 Datum          TEXT NOT NULL\n"
+                + ");");
+
+        tables.add("CREATE TABLE IF NOT EXISTS  Schur  (\n"
+                + "	 SchurID 	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n"
+                + "	 SchafID 	INTEGER NOT NULL,\n"
+                + "	 Datum          TEXT NOT NULL\n"
+                + ");");
+
+        tables.add("CREATE TABLE IF NOT EXISTS  Schaf  (\n"
+                + "	 SchafID 	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n"
+                + "	 DatumZugang 	TEXT,\n"
+                + "	 DatumAbgang 	TEXT,\n"
+                + "	 GrundFürAbgang TEXT,\n"
+                + "	 Kennung 	TEXT,\n"
+                + "	 Bemerkung 	TEXT,\n"
+                + "	 MutterKennung 	TEXT\n"
+                + ");");
+        
+        tables.add("CREATE TABLE IF NOT EXISTS Transport (\n"
+                + "	TransportID     INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n"
+                + "	SchafID         INTEGER NOT NULL,\n"
+                + "	TransportMittel	TEXT NOT NULL,\n"
+                + "	Grund           TEXT\n"
+                + ")");
+
+        try (Connection conn = DriverManager.getConnection(CONNECTION);
+                Statement stmt = conn.createStatement()) {
+            // create a new table
+            for (String sql : tables) {
+                stmt.execute(sql);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
     }
 }
