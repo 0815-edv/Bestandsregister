@@ -16,6 +16,15 @@ public class Betriebsnummer {
     private int schafID;
     private String bemerkung;
 
+    public Betriebsnummer(){
+        
+    }
+    
+    public Betriebsnummer(int schafID, int betriebsID){
+        this.schafID = schafID;
+        this.betriebsID = betriebsID;
+    }
+    
     public String getBetriebsnummer() {
         return betriebsnummer;
     }

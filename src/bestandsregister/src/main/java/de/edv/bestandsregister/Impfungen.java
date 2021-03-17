@@ -23,6 +23,11 @@ public class Impfungen {
         this.schafID = schafID;
     }
 
+    public Impfungen(int schafID, int impfID){
+        this.schafID = schafID;
+        this.impfID = impfID;
+    }
+    
     public int getImpfID() {
         return impfID;
     }

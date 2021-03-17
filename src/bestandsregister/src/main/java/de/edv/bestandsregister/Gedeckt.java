@@ -14,14 +14,19 @@ import java.sql.Date;
 public class Gedeckt {
     
     private int gedecktID;
-    private int SchafID;
+    private int schafID;
     private Date datum;
     private String vaterkennung;
     
     public Gedeckt(int schafID){
-        this.SchafID = schafID;
+        this.schafID = schafID;
     }
 
+    public Gedeckt(int schafID, int gedecktID){
+        this.schafID = schafID;
+        this.gedecktID = gedecktID;
+    }
+    
     public Date getDatum() {
         return datum;
     }
@@ -37,7 +42,4 @@ public class Gedeckt {
     public void setVaterkennung(String vaterkennung) {
         this.vaterkennung = vaterkennung;
     }
-    
-    
-    
 }
