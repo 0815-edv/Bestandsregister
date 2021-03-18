@@ -69,6 +69,8 @@ public class Config {
                 SQL.close();
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
+            } finally {
+                SQL = null;
             }
         }
     }
@@ -133,7 +135,7 @@ public class Config {
                 + "	TransportID     TEXT NOT NULL PRIMARY KEY,\n"
                 + "	SchafID         TEXT NOT NULL,\n"
                 + "	TransportMittel	TEXT NOT NULL,\n"
-                + "	Grund           TEXT\n"
+                + "	Grund           TEXT,\n"
                 + "	Datum           TEXT NOT NULL\n"
                 + ")");
 
