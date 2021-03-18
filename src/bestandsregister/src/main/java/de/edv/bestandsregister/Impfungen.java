@@ -5,6 +5,7 @@
  */
 package de.edv.bestandsregister;
 
+import de.edv.bestandsregister.utils.IdentifierService;
 import java.sql.Date;
 
 /**
@@ -13,26 +14,27 @@ import java.sql.Date;
  */
 
 public class Impfungen {
-    private int schafID;
-    private int impfID;
+    private String schafID;
+    private String impfID;
     private String impfstoff;
     private String bemerkung;
     private Date datum;
     
-    public Impfungen(int schafID){
+    public Impfungen(String schafID){
         this.schafID = schafID;
+        this.impfID = IdentifierService.generateGUID();
     }
 
-    public Impfungen(int schafID, int impfID){
+    public Impfungen(String schafID, String impfID){
         this.schafID = schafID;
         this.impfID = impfID;
     }
     
-    public int getSchafID(){
+    public String getSchafID(){
         return schafID;
     }
       
-    public int getImpfID() {
+    public String getImpfID() {
         return impfID;
     }
 

@@ -5,6 +5,7 @@
  */
 package de.edv.bestandsregister;
 
+import de.edv.bestandsregister.utils.IdentifierService;
 import java.sql.Date;
 
 /**
@@ -13,24 +14,25 @@ import java.sql.Date;
  */
 public class Entwurmen {
 
-    private int entwurmenID;
-    private int schafID;
+    private String entwurmenID;
+    private String schafID;
     private Date datum;
 
-    public Entwurmen(int schafID) {
+    public Entwurmen(String schafID) {
         this.schafID = schafID;
+        this.entwurmenID = IdentifierService.generateGUID();
     }
     
-    public Entwurmen(int schafID, int entwurmenID){
+    public Entwurmen(String schafID, String entwurmenID){
         this.schafID = schafID;
         this.entwurmenID = entwurmenID;
     }
 
-    public int getEntwurmenID(){
+    public String getEntwurmenID(){
         return entwurmenID;
     }
     
-    public int getSchafID(){
+    public String getSchafID(){
         return schafID;
     }
     
@@ -41,5 +43,4 @@ public class Entwurmen {
     public void setDatum(Date datum) {
         this.datum = datum;
     }
-
 }

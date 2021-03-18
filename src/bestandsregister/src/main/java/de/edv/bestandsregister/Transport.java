@@ -5,6 +5,7 @@
  */
 package de.edv.bestandsregister;
 
+import de.edv.bestandsregister.utils.IdentifierService;
 import java.sql.Date;
 
 /**
@@ -13,26 +14,27 @@ import java.sql.Date;
  */
 public class Transport {
 
-    private int transportID;
-    private int schafID;
+    private String transportID;
+    private String schafID;
     private String transportMittel;
     private String grund;
     private Date datum;
 
-    public Transport(int schafID) {
+    public Transport(String schafID) {
         this.schafID = schafID;
+        this.transportID = IdentifierService.generateGUID();
     }
 
-    public Transport(int schafID, int transportID) {
+    public Transport(String schafID, String transportID) {
         this.schafID = schafID;
         this.transportID = transportID;
     }
 
-    public int getTransportID() {
+    public String getTransportID() {
         return transportID;
     }
 
-    public int getSchafID() {
+    public String getSchafID() {
         return schafID;
     }
 

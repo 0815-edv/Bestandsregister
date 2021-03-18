@@ -5,22 +5,25 @@
  */
 package de.edv.bestandsregister;
 
+import de.edv.bestandsregister.utils.IdentifierService;
+
 /**
  *
  * @author lorenz
  */
 public class Betriebsnummer {
 
-    private int betriebsID;
+    private String betriebsID;
     private String betriebsnummer;
-    private int schafID;
+    private String schafID;
     private String bemerkung;
 
-    public Betriebsnummer(){
-        
+    public Betriebsnummer(String schafID){
+        this.schafID = schafID;
+        this.betriebsID = IdentifierService.generateGUID();
     }
     
-    public Betriebsnummer(int schafID, int betriebsID){
+    public Betriebsnummer(String schafID, String betriebsID){
         this.schafID = schafID;
         this.betriebsID = betriebsID;
     }
@@ -33,11 +36,11 @@ public class Betriebsnummer {
         this.betriebsnummer = betriebsnummer;
     }
     
-    public int getBetriebsID(){
+    public String getBetriebsID(){
         return betriebsID;
     }
     
-    public int getSchafID(){
+    public String getSchafID(){
         return schafID;
     }
 
@@ -48,5 +51,4 @@ public class Betriebsnummer {
     public void setBemerkung(String bemerkung) {
         this.bemerkung = bemerkung;
     }
-
 }
