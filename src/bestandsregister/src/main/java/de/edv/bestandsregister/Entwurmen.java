@@ -26,6 +26,14 @@ public class Entwurmen {
         this.entwurmenID = entwurmenID;
     }
 
+    public int getEntwurmenID(){
+        return entwurmenID;
+    }
+    
+    public int getSchafID(){
+        return schafID;
+    }
+    
     public Date getDatum() {
         return datum;
     }

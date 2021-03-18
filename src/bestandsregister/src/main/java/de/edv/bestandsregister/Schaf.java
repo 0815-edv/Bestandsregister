@@ -28,6 +28,10 @@ public class Schaf {
         this.schafID = schafID;
     }
     
+    public int getSchafID(){
+        return schafID;
+    }
+    
     public Date getDatumZugang() {
         return datumZugang;
     }
@@ -75,7 +79,4 @@ public class Schaf {
     public void setMutterkennung(String mutterkennung) {
         this.mutterkennung = mutterkennung;
     }
-    
-    
-    
 }

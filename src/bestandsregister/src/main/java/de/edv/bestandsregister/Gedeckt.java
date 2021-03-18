@@ -27,6 +27,14 @@ public class Gedeckt {
         this.gedecktID = gedecktID;
     }
     
+    public int getSchafID(){
+        return schafID;
+    }
+    
+    public int getGedecktID(){
+        return gedecktID;
+    }
+    
     public Date getDatum() {
         return datum;
     }

@@ -24,6 +24,14 @@ public class Klauenschneiden {
         this.klauenID = klauenID;
     }
 
+    public int getSchafID(){
+        return schafID;
+    }
+    
+    public int getKlauenID(){
+        return klauenID;
+    }
+    
     public Date getDatum() {
         return Datum;
     }
