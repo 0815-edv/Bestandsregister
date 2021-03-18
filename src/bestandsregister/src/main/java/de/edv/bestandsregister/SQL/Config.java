@@ -80,27 +80,27 @@ public class Config {
         // SQL statement for creating a new table
         ArrayList<String> tables = new ArrayList<String>();
         tables.add("CREATE TABLE IF NOT EXISTS  Betriebsnummer  (\n"
-                + "	 BetriebsID 	TEXT NOT NULL PRIMARY KEY AUTOINCREMENT,\n"
+                + "	 BetriebsID 	TEXT NOT NULL PRIMARY KEY,\n"
                 + "	 SchafID 	TEXT NOT NULL,\n"
                 + "	 Betriebsnummer TEXT NOT NULL,\n"
                 + "	 Bemerkung 	TEXT\n"
                 + ");");
 
         tables.add("CREATE TABLE IF NOT EXISTS  Gedeckt  (\n"
-                + "	 GedecktID 	TEXT NOT NULL PRIMARY KEY AUTOINCREMENT,\n"
+                + "	 GedecktID 	TEXT NOT NULL PRIMARY KEY,\n"
                 + "	 SchafID 	TEXT NOT NULL,\n"
                 + "	 VaterKennung 	TEXT NOT NULL,\n"
                 + "	 Datum          TEXT NOT NULL\n"
                 + ");");
 
         tables.add("CREATE TABLE IF NOT EXISTS  Klauenschneiden  (\n"
-                + "	 KlauenID 	TEXT NOT NULL PRIMARY KEY AUTOINCREMENT,\n"
+                + "	 KlauenID 	TEXT NOT NULL PRIMARY KEY,\n"
                 + "	 SchafID 	TEXT NOT NULL,\n"
                 + "	 Datum          TEXT NOT NULL\n"
                 + ");");
 
         tables.add("CREATE TABLE IF NOT EXISTS  Impfungen  (\n"
-                + "	 ImpfID 	TEXT NOT NULL PRIMARY KEY AUTOINCREMENT,\n"
+                + "	 ImpfID 	TEXT NOT NULL PRIMARY KEY,\n"
                 + "	 SchafID 	TEXT NOT NULL,\n"
                 + "	 Impfstoff 	TEXT NOT NULL,\n"
                 + "	 Bemerkung 	TEXT,\n"
@@ -108,19 +108,19 @@ public class Config {
                 + ");");
 
         tables.add("CREATE TABLE IF NOT EXISTS  Entwurmen  (\n"
-                + "	 EntwurmenID 	TEXT NOT NULL PRIMARY KEY AUTOINCREMENT,\n"
+                + "	 EntwurmenID 	TEXT NOT NULL PRIMARY KEY,\n"
                 + "	 SchafID 	TEXT NOT NULL,\n"
                 + "	 Datum          TEXT NOT NULL\n"
                 + ");");
 
         tables.add("CREATE TABLE IF NOT EXISTS  Schur  (\n"
-                + "	 SchurID 	TEXT NOT NULL PRIMARY KEY AUTOINCREMENT,\n"
+                + "	 SchurID 	TEXT NOT NULL PRIMARY KEY,\n"
                 + "	 SchafID 	TEXT NOT NULL,\n"
                 + "	 Datum          TEXT NOT NULL\n"
                 + ");");
 
         tables.add("CREATE TABLE IF NOT EXISTS  Schaf  (\n"
-                + "	 SchafID 	TEXT NOT NULL PRIMARY KEY AUTOINCREMENT,\n"
+                + "	 SchafID 	TEXT NOT NULL PRIMARY KEY,\n"
                 + "	 DatumZugang 	TEXT,\n"
                 + "	 DatumAbgang 	TEXT,\n"
                 + "	 GrundFürAbgang TEXT,\n"
@@ -130,7 +130,7 @@ public class Config {
                 + ");");
         
         tables.add("CREATE TABLE IF NOT EXISTS Transport (\n"
-                + "	TransportID     TEXT NOT NULL PRIMARY KEY AUTOINCREMENT,\n"
+                + "	TransportID     TEXT NOT NULL PRIMARY KEY,\n"
                 + "	SchafID         TEXT NOT NULL,\n"
                 + "	TransportMittel	TEXT NOT NULL,\n"
                 + "	Grund           TEXT\n"
