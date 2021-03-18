@@ -40,6 +40,10 @@ public class Impfungen {
         return bemerkung;
     }
 
+    public String getImpfstoff(){
+        return impfstoff;
+    }
+    
     public Date getDatum() {
         return datum;
     }
