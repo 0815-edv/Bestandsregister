@@ -54,7 +54,7 @@ public class TestDBInitialisation {
             assertFalse(true);
         }
 
-        assertTrue(tables.size() == 9 && f.exists());
+        assertTrue(tables.size() == 8 && f.exists());
         f.delete();
     }
 }

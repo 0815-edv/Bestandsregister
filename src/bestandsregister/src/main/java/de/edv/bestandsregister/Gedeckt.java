@@ -5,6 +5,7 @@
  */
 package de.edv.bestandsregister;
 
+import de.edv.bestandsregister.utils.IdentifierService;
 import java.sql.Date;
 
 /**
@@ -13,25 +14,26 @@ import java.sql.Date;
  */
 public class Gedeckt {
     
-    private int gedecktID;
-    private int schafID;
+    private String gedecktID;
+    private String schafID;
     private Date datum;
     private String vaterkennung;
     
-    public Gedeckt(int schafID){
+    public Gedeckt(String schafID){
         this.schafID = schafID;
+        this.gedecktID = IdentifierService.generateGUID();
     }
 
-    public Gedeckt(int schafID, int gedecktID){
+    public Gedeckt(String schafID, String gedecktID){
         this.schafID = schafID;
         this.gedecktID = gedecktID;
     }
     
-    public int getSchafID(){
+    public String getSchafID(){
         return schafID;
     }
     
-    public int getGedecktID(){
+    public String getGedecktID(){
         return gedecktID;
     }
     

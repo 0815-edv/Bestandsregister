@@ -5,6 +5,7 @@
  */
 package de.edv.bestandsregister;
 
+import de.edv.bestandsregister.utils.IdentifierService;
 import java.sql.Date;
 
 /**
@@ -12,8 +13,8 @@ import java.sql.Date;
  * @author lorenz
  */
 public class Schaf {
-    
-    private int schafID;
+
+    private String schafID;
     private Date datumZugang;
     private Date datumAbgang;
     private String grundFürAbgang;
@@ -21,17 +22,18 @@ public class Schaf {
     private String bemerkung;
     private String mutterkennung;
 
-    public Schaf(){
+    public Schaf() {
+        this.schafID = IdentifierService.generateGUID();
     }
-    
-    public Schaf(int schafID){
+
+    public Schaf(String schafID) {
         this.schafID = schafID;
     }
-    
-    public int getSchafID(){
+
+    public String getSchafID() {
         return schafID;
     }
-    
+
     public Date getDatumZugang() {
         return datumZugang;
     }

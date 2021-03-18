@@ -1,60 +1,60 @@
 BEGIN TRANSACTION;
+CREATE TABLE IF NOT EXISTS "Gedeckt" (
+	"GedecktID"	TEXT NOT NULL,
+	"SchafID"	TEXT NOT NULL,
+	"VaterKennung"	TEXT NOT NULL,
+	"Datum"	TEXT NOT NULL,
+	PRIMARY KEY("GedecktID")
+);
+CREATE TABLE IF NOT EXISTS "Entwurmen" (
+	"EntwurmenID"	TEXT NOT NULL,
+	"SchafID"	TEXT NOT NULL,
+	"Datum"	TEXT NOT NULL,
+	PRIMARY KEY("EntwurmenID")
+);
+CREATE TABLE IF NOT EXISTS "Betriebsnummer" (
+	"BetriebsID"	TEXT NOT NULL,
+	"SchafID"	TEXT NOT NULL,
+	"Betriebsnummer"	TEXT NOT NULL,
+	"Bemerkung"	TEXT,
+	PRIMARY KEY("BetriebsID")
+);
+CREATE TABLE IF NOT EXISTS "Impfungen" (
+	"ImpfID"	TEXT NOT NULL,
+	"SchafID"	TEXT NOT NULL,
+	"Impfstoff"	TEXT NOT NULL,
+	"Bemerkung"	TEXT,
+	"Datum"	TEXT NOT NULL,
+	PRIMARY KEY("ImpfID")
+);
+CREATE TABLE IF NOT EXISTS "Klauenschneiden" (
+	"KlauenID"	TEXT NOT NULL,
+	"SchafID"	TEXT NOT NULL,
+	"Datum"	TEXT NOT NULL,
+	PRIMARY KEY("KlauenID")
+);
 CREATE TABLE IF NOT EXISTS "Schaf" (
-	"SchafID"	INTEGER NOT NULL,
+	"SchafID"	TEXT NOT NULL,
 	"DatumZugang"	TEXT,
 	"DatumAbgang"	TEXT,
 	"GrundFürAbgang"	TEXT,
 	"Kennung"	TEXT,
 	"Bemerkung"	TEXT,
 	"MutterKennung"	TEXT,
-	PRIMARY KEY("SchafID" AUTOINCREMENT)
+	PRIMARY KEY("SchafID")
 );
 CREATE TABLE IF NOT EXISTS "Schur" (
-	"SchurID"	INTEGER NOT NULL,
-	"SchafID"	INTEGER NOT NULL,
+	"SchurID"	TEXT NOT NULL,
+	"SchafID"	TEXT NOT NULL,
 	"Datum"	TEXT NOT NULL,
-	PRIMARY KEY("SchurID" AUTOINCREMENT)
-);
-CREATE TABLE IF NOT EXISTS "Entwurmen" (
-	"EntwurmenID"	INTEGER NOT NULL,
-	"SchafID"	INTEGER NOT NULL,
-	"Datum"	TEXT NOT NULL,
-	PRIMARY KEY("EntwurmenID" AUTOINCREMENT)
-);
-CREATE TABLE IF NOT EXISTS "Impfungen" (
-	"ImpfID"	INTEGER NOT NULL,
-	"SchafID"	INTEGER NOT NULL,
-	"Impfstoff"	TEXT NOT NULL,
-	"Bemerkung"	TEXT,
-	"Datum"	TEXT NOT NULL,
-	PRIMARY KEY("ImpfID" AUTOINCREMENT)
-);
-CREATE TABLE IF NOT EXISTS "Klauenschneiden" (
-	"KlauenID"	INTEGER NOT NULL,
-	"SchafID"	INTEGER NOT NULL,
-	"Datum"	TEXT NOT NULL,
-	PRIMARY KEY("KlauenID" AUTOINCREMENT)
-);
-CREATE TABLE IF NOT EXISTS "Gedeckt" (
-	"GedecktID"	INTEGER NOT NULL,
-	"SchafID"	INTEGER NOT NULL,
-	"VaterKennung"	TEXT NOT NULL,
-	"Datum"	TEXT NOT NULL,
-	PRIMARY KEY("GedecktID" AUTOINCREMENT)
-);
-CREATE TABLE IF NOT EXISTS "Betriebsnummer" (
-	"BetriebsID"	INTEGER NOT NULL,
-	"SchafID"	INTEGER NOT NULL,
-	"Betriebsnummer"	TEXT NOT NULL,
-	"Bemerkung"	TEXT,
-	PRIMARY KEY("BetriebsID" AUTOINCREMENT)
+	PRIMARY KEY("SchurID")
 );
 CREATE TABLE IF NOT EXISTS "Transport" (
-	"TransportID"	INTEGER NOT NULL,
-	"SchafID"	INTEGER NOT NULL,
+	"TransportID"	TEXT NOT NULL,
+	"SchafID"	TEXT NOT NULL,
 	"TransportMittel"	TEXT NOT NULL,
 	"Grund"	TEXT,
 	"Datum"	TEXT NOT NULL,
-	PRIMARY KEY("TransportID" AUTOINCREMENT)
+	PRIMARY KEY("TransportID")
 );
 COMMIT;

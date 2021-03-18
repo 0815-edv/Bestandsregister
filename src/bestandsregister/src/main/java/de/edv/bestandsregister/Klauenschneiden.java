@@ -4,34 +4,38 @@
  * and open the template in the editor.
  */
 package de.edv.bestandsregister;
+
+import de.edv.bestandsregister.utils.IdentifierService;
 import java.sql.Date;
+
 /**
  *
  * @author flori
  */
 public class Klauenschneiden {
-    
-    private int klauenID;
-    private int schafID;
+
+    private String klauenID;
+    private String schafID;
     private Date Datum;
 
-    public Klauenschneiden(int schafID) {
+    public Klauenschneiden(String schafID) {
         this.schafID = schafID;
+        this.klauenID = IdentifierService.generateGUID();
     }
-    
-    public Klauenschneiden(int schafID, int klauenID){
+
+    public Klauenschneiden(String schafID, String klauenID) {
         this.schafID = schafID;
         this.klauenID = klauenID;
     }
 
-    public int getSchafID(){
+    public String getSchafID() {
         return schafID;
     }
-    
-    public int getKlauenID(){
+
+    public String getKlauenID() {
         return klauenID;
     }
-    
+
     public Date getDatum() {
         return Datum;
     }
@@ -39,7 +43,4 @@ public class Klauenschneiden {
     public void setDatum(Date Datum) {
         this.Datum = Datum;
     }
-    
-    
-    
 }

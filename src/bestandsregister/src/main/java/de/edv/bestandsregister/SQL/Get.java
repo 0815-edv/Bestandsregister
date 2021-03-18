@@ -41,7 +41,7 @@ public class Get {
             ResultSet rs = stm.executeQuery(sql);
 
             while (rs.next()) {
-                Schaf s = new Schaf(rs.getInt("SchafID"));
+                Schaf s = new Schaf(rs.getString("SchafID"));
 
                 s.setKennung(rs.getString("Kennung"));
                 s.setBemerkung(rs.getString("Bemerkung"));
@@ -68,18 +68,18 @@ public class Get {
      * @param SchafID
      * @return ArrayList with Betriebsnummern Objects
      */
-    public ArrayList<Betriebsnummer> betriebsnummer(int SchafID) {
+    public ArrayList<Betriebsnummer> betriebsnummer(String SchafID) {
         Config.open();
         PreparedStatement stm = null;
         ArrayList<Betriebsnummer> dbBetriebsnummer = new ArrayList<Betriebsnummer>();
 
         try {
             String sql = "SELECT * FROM Betriebsnummer WHERE SchafID = ?;";
-            stm.setInt(1, SchafID);
+            stm.setString(1, SchafID);
             ResultSet rs = stm.executeQuery(sql);
 
             while (rs.next()) {
-                Betriebsnummer s = new Betriebsnummer(rs.getInt("SchafID"), rs.getInt("BetriebsID"));
+                Betriebsnummer s = new Betriebsnummer(rs.getString("SchafID"), rs.getString("BetriebsID"));
 
                 s.setBetriebsnummer(rs.getString("Betriebsnummer"));
                 s.setBemerkung(rs.getString("Bemerkung"));
@@ -101,18 +101,18 @@ public class Get {
      * @param SchafID
      * @return
      */
-    public ArrayList<Entwurmen> entwurmen(int SchafID) {
+    public ArrayList<Entwurmen> entwurmen(String SchafID) {
         Config.open();
         PreparedStatement stm = null;
         ArrayList<Entwurmen> dbEntwurmen = new ArrayList<Entwurmen>();
 
         try {
             String sql = "SELECT * FROM Entwurmen WHERE SchafID = ?;";
-            stm.setInt(1, SchafID);
+            stm.setString(1, SchafID);
             ResultSet rs = stm.executeQuery(sql);
 
             while (rs.next()) {
-                Entwurmen s = new Entwurmen(rs.getInt("SchafID"), rs.getInt("EntwurmenID"));
+                Entwurmen s = new Entwurmen(rs.getString("SchafID"), rs.getString("EntwurmenID"));
 
                 s.setDatum(rs.getDate("Datum"));
 
@@ -133,18 +133,18 @@ public class Get {
      * @param SchafID
      * @return
      */
-    public ArrayList<Gedeckt> gedeckt(int SchafID) {
+    public ArrayList<Gedeckt> gedeckt(String SchafID) {
         Config.open();
         PreparedStatement stm = null;
         ArrayList<Gedeckt> dbGedeckt = new ArrayList<Gedeckt>();
 
         try {
             String sql = "SELECT * FROM Gedeckt WHERE SchafID = ?;";
-            stm.setInt(1, SchafID);
+            stm.setString(1, SchafID);
             ResultSet rs = stm.executeQuery(sql);
 
             while (rs.next()) {
-                Gedeckt s = new Gedeckt(rs.getInt("SchafID"), rs.getInt("GedecktID"));
+                Gedeckt s = new Gedeckt(rs.getString("SchafID"), rs.getString("GedecktID"));
 
                 s.setVaterkennung(rs.getString("VaterKennung"));
                 s.setDatum(rs.getDate("Datum"));
@@ -166,18 +166,18 @@ public class Get {
      * @param SchafID
      * @return
      */
-    public ArrayList<Impfungen> impfungen(int SchafID) {
+    public ArrayList<Impfungen> impfungen(String SchafID) {
         Config.open();
         PreparedStatement stm = null;
         ArrayList<Impfungen> dbImpfung = new ArrayList<Impfungen>();
 
         try {
             String sql = "SELECT * FROM Impfungen WHERE SchafID = ?;";
-            stm.setInt(1, SchafID);
+            stm.setString(1, SchafID);
             ResultSet rs = stm.executeQuery(sql);
 
             while (rs.next()) {
-                Impfungen s = new Impfungen(rs.getInt("SchafID"), rs.getInt("ImpfID"));
+                Impfungen s = new Impfungen(rs.getString("SchafID"), rs.getString("ImpfID"));
 
                 s.setBemerkung(rs.getString("Bemerkung"));
                 s.setImpfstoff(rs.getString("Impfstoff"));
@@ -200,18 +200,18 @@ public class Get {
      * @param SchafID
      * @return
      */
-    public ArrayList<Klauenschneiden> klauenschneiden(int SchafID) {
+    public ArrayList<Klauenschneiden> klauenschneiden(String SchafID) {
         Config.open();
         PreparedStatement stm = null;
         ArrayList<Klauenschneiden> dbKlauenschneiden = new ArrayList<Klauenschneiden>();
 
         try {
             String sql = "SELECT * FROM Klauenschneiden WHERE SchafID = ?;";
-            stm.setInt(1, SchafID);
+            stm.setString(1, SchafID);
             ResultSet rs = stm.executeQuery(sql);
 
             while (rs.next()) {
-                Klauenschneiden s = new Klauenschneiden(rs.getInt("SchafID"), rs.getInt("KlauenID"));
+                Klauenschneiden s = new Klauenschneiden(rs.getString("SchafID"), rs.getString("KlauenID"));
 
                 s.setDatum(rs.getDate("Datum"));
 
@@ -232,18 +232,18 @@ public class Get {
      * @param SchafID
      * @return
      */
-    public ArrayList<Schur> schur(int SchafID) {
+    public ArrayList<Schur> schur(String SchafID) {
         Config.open();
         PreparedStatement stm = null;
         ArrayList<Schur> dbSchur = new ArrayList<Schur>();
 
         try {
             String sql = "SELECT * FROM Schur WHERE SchafID = ?;";
-            stm.setInt(1, SchafID);
+            stm.setString(1, SchafID);
             ResultSet rs = stm.executeQuery(sql);
 
             while (rs.next()) {
-                Schur s = new Schur(rs.getInt("SchafID"), rs.getInt("SchurID"));
+                Schur s = new Schur(rs.getString("SchafID"), rs.getString("SchurID"));
 
                 s.setDatum(rs.getDate("Datum"));
 
@@ -264,18 +264,18 @@ public class Get {
      * @param SchafID
      * @return
      */
-    public ArrayList<Transport> transport(int SchafID) {
+    public ArrayList<Transport> transport(String SchafID) {
         Config.open();
         PreparedStatement stm = null;
         ArrayList<Transport> dbTransport = new ArrayList<Transport>();
 
         try {
             String sql = "SELECT * FROM Transport WHERE SchafID = ?;";
-            stm.setInt(1, SchafID);
+            stm.setString(1, SchafID);
             ResultSet rs = stm.executeQuery(sql);
 
             while (rs.next()) {
-                Transport s = new Transport(rs.getInt("SchafID"), rs.getInt("TransportID"));
+                Transport s = new Transport(rs.getString("SchafID"), rs.getString("TransportID"));
 
                 s.setTransportMittel(rs.getString("TransportMittel"));
                 s.setGrund("Grund");

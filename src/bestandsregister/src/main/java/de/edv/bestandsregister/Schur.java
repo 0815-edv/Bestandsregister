@@ -5,6 +5,7 @@
  */
 package de.edv.bestandsregister;
 
+import de.edv.bestandsregister.utils.IdentifierService;
 import java.sql.Date;
 
 /**
@@ -13,24 +14,25 @@ import java.sql.Date;
  */
 public class Schur {
 
-    private int schurID;
-    private int schafID;
+    private String schurID;
+    private String schafID;
     private Date datum;
 
-    public Schur(int schafID) {
+    public Schur(String schafID) {
         this.schafID = schafID;
+        this.schurID = IdentifierService.generateGUID();
     }
 
-    public Schur(int schafID, int schurID) {
+    public Schur(String schafID, String schurID) {
         this.schafID = schafID;
         this.schurID = schurID;
     }
 
-    public int getSchafID() {
+    public String getSchafID() {
         return schafID;
     }
 
-    public int getSchurID() {
+    public String getSchurID() {
         return schurID;
     }
 
