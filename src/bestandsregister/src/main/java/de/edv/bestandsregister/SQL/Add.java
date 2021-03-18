@@ -64,7 +64,7 @@ public class Add {
         try {
             stm = Config.getSQLConnection().prepareStatement("INSERT INTO Betriebsnummer(SchafID, Betriebsnummer, Bemerkung) VALUES (?, ?, ?)");
 
-            stm.setInt(1, bNummer.getSchafID());
+            stm.setString(1, bNummer.getSchafID());
             stm.setString(2, bNummer.getBetriebsnummer());
             stm.setString(3, bNummer.getBemerkung());
 
@@ -89,7 +89,7 @@ public class Add {
         try {
             stm = Config.getSQLConnection().prepareStatement("INSERT INTO Entwurmen(SchafID, Datum) VALUES (?, ?)");
 
-            stm.setInt(1, entwurmen.getSchafID());
+            stm.setString(1, entwurmen.getSchafID());
             stm.setDate(2, entwurmen.getDatum());
 
             stm.executeUpdate();
@@ -113,7 +113,7 @@ public class Add {
         try {
             stm = Config.getSQLConnection().prepareStatement("INSERT INTO Gedeckt(SchafID, VaterKennung, Datum) VALUES (?, ?, ?)");
 
-            stm.setInt(1, gedeckt.getSchafID());
+            stm.setString(1, gedeckt.getSchafID());
             stm.setString(2, gedeckt.getVaterkennung());
             stm.setDate(3, gedeckt.getDatum());
 
@@ -138,7 +138,7 @@ public class Add {
         try {
             stm = Config.getSQLConnection().prepareStatement("INSERT INTO Betriebsnummer(SchafID, Impfstoff, Bemerkung, Datum) VALUES (?, ?, ?, ?)");
 
-            stm.setInt(1, impfung.getSchafID());
+            stm.setString(1, impfung.getSchafID());
             stm.setString(2, impfung.getImpfstoff());
             stm.setString(3, impfung.getBemerkung());
             stm.setDate(4, impfung.getDatum());
@@ -164,7 +164,7 @@ public class Add {
         try {
             stm = Config.getSQLConnection().prepareStatement("INSERT INTO Klauenschneiden(SchafID, Datum) VALUES (?, ?)");
 
-            stm.setInt(1, klauen.getSchafID());
+            stm.setString(1, klauen.getSchafID());
             stm.setDate(2, klauen.getDatum());
 
             stm.executeUpdate();
@@ -188,7 +188,7 @@ public class Add {
         try {
             stm = Config.getSQLConnection().prepareStatement("INSERT INTO Schur(SchafID, Datum) VALUES (?, ?)");
 
-            stm.setInt(1, schur.getSchafID());
+            stm.setString(1, schur.getSchafID());
             stm.setDate(2, schur.getDatum());
 
             stm.executeUpdate();
@@ -212,7 +212,7 @@ public class Add {
         try {
             stm = Config.getSQLConnection().prepareStatement("INSERT INTO Transport(SchafID, TransportMittel, Grund, Datum) VALUES (?, ?, ?)");
 
-            stm.setInt(1, transport.getSchafID());
+            stm.setString(1, transport.getSchafID());
             stm.setString(2, transport.getTransportMittel());
             stm.setString(3, transport.getGrund());
             stm.setDate(4, transport.getDatum());
