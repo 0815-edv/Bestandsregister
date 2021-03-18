@@ -34,14 +34,15 @@ public class Add {
         PreparedStatement stm = null;
 
         try {
-            stm = Config.getSQLConnection().prepareStatement("INSERT INTO Schaf(DatumZugang, DatumAbgang, GrundFürAbgang, Kennung, Bemerkung, MutterKennung) VALUES (?, ?, ?, ?, ?, ?)");
+            stm = Config.getSQLConnection().prepareStatement("INSERT INTO Schaf(SchafID, DatumZugang, DatumAbgang, GrundFürAbgang, Kennung, Bemerkung, MutterKennung) VALUES (?, ?, ?, ?, ?, ?, ?)");
 
-            stm.setDate(1, schaf.getDatumZugang());
-            stm.setDate(2, schaf.getDatumAbgang());
-            stm.setString(3, schaf.getGrundFürAbgang());
-            stm.setString(4, schaf.getKennung());
-            stm.setString(5, schaf.getBemerkung());
-            stm.setString(6, schaf.getMutterkennung());
+            stm.setString(1, schaf.getSchafID());
+            stm.setDate(2, schaf.getDatumZugang());
+            stm.setDate(3, schaf.getDatumAbgang());
+            stm.setString(4, schaf.getGrundFürAbgang());
+            stm.setString(5, schaf.getKennung());
+            stm.setString(6, schaf.getBemerkung());
+            stm.setString(7, schaf.getMutterkennung());
 
             stm.executeUpdate();
 
