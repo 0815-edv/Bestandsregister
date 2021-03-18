@@ -32,6 +32,14 @@ public class Betriebsnummer {
     public void setBetriebsnummer(String betriebsnummer) {
         this.betriebsnummer = betriebsnummer;
     }
+    
+    public int getBetriebsID(){
+        return betriebsID;
+    }
+    
+    public int getSchafID(){
+        return schafID;
+    }
 
     public String getBemerkung() {
         return bemerkung;

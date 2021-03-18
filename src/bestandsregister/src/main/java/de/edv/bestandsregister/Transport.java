@@ -28,6 +28,14 @@ public class Transport {
         this.transportID = transportID;
     }
 
+    public int getTransportID() {
+        return transportID;
+    }
+
+    public int getSchafID() {
+        return schafID;
+    }
+
     public String getTransportMittel() {
         return transportMittel;
     }

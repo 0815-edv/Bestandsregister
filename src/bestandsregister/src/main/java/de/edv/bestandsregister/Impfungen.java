@@ -28,6 +28,10 @@ public class Impfungen {
         this.impfID = impfID;
     }
     
+    public int getSchafID(){
+        return schafID;
+    }
+      
     public int getImpfID() {
         return impfID;
     }

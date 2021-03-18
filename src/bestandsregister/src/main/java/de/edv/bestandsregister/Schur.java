@@ -12,17 +12,26 @@ import java.sql.Date;
  * @author lorenz
  */
 public class Schur {
+
     private int schurID;
     private int schafID;
     private Date datum;
-    
-    public Schur(int schafID){
+
+    public Schur(int schafID) {
         this.schafID = schafID;
     }
-    
-    public Schur(int schafID, int schurID){
+
+    public Schur(int schafID, int schurID) {
         this.schafID = schafID;
         this.schurID = schurID;
+    }
+
+    public int getSchafID() {
+        return schafID;
+    }
+
+    public int getSchurID() {
+        return schurID;
     }
 
     public Date getDatum() {
