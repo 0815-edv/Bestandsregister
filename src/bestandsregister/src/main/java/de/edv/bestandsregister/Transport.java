@@ -58,7 +58,7 @@ public class Transport {
         this.grund = grund;
     }
 
-    public void setDatum(Date daum) {
+    public void setDatum(Date datum) {
         this.datum = datum;
     }
 }
