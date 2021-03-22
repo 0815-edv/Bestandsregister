@@ -7,10 +7,7 @@ package de.edv.bestandsregister.GUI;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.UIManager;
-import mdlaf.MaterialLookAndFeel;
-import mdlaf.themes.JMarsDarkTheme;
-import mdlaf.themes.MaterialOceanicTheme;
+
 
 /**
  *
