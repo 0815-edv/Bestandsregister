@@ -81,4 +81,8 @@ public class Schaf {
     public void setMutterkennung(String mutterkennung) {
         this.mutterkennung = mutterkennung;
     }
+    
+    public String toString(){
+        return kennung;
+    }
 }
