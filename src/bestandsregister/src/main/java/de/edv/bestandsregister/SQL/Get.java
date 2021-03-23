@@ -143,8 +143,8 @@ public class Get {
 
         try {
             String sql = "SELECT * FROM Gedeckt WHERE SchafID = ?;";
-            stm.setString(1, SchafID);
             stm = Config.getSQLConnection().prepareStatement(sql);
+            stm.setString(1, SchafID);
             ResultSet rs = stm.executeQuery();
 
             while (rs.next()) {
@@ -177,8 +177,9 @@ public class Get {
 
         try {
             String sql = "SELECT * FROM Impfungen WHERE SchafID = ?;";
-            stm.setString(1, SchafID);
             stm = Config.getSQLConnection().prepareStatement(sql);
+            stm.setString(1, SchafID);
+            
             ResultSet rs = stm.executeQuery();
 
             while (rs.next()) {
@@ -212,8 +213,9 @@ public class Get {
 
         try {
             String sql = "SELECT * FROM Klauenschneiden WHERE SchafID = ?;";
-            stm.setString(1, SchafID);
             stm = Config.getSQLConnection().prepareStatement(sql);
+            stm.setString(1, SchafID);
+            
             ResultSet rs = stm.executeQuery();
 
             while (rs.next()) {
@@ -245,8 +247,9 @@ public class Get {
 
         try {
             String sql = "SELECT * FROM Schur WHERE SchafID = ?;";
-            stm.setString(1, SchafID);
             stm = Config.getSQLConnection().prepareStatement(sql);
+            stm.setString(1, SchafID);
+            
             ResultSet rs = stm.executeQuery();
 
             while (rs.next()) {
@@ -278,8 +281,9 @@ public class Get {
 
         try {
             String sql = "SELECT * FROM Transport WHERE SchafID = ?;";
-            stm.setString(1, SchafID);
             stm = Config.getSQLConnection().prepareStatement(sql);
+            stm.setString(1, SchafID);
+            
             ResultSet rs = stm.executeQuery();
 
             while (rs.next()) {
