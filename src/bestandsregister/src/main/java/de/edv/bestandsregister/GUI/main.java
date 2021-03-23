@@ -5,9 +5,20 @@
  */
 package de.edv.bestandsregister.GUI;
 
+import de.edv.bestandsregister.Betriebsnummer;
+import de.edv.bestandsregister.Entwurmen;
+import de.edv.bestandsregister.Gedeckt;
+import de.edv.bestandsregister.Impfungen;
+import de.edv.bestandsregister.Klauenschneiden;
+import de.edv.bestandsregister.SQL.Get;
+import de.edv.bestandsregister.Schaf;
+import de.edv.bestandsregister.Schur;
+import de.edv.bestandsregister.Transport;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import org.jdatepicker.DateModel;
 
 /**
  *
@@ -20,6 +31,8 @@ public class main extends javax.swing.JFrame {
      */
     public main() {
         initComponents();
+        Get select = new Get();
+        lstausgabe.setListData(select.schafe().toArray());
     }
 
     /**
@@ -33,91 +46,77 @@ public class main extends javax.swing.JFrame {
 
         jLabel22 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        lstausgabe = new javax.swing.JList<>();
+        lstausgabe = new javax.swing.JList();
         jTabPlane = new javax.swing.JTabbedPane();
         jTabBetriebsnummer = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
-        jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
-        txfbnbetriebsid = new javax.swing.JTextField();
         txfbnnummer = new javax.swing.JTextField();
-        txfbnschafid = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         txabnbemerkung = new javax.swing.JTextArea();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        jListBetriebsnummer = new javax.swing.JList<>();
         jTabEntwurmen = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
-        jLabel27 = new javax.swing.JLabel();
-        jLabel28 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
-        txfentwurmenid = new javax.swing.JTextField();
-        txfentwurmenschafid = new javax.swing.JTextField();
-        txfentwurmendatum = new javax.swing.JTextField();
+        jDateEntwurmen = new org.jdatepicker.JDatePicker();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        jListEntwurmen = new javax.swing.JList<>();
         jTabGedeckt = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
-        jLabel30 = new javax.swing.JLabel();
-        jLabel31 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
-        txfgedecktid = new javax.swing.JTextField();
-        txfgedecktschafid = new javax.swing.JTextField();
-        txfgedecktdatum = new javax.swing.JTextField();
         txfgedecktvaterkennung = new javax.swing.JTextField();
+        jDatePicker1 = new org.jdatepicker.JDatePicker();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        jListGedeckt = new javax.swing.JList<>();
         jTabImpfungen = new javax.swing.JPanel();
-        jLabel17 = new javax.swing.JLabel();
-        txfimpfungschafid = new javax.swing.JTextField();
-        jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         txfimpfungbemerkung = new javax.swing.JTextField();
-        txfimpfungid = new javax.swing.JTextField();
         txfimpfungstoff = new javax.swing.JTextField();
-        txfimpfungdatum = new javax.swing.JTextField();
-        jTabKlauenschneiden = new javax.swing.JPanel();
-        jLabel14 = new javax.swing.JLabel();
-        txfklauenid = new javax.swing.JTextField();
-        jLabel15 = new javax.swing.JLabel();
-        txfklauenschafid = new javax.swing.JTextField();
-        jLabel16 = new javax.swing.JLabel();
-        txfklauendatum = new javax.swing.JTextField();
+        jDateImpfungen = new org.jdatepicker.JDatePicker();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jListImpfungen = new javax.swing.JList<>();
         jTabSchur = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
-        txfschurid = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
-        txfschurschafid = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        txfschurdatum = new javax.swing.JTextField();
+        jDateSchur = new org.jdatepicker.JDatePicker();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jListSchur = new javax.swing.JList();
         jTabTransport = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
-        txftpschafid = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txftptransportmittel = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         txftpgrund = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        txftpdatum = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        txftptransportid = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
+        jDateTransport = new org.jdatepicker.JDatePicker();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jListTransport = new javax.swing.JList<>();
         jTabSchaf = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabelZugang = new javax.swing.JLabel();
-        jTextZugang = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jTextAbgang = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jTextGrundFürAbgang = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jMutterKennung = new javax.swing.JTextField();
+        jDateZugangsdatum = new org.jdatepicker.JDatePicker();
+        jDateAbgang = new org.jdatepicker.JDatePicker();
         jPanel3 = new javax.swing.JPanel();
         jTextKennung = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jTabKlauenschneiden = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        jDateKlauenschneiden = new org.jdatepicker.JDatePicker();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jListKlauenschneiden = new javax.swing.JList<>();
         jPanel1 = new javax.swing.JPanel();
         btnadd = new javax.swing.JButton();
         btnchange = new javax.swing.JButton();
@@ -126,15 +125,18 @@ public class main extends javax.swing.JFrame {
         jLabel22.setText("jLabel22");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Bestandsregister");
+        setResizable(false);
 
         lstausgabe.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        lstausgabe.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                lstausgabeValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(lstausgabe);
 
-        jLabel23.setText("BetriebsID");
-
         jLabel24.setText("Betriebsnummer");
-
-        jLabel25.setText("SchafID");
 
         jLabel26.setText("Bemerkung");
 
@@ -150,33 +152,21 @@ public class main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel24)
-                    .addComponent(jLabel23)
-                    .addComponent(jLabel25)
                     .addComponent(jLabel26))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(txfbnschafid, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
-                        .addComponent(txfbnnummer, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txfbnbetriebsid, javax.swing.GroupLayout.Alignment.LEADING)))
+                    .addComponent(txfbnnummer, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel23)
-                    .addComponent(txfbnbetriebsid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel24)
                     .addComponent(txfbnnummer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel25)
-                    .addComponent(txfbnschafid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(28, 28, 28)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel26)
@@ -186,28 +176,31 @@ public class main extends javax.swing.JFrame {
                         .addContainerGap())))
         );
 
+        jListBetriebsnummer.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane10.setViewportView(jListBetriebsnummer);
+
         javax.swing.GroupLayout jTabBetriebsnummerLayout = new javax.swing.GroupLayout(jTabBetriebsnummer);
         jTabBetriebsnummer.setLayout(jTabBetriebsnummerLayout);
         jTabBetriebsnummerLayout.setHorizontalGroup(
             jTabBetriebsnummerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jTabBetriebsnummerLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jTabBetriebsnummerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         jTabBetriebsnummerLayout.setVerticalGroup(
             jTabBetriebsnummerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jTabBetriebsnummerLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         jTabPlane.addTab("Betriebsnummer", jTabBetriebsnummer);
-
-        jLabel27.setText("EntwurmenID");
-
-        jLabel28.setText("SchafID");
 
         jLabel29.setText("Datum");
 
@@ -216,58 +209,53 @@ public class main extends javax.swing.JFrame {
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel27)
-                    .addComponent(jLabel28)
-                    .addComponent(jLabel29))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txfentwurmenid)
-                    .addComponent(txfentwurmenschafid)
-                    .addComponent(txfentwurmendatum, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE))
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addGap(17, 17, 17)
+                .addComponent(jLabel29)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addComponent(jDateEntwurmen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel27)
-                    .addComponent(txfentwurmenid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel28)
-                    .addComponent(txfentwurmenschafid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel29)
-                    .addComponent(txfentwurmendatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(183, Short.MAX_VALUE))
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabel29))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jDateEntwurmen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
+
+        jListEntwurmen.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane9.setViewportView(jListEntwurmen);
 
         javax.swing.GroupLayout jTabEntwurmenLayout = new javax.swing.GroupLayout(jTabEntwurmen);
         jTabEntwurmen.setLayout(jTabEntwurmenLayout);
         jTabEntwurmenLayout.setHorizontalGroup(
             jTabEntwurmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jTabEntwurmenLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addGroup(jTabEntwurmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jTabEntwurmenLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jTabEntwurmenLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         jTabEntwurmenLayout.setVerticalGroup(
             jTabEntwurmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jTabEntwurmenLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         jTabPlane.addTab("Entwurmen", jTabEntwurmen);
-
-        jLabel30.setText("GedecktID");
-
-        jLabel31.setText("SchafID");
 
         jLabel32.setText("Datum");
 
@@ -280,47 +268,45 @@ public class main extends javax.swing.JFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel30)
-                    .addComponent(jLabel31)
                     .addComponent(jLabel32)
                     .addComponent(jLabel33))
                 .addGap(25, 25, 25)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txfgedecktid)
-                    .addComponent(txfgedecktschafid)
-                    .addComponent(txfgedecktdatum)
-                    .addComponent(txfgedecktvaterkennung, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE))
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txfgedecktvaterkennung, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel30)
-                    .addComponent(txfgedecktid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel31)
-                    .addComponent(txfgedecktschafid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel32)
-                    .addComponent(txfgedecktdatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(jLabel32)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel33)
                     .addComponent(txfgedecktvaterkennung, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(130, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
+
+        jListGedeckt.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane8.setViewportView(jListGedeckt);
 
         javax.swing.GroupLayout jTabGedecktLayout = new javax.swing.GroupLayout(jTabGedeckt);
         jTabGedeckt.setLayout(jTabGedecktLayout);
         jTabGedecktLayout.setHorizontalGroup(
             jTabGedecktLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jTabGedecktLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jTabGedecktLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jTabGedecktLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jTabGedecktLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jTabGedecktLayout.setVerticalGroup(
@@ -328,14 +314,12 @@ public class main extends javax.swing.JFrame {
             .addGroup(jTabGedecktLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         jTabPlane.addTab("Gedeckt", jTabGedeckt);
-
-        jLabel17.setText("SchafID");
-
-        jLabel18.setText("ImpfID");
 
         jLabel19.setText("Impfstoff");
 
@@ -343,39 +327,35 @@ public class main extends javax.swing.JFrame {
 
         jLabel21.setText("Datum");
 
+        jScrollPane7.setViewportView(jListImpfungen);
+
         javax.swing.GroupLayout jTabImpfungenLayout = new javax.swing.GroupLayout(jTabImpfungen);
         jTabImpfungen.setLayout(jTabImpfungenLayout);
         jTabImpfungenLayout.setHorizontalGroup(
             jTabImpfungenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jTabImpfungenLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jTabImpfungenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel20)
-                    .addComponent(jLabel17)
-                    .addComponent(jLabel18)
-                    .addComponent(jLabel19)
-                    .addComponent(jLabel21))
-                .addGap(18, 18, 18)
-                .addGroup(jTabImpfungenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txfimpfungschafid, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
-                    .addComponent(txfimpfungid)
-                    .addComponent(txfimpfungstoff)
-                    .addComponent(txfimpfungbemerkung)
-                    .addComponent(txfimpfungdatum))
-                .addContainerGap(58, Short.MAX_VALUE))
+                    .addGroup(jTabImpfungenLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jTabImpfungenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel20)
+                            .addComponent(jLabel19)
+                            .addComponent(jLabel21))
+                        .addGap(18, 18, 18)
+                        .addGroup(jTabImpfungenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jTabImpfungenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txfimpfungstoff, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
+                                .addComponent(txfimpfungbemerkung))
+                            .addComponent(jDateImpfungen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jTabImpfungenLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         jTabImpfungenLayout.setVerticalGroup(
             jTabImpfungenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jTabImpfungenLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(jTabImpfungenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel17)
-                    .addComponent(txfimpfungschafid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jTabImpfungenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel18)
-                    .addComponent(txfimpfungid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(19, 19, 19)
                 .addGroup(jTabImpfungenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel19)
                     .addComponent(txfimpfungstoff, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -384,60 +364,17 @@ public class main extends javax.swing.JFrame {
                     .addComponent(jLabel20)
                     .addComponent(txfimpfungbemerkung, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jTabImpfungenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel21)
-                    .addComponent(txfimpfungdatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(107, Short.MAX_VALUE))
+                .addGroup(jTabImpfungenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jDateImpfungen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jTabImpfungenLayout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(jLabel21)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
         );
 
         jTabPlane.addTab("Impfungen", jTabImpfungen);
-
-        jLabel14.setText("KlauenID");
-
-        jLabel15.setText("SchafID");
-
-        jLabel16.setText("Datum");
-
-        javax.swing.GroupLayout jTabKlauenschneidenLayout = new javax.swing.GroupLayout(jTabKlauenschneiden);
-        jTabKlauenschneiden.setLayout(jTabKlauenschneidenLayout);
-        jTabKlauenschneidenLayout.setHorizontalGroup(
-            jTabKlauenschneidenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jTabKlauenschneidenLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jTabKlauenschneidenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel14)
-                    .addComponent(jLabel15)
-                    .addComponent(jLabel16))
-                .addGap(18, 18, 18)
-                .addGroup(jTabKlauenschneidenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txfklauenid)
-                    .addComponent(txfklauenschafid)
-                    .addComponent(txfklauendatum, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE))
-                .addContainerGap(45, Short.MAX_VALUE))
-        );
-        jTabKlauenschneidenLayout.setVerticalGroup(
-            jTabKlauenschneidenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jTabKlauenschneidenLayout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(jTabKlauenschneidenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(txfklauenid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jTabKlauenschneidenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15)
-                    .addComponent(txfklauenschafid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jTabKlauenschneidenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
-                    .addComponent(txfklauendatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(184, Short.MAX_VALUE))
-        );
-
-        jTabPlane.addTab("Klauenschneiden", jTabKlauenschneiden);
-
-        jLabel11.setText("SchurID");
-
-        jLabel12.setText("SchafID");
 
         jLabel13.setText("Datum");
 
@@ -447,34 +384,26 @@ public class main extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel13))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txfschurschafid)
-                    .addComponent(txfschurid, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txfschurdatum, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addComponent(jLabel13)
+                .addGap(40, 40, 40)
+                .addComponent(jDateSchur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(13, 13, 13)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(txfschurid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(txfschurschafid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel13)
-                    .addComponent(txfschurdatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(116, Short.MAX_VALUE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(jLabel13))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jDateSchur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
+
+        jListSchur.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane5.setViewportView(jListSchur);
 
         javax.swing.GroupLayout jTabSchurLayout = new javax.swing.GroupLayout(jTabSchur);
         jTabSchur.setLayout(jTabSchurLayout);
@@ -484,13 +413,19 @@ public class main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(jTabSchurLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         jTabSchurLayout.setVerticalGroup(
             jTabSchurLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jTabSchurLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         jTabPlane.addTab("Schur", jTabSchur);
@@ -501,50 +436,27 @@ public class main extends javax.swing.JFrame {
 
         jLabel10.setText("Datum");
 
-        jLabel6.setText("TransportID");
-        jLabel6.setToolTipText("");
-
-        jLabel7.setText("SchafID");
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txftpschafid, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txftptransportid, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel10))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txftpgrund)
-                            .addComponent(txftptransportmittel)
-                            .addComponent(txftpdatum, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel10))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jDateTransport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txftpgrund, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txftptransportmittel, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(txftptransportid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(txftpschafid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addContainerGap(19, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(txftptransportmittel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -553,27 +465,38 @@ public class main extends javax.swing.JFrame {
                     .addComponent(jLabel9)
                     .addComponent(txftpgrund, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(txftpdatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jDateTransport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addContainerGap())))
         );
+
+        jListTransport.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane4.setViewportView(jListTransport);
 
         javax.swing.GroupLayout jTabTransportLayout = new javax.swing.GroupLayout(jTabTransport);
         jTabTransport.setLayout(jTabTransportLayout);
         jTabTransportLayout.setHorizontalGroup(
             jTabTransportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jTabTransportLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addGroup(jTabTransportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jTabTransportLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jTabTransportLayout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jTabTransportLayout.setVerticalGroup(
             jTabTransportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jTabTransportLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(107, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17))
         );
 
         jTabPlane.addTab("Transport", jTabTransport);
@@ -592,30 +515,30 @@ public class main extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jMutterKennung, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextZugang)
                         .addComponent(jLabelZugang)
-                        .addComponent(jTextAbgang)
                         .addComponent(jLabel1)
                         .addComponent(jTextGrundFürAbgang, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel5))
-                .addGap(96, 96, 96))
+                    .addComponent(jLabel5)
+                    .addComponent(jDateZugangsdatum, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                    .addComponent(jDateAbgang, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(69, 69, 69))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabelZugang)
-                .addGap(7, 7, 7)
-                .addComponent(jTextZugang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1)
-                .addGap(12, 12, 12)
-                .addComponent(jTextAbgang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(jDateZugangsdatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jDateAbgang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTextGrundFürAbgang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -687,6 +610,44 @@ public class main extends javax.swing.JFrame {
 
         jTabPlane.addTab("Schaf", jTabSchaf);
 
+        jLabel16.setText("Datum");
+
+        jListKlauenschneiden.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane6.setViewportView(jListKlauenschneiden);
+
+        javax.swing.GroupLayout jTabKlauenschneidenLayout = new javax.swing.GroupLayout(jTabKlauenschneiden);
+        jTabKlauenschneiden.setLayout(jTabKlauenschneidenLayout);
+        jTabKlauenschneidenLayout.setHorizontalGroup(
+            jTabKlauenschneidenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jTabKlauenschneidenLayout.createSequentialGroup()
+                .addGroup(jTabKlauenschneidenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jTabKlauenschneidenLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel16)
+                        .addGap(35, 35, 35)
+                        .addComponent(jDateKlauenschneiden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jTabKlauenschneidenLayout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(37, Short.MAX_VALUE))
+        );
+        jTabKlauenschneidenLayout.setVerticalGroup(
+            jTabKlauenschneidenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jTabKlauenschneidenLayout.createSequentialGroup()
+                .addGroup(jTabKlauenschneidenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jTabKlauenschneidenLayout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(jLabel16))
+                    .addGroup(jTabKlauenschneidenLayout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(jDateKlauenschneiden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(36, 36, 36)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(47, Short.MAX_VALUE))
+        );
+
+        jTabPlane.addTab("Klauenschneiden", jTabKlauenschneiden);
+
         btnadd.setText("Hinzufügen");
 
         btnchange.setText("Ändern");
@@ -751,8 +712,47 @@ public class main extends javax.swing.JFrame {
 
         jTabPlane.getAccessibleContext().setAccessibleName("Schaf");
 
+        getAccessibleContext().setAccessibleName("Bestandsregister");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void lstausgabeValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstausgabeValueChanged
+        // TODO add your handling code here:
+        Schaf schaf = (Schaf) lstausgabe.getSelectedValue();
+        Get select = new Get();
+
+        ArrayList<Betriebsnummer> betriebsnummerList = select.betriebsnummer(schaf.getSchafID());
+        ArrayList<Entwurmen> entwurmenList = select.entwurmen(schaf.getSchafID());
+        ArrayList<Gedeckt> gedecktList = select.gedeckt(schaf.getSchafID());
+        ArrayList<Impfungen> impfungenList = select.impfungen(schaf.getSchafID());
+        ArrayList<Klauenschneiden> klauenList = select.klauenschneiden(schaf.getSchafID());
+        ArrayList<Schur> schurList = select.schur(schaf.getSchafID());
+        ArrayList<Transport> transportList = select.transport(schaf.getSchafID());
+
+        // Schur
+        // Add First Item in List as Displayed
+        if (schurList.size() > 0) {
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(schurList.get(0).getDatum());
+            DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateSchur.getModel();
+            dateModel.setValue(calendar);
+
+            jListSchur.setListData(schurList.toArray());
+        }
+
+        if (impfungenList.size() > 0) {
+            // Impfung
+            txfimpfungstoff.setText(impfungenList.get(0).getImpfstoff());
+            txfimpfungbemerkung.setText(impfungenList.get(0).getBemerkung());
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(schurList.get(0).getDatum());
+            DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateImpfungen.getModel();
+            dateModel.setValue(calendar);
+        }
+
+    }//GEN-LAST:event_lstausgabeValueChanged
 
     /**
      * @param args the command line arguments
@@ -796,40 +796,41 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JButton btnadd;
     private javax.swing.JButton btnchange;
     private javax.swing.JButton btnloeschen;
+    private org.jdatepicker.JDatePicker jDateAbgang;
+    private org.jdatepicker.JDatePicker jDateEntwurmen;
+    private org.jdatepicker.JDatePicker jDateImpfungen;
+    private org.jdatepicker.JDatePicker jDateKlauenschneiden;
+    private org.jdatepicker.JDatePicker jDatePicker1;
+    private org.jdatepicker.JDatePicker jDateSchur;
+    private org.jdatepicker.JDatePicker jDateTransport;
+    private org.jdatepicker.JDatePicker jDateZugangsdatum;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelZugang;
+    private javax.swing.JList<String> jListBetriebsnummer;
+    private javax.swing.JList<String> jListEntwurmen;
+    private javax.swing.JList<String> jListGedeckt;
+    private javax.swing.JList<String> jListImpfungen;
+    private javax.swing.JList<String> jListKlauenschneiden;
+    private javax.swing.JList jListSchur;
+    private javax.swing.JList<String> jListTransport;
     private javax.swing.JTextField jMutterKennung;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -840,8 +841,15 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JPanel jTabBetriebsnummer;
     private javax.swing.JPanel jTabEntwurmen;
     private javax.swing.JPanel jTabGedeckt;
@@ -851,38 +859,16 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JPanel jTabSchaf;
     private javax.swing.JPanel jTabSchur;
     private javax.swing.JPanel jTabTransport;
-    private javax.swing.JTextField jTextAbgang;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextGrundFürAbgang;
     private javax.swing.JTextField jTextKennung;
-    private javax.swing.JTextField jTextZugang;
-    private javax.swing.JList<String> lstausgabe;
+    private javax.swing.JList lstausgabe;
     private javax.swing.JTextArea txabnbemerkung;
-    private javax.swing.JTextField txfbnbetriebsid;
     private javax.swing.JTextField txfbnnummer;
-    private javax.swing.JTextField txfbnschafid;
-    private javax.swing.JTextField txfentwurmendatum;
-    private javax.swing.JTextField txfentwurmenid;
-    private javax.swing.JTextField txfentwurmenschafid;
-    private javax.swing.JTextField txfgedecktdatum;
-    private javax.swing.JTextField txfgedecktid;
-    private javax.swing.JTextField txfgedecktschafid;
     private javax.swing.JTextField txfgedecktvaterkennung;
     private javax.swing.JTextField txfimpfungbemerkung;
-    private javax.swing.JTextField txfimpfungdatum;
-    private javax.swing.JTextField txfimpfungid;
-    private javax.swing.JTextField txfimpfungschafid;
     private javax.swing.JTextField txfimpfungstoff;
-    private javax.swing.JTextField txfklauendatum;
-    private javax.swing.JTextField txfklauenid;
-    private javax.swing.JTextField txfklauenschafid;
-    private javax.swing.JTextField txfschurdatum;
-    private javax.swing.JTextField txfschurid;
-    private javax.swing.JTextField txfschurschafid;
-    private javax.swing.JTextField txftpdatum;
     private javax.swing.JTextField txftpgrund;
-    private javax.swing.JTextField txftpschafid;
-    private javax.swing.JTextField txftptransportid;
     private javax.swing.JTextField txftptransportmittel;
     // End of variables declaration//GEN-END:variables
 }

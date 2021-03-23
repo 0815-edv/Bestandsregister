@@ -38,7 +38,8 @@ public class Get {
 
         try {
             String sql = "SELECT * FROM Schaf;";
-            ResultSet rs = stm.executeQuery(sql);
+            stm = Config.getSQLConnection().prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
 
             while (rs.next()) {
                 Schaf s = new Schaf(rs.getString("SchafID"));
@@ -48,8 +49,8 @@ public class Get {
                 s.setGrundFürAbgang(rs.getString("GrundFürAbgang"));
                 s.setMutterkennung(rs.getString("MutterKennung"));
                 // Cast from String Possible ???
-                s.setDatumAbgang(rs.getDate("DatumAbgang"));
-                s.setDatumZugang(rs.getDate("DatumZugang"));
+                s.setDatumAbgang(new java.sql.Date(rs.getLong("DatumAbgang")));
+                s.setDatumZugang(new java.sql.Date(rs.getLong("DatumZugang")));
 
                 dbSchafe.add(s);
             }
@@ -75,8 +76,9 @@ public class Get {
 
         try {
             String sql = "SELECT * FROM Betriebsnummer WHERE SchafID = ?;";
+            stm = Config.getSQLConnection().prepareStatement(sql);
             stm.setString(1, SchafID);
-            ResultSet rs = stm.executeQuery(sql);
+            ResultSet rs = stm.executeQuery();
 
             while (rs.next()) {
                 Betriebsnummer s = new Betriebsnummer(rs.getString("SchafID"), rs.getString("BetriebsID"));
@@ -108,13 +110,14 @@ public class Get {
 
         try {
             String sql = "SELECT * FROM Entwurmen WHERE SchafID = ?;";
+            stm = Config.getSQLConnection().prepareStatement(sql);
             stm.setString(1, SchafID);
-            ResultSet rs = stm.executeQuery(sql);
+            ResultSet rs = stm.executeQuery();
 
             while (rs.next()) {
                 Entwurmen s = new Entwurmen(rs.getString("SchafID"), rs.getString("EntwurmenID"));
 
-                s.setDatum(rs.getDate("Datum"));
+                s.setDatum(new java.sql.Date(rs.getLong("Datum")));
 
                 dbEntwurmen.add(s);
             }
@@ -140,14 +143,15 @@ public class Get {
 
         try {
             String sql = "SELECT * FROM Gedeckt WHERE SchafID = ?;";
+            stm = Config.getSQLConnection().prepareStatement(sql);
             stm.setString(1, SchafID);
-            ResultSet rs = stm.executeQuery(sql);
+            ResultSet rs = stm.executeQuery();
 
             while (rs.next()) {
                 Gedeckt s = new Gedeckt(rs.getString("SchafID"), rs.getString("GedecktID"));
 
                 s.setVaterkennung(rs.getString("VaterKennung"));
-                s.setDatum(rs.getDate("Datum"));
+                s.setDatum(new java.sql.Date(rs.getLong("Datum")));
 
                 dbGedeckt.add(s);
             }
@@ -173,15 +177,17 @@ public class Get {
 
         try {
             String sql = "SELECT * FROM Impfungen WHERE SchafID = ?;";
+            stm = Config.getSQLConnection().prepareStatement(sql);
             stm.setString(1, SchafID);
-            ResultSet rs = stm.executeQuery(sql);
+            
+            ResultSet rs = stm.executeQuery();
 
             while (rs.next()) {
                 Impfungen s = new Impfungen(rs.getString("SchafID"), rs.getString("ImpfID"));
 
                 s.setBemerkung(rs.getString("Bemerkung"));
                 s.setImpfstoff(rs.getString("Impfstoff"));
-                s.setDatum(rs.getDate("Datum"));
+                s.setDatum(new java.sql.Date(rs.getLong("Datum")));
 
                 dbImpfung.add(s);
             }
@@ -207,13 +213,15 @@ public class Get {
 
         try {
             String sql = "SELECT * FROM Klauenschneiden WHERE SchafID = ?;";
+            stm = Config.getSQLConnection().prepareStatement(sql);
             stm.setString(1, SchafID);
-            ResultSet rs = stm.executeQuery(sql);
+            
+            ResultSet rs = stm.executeQuery();
 
             while (rs.next()) {
                 Klauenschneiden s = new Klauenschneiden(rs.getString("SchafID"), rs.getString("KlauenID"));
 
-                s.setDatum(rs.getDate("Datum"));
+                s.setDatum(new java.sql.Date(rs.getLong("Datum")));
 
                 dbKlauenschneiden.add(s);
             }
@@ -239,13 +247,15 @@ public class Get {
 
         try {
             String sql = "SELECT * FROM Schur WHERE SchafID = ?;";
+            stm = Config.getSQLConnection().prepareStatement(sql);
             stm.setString(1, SchafID);
-            ResultSet rs = stm.executeQuery(sql);
+            
+            ResultSet rs = stm.executeQuery();
 
             while (rs.next()) {
                 Schur s = new Schur(rs.getString("SchafID"), rs.getString("SchurID"));
 
-                s.setDatum(rs.getDate("Datum"));
+                s.setDatum(new java.sql.Date(rs.getLong("Datum")));
 
                 dbSchur.add(s);
             }
@@ -271,15 +281,17 @@ public class Get {
 
         try {
             String sql = "SELECT * FROM Transport WHERE SchafID = ?;";
+            stm = Config.getSQLConnection().prepareStatement(sql);
             stm.setString(1, SchafID);
-            ResultSet rs = stm.executeQuery(sql);
+            
+            ResultSet rs = stm.executeQuery();
 
             while (rs.next()) {
                 Transport s = new Transport(rs.getString("SchafID"), rs.getString("TransportID"));
 
                 s.setTransportMittel(rs.getString("TransportMittel"));
                 s.setGrund("Grund");
-                s.setDatum(rs.getDate("Datum"));
+                s.setDatum(new java.sql.Date(rs.getLong("Datum")));
 
                 dbTransport.add(s);
             }
