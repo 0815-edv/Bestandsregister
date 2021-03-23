@@ -37,44 +37,36 @@ public class main extends javax.swing.JFrame {
         jTabPlane = new javax.swing.JTabbedPane();
         jTabBetriebsnummer = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
-        jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
-        txfbnbetriebsid = new javax.swing.JTextField();
         txfbnnummer = new javax.swing.JTextField();
-        txfbnschafid = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         txabnbemerkung = new javax.swing.JTextArea();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        jListBetriebsnummer = new javax.swing.JList<>();
         jTabEntwurmen = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
-        jLabel27 = new javax.swing.JLabel();
-        jLabel28 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
-        txfentwurmenid = new javax.swing.JTextField();
-        txfentwurmenschafid = new javax.swing.JTextField();
-        txfentwurmendatum = new javax.swing.JTextField();
+        jDateEntwurmen = new org.jdatepicker.JDatePicker();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        jListEntwurmen = new javax.swing.JList<>();
         jTabGedeckt = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
-        jLabel30 = new javax.swing.JLabel();
-        jLabel31 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
-        txfgedecktid = new javax.swing.JTextField();
-        txfgedecktschafid = new javax.swing.JTextField();
-        txfgedecktdatum = new javax.swing.JTextField();
         txfgedecktvaterkennung = new javax.swing.JTextField();
+        jDatePicker1 = new org.jdatepicker.JDatePicker();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        jListGedeckt = new javax.swing.JList<>();
         jTabImpfungen = new javax.swing.JPanel();
-        jLabel17 = new javax.swing.JLabel();
-        txfimpfungschafid = new javax.swing.JTextField();
-        jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         txfimpfungbemerkung = new javax.swing.JTextField();
-        txfimpfungid = new javax.swing.JTextField();
         txfimpfungstoff = new javax.swing.JTextField();
-        txfimpfungdatum = new javax.swing.JTextField();
+        jDateImpfungen = new org.jdatepicker.JDatePicker();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jListImpfungen = new javax.swing.JList<>();
         jTabSchur = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
@@ -120,15 +112,13 @@ public class main extends javax.swing.JFrame {
         jLabel22.setText("jLabel22");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Bestandsregister");
+        setResizable(false);
 
         lstausgabe.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(lstausgabe);
 
-        jLabel23.setText("BetriebsID");
-
         jLabel24.setText("Betriebsnummer");
-
-        jLabel25.setText("SchafID");
 
         jLabel26.setText("Bemerkung");
 
@@ -144,33 +134,21 @@ public class main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel24)
-                    .addComponent(jLabel23)
-                    .addComponent(jLabel25)
                     .addComponent(jLabel26))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(txfbnschafid, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
-                        .addComponent(txfbnnummer, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txfbnbetriebsid, javax.swing.GroupLayout.Alignment.LEADING)))
+                    .addComponent(txfbnnummer, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel23)
-                    .addComponent(txfbnbetriebsid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel24)
                     .addComponent(txfbnnummer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel25)
-                    .addComponent(txfbnschafid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(28, 28, 28)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel26)
@@ -180,28 +158,31 @@ public class main extends javax.swing.JFrame {
                         .addContainerGap())))
         );
 
+        jListBetriebsnummer.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane10.setViewportView(jListBetriebsnummer);
+
         javax.swing.GroupLayout jTabBetriebsnummerLayout = new javax.swing.GroupLayout(jTabBetriebsnummer);
         jTabBetriebsnummer.setLayout(jTabBetriebsnummerLayout);
         jTabBetriebsnummerLayout.setHorizontalGroup(
             jTabBetriebsnummerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jTabBetriebsnummerLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jTabBetriebsnummerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         jTabBetriebsnummerLayout.setVerticalGroup(
             jTabBetriebsnummerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jTabBetriebsnummerLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         jTabPlane.addTab("Betriebsnummer", jTabBetriebsnummer);
-
-        jLabel27.setText("EntwurmenID");
-
-        jLabel28.setText("SchafID");
 
         jLabel29.setText("Datum");
 
@@ -210,58 +191,53 @@ public class main extends javax.swing.JFrame {
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel27)
-                    .addComponent(jLabel28)
-                    .addComponent(jLabel29))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txfentwurmenid)
-                    .addComponent(txfentwurmenschafid)
-                    .addComponent(txfentwurmendatum, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE))
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addGap(17, 17, 17)
+                .addComponent(jLabel29)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addComponent(jDateEntwurmen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel27)
-                    .addComponent(txfentwurmenid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel28)
-                    .addComponent(txfentwurmenschafid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel29)
-                    .addComponent(txfentwurmendatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(183, Short.MAX_VALUE))
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabel29))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jDateEntwurmen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
+
+        jListEntwurmen.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane9.setViewportView(jListEntwurmen);
 
         javax.swing.GroupLayout jTabEntwurmenLayout = new javax.swing.GroupLayout(jTabEntwurmen);
         jTabEntwurmen.setLayout(jTabEntwurmenLayout);
         jTabEntwurmenLayout.setHorizontalGroup(
             jTabEntwurmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jTabEntwurmenLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addGroup(jTabEntwurmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jTabEntwurmenLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jTabEntwurmenLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         jTabEntwurmenLayout.setVerticalGroup(
             jTabEntwurmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jTabEntwurmenLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         jTabPlane.addTab("Entwurmen", jTabEntwurmen);
-
-        jLabel30.setText("GedecktID");
-
-        jLabel31.setText("SchafID");
 
         jLabel32.setText("Datum");
 
@@ -274,47 +250,45 @@ public class main extends javax.swing.JFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel30)
-                    .addComponent(jLabel31)
                     .addComponent(jLabel32)
                     .addComponent(jLabel33))
                 .addGap(25, 25, 25)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txfgedecktid)
-                    .addComponent(txfgedecktschafid)
-                    .addComponent(txfgedecktdatum)
-                    .addComponent(txfgedecktvaterkennung, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE))
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txfgedecktvaterkennung, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel30)
-                    .addComponent(txfgedecktid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel31)
-                    .addComponent(txfgedecktschafid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel32)
-                    .addComponent(txfgedecktdatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(jLabel32)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel33)
                     .addComponent(txfgedecktvaterkennung, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(130, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
+
+        jListGedeckt.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane8.setViewportView(jListGedeckt);
 
         javax.swing.GroupLayout jTabGedecktLayout = new javax.swing.GroupLayout(jTabGedeckt);
         jTabGedeckt.setLayout(jTabGedecktLayout);
         jTabGedecktLayout.setHorizontalGroup(
             jTabGedecktLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jTabGedecktLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jTabGedecktLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jTabGedecktLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jTabGedecktLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jTabGedecktLayout.setVerticalGroup(
@@ -322,14 +296,12 @@ public class main extends javax.swing.JFrame {
             .addGroup(jTabGedecktLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         jTabPlane.addTab("Gedeckt", jTabGedeckt);
-
-        jLabel17.setText("SchafID");
-
-        jLabel18.setText("ImpfID");
 
         jLabel19.setText("Impfstoff");
 
@@ -337,39 +309,35 @@ public class main extends javax.swing.JFrame {
 
         jLabel21.setText("Datum");
 
+        jScrollPane7.setViewportView(jListImpfungen);
+
         javax.swing.GroupLayout jTabImpfungenLayout = new javax.swing.GroupLayout(jTabImpfungen);
         jTabImpfungen.setLayout(jTabImpfungenLayout);
         jTabImpfungenLayout.setHorizontalGroup(
             jTabImpfungenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jTabImpfungenLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jTabImpfungenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel20)
-                    .addComponent(jLabel17)
-                    .addComponent(jLabel18)
-                    .addComponent(jLabel19)
-                    .addComponent(jLabel21))
-                .addGap(18, 18, 18)
-                .addGroup(jTabImpfungenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txfimpfungschafid, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
-                    .addComponent(txfimpfungid)
-                    .addComponent(txfimpfungstoff)
-                    .addComponent(txfimpfungbemerkung)
-                    .addComponent(txfimpfungdatum))
-                .addContainerGap(58, Short.MAX_VALUE))
+                    .addGroup(jTabImpfungenLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jTabImpfungenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel20)
+                            .addComponent(jLabel19)
+                            .addComponent(jLabel21))
+                        .addGap(18, 18, 18)
+                        .addGroup(jTabImpfungenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jTabImpfungenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txfimpfungstoff, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
+                                .addComponent(txfimpfungbemerkung))
+                            .addComponent(jDateImpfungen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jTabImpfungenLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         jTabImpfungenLayout.setVerticalGroup(
             jTabImpfungenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jTabImpfungenLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(jTabImpfungenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel17)
-                    .addComponent(txfimpfungschafid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jTabImpfungenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel18)
-                    .addComponent(txfimpfungid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(19, 19, 19)
                 .addGroup(jTabImpfungenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel19)
                     .addComponent(txfimpfungstoff, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -378,10 +346,14 @@ public class main extends javax.swing.JFrame {
                     .addComponent(jLabel20)
                     .addComponent(txfimpfungbemerkung, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jTabImpfungenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel21)
-                    .addComponent(txfimpfungdatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(107, Short.MAX_VALUE))
+                .addGroup(jTabImpfungenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jDateImpfungen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jTabImpfungenLayout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(jLabel21)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
         );
 
         jTabPlane.addTab("Impfungen", jTabImpfungen);
@@ -722,6 +694,8 @@ public class main extends javax.swing.JFrame {
 
         jTabPlane.getAccessibleContext().setAccessibleName("Schaf");
 
+        getAccessibleContext().setAccessibleName("Bestandsregister");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -768,7 +742,10 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JButton btnchange;
     private javax.swing.JButton btnloeschen;
     private org.jdatepicker.JDatePicker jDateAbgang;
+    private org.jdatepicker.JDatePicker jDateEntwurmen;
+    private org.jdatepicker.JDatePicker jDateImpfungen;
     private org.jdatepicker.JDatePicker jDateKlauenschneiden;
+    private org.jdatepicker.JDatePicker jDatePicker1;
     private org.jdatepicker.JDatePicker jDateSchur;
     private org.jdatepicker.JDatePicker jDateTransport;
     private org.jdatepicker.JDatePicker jDateZugangsdatum;
@@ -776,23 +753,15 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel4;
@@ -800,6 +769,10 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelZugang;
+    private javax.swing.JList<String> jListBetriebsnummer;
+    private javax.swing.JList<String> jListEntwurmen;
+    private javax.swing.JList<String> jListGedeckt;
+    private javax.swing.JList<String> jListImpfungen;
     private javax.swing.JList<String> jListKlauenschneiden;
     private javax.swing.JList<String> jListSchur;
     private javax.swing.JList<String> jListTransport;
@@ -813,11 +786,15 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JPanel jTabBetriebsnummer;
     private javax.swing.JPanel jTabEntwurmen;
     private javax.swing.JPanel jTabGedeckt;
@@ -832,20 +809,9 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JTextField jTextKennung;
     private javax.swing.JList<String> lstausgabe;
     private javax.swing.JTextArea txabnbemerkung;
-    private javax.swing.JTextField txfbnbetriebsid;
     private javax.swing.JTextField txfbnnummer;
-    private javax.swing.JTextField txfbnschafid;
-    private javax.swing.JTextField txfentwurmendatum;
-    private javax.swing.JTextField txfentwurmenid;
-    private javax.swing.JTextField txfentwurmenschafid;
-    private javax.swing.JTextField txfgedecktdatum;
-    private javax.swing.JTextField txfgedecktid;
-    private javax.swing.JTextField txfgedecktschafid;
     private javax.swing.JTextField txfgedecktvaterkennung;
     private javax.swing.JTextField txfimpfungbemerkung;
-    private javax.swing.JTextField txfimpfungdatum;
-    private javax.swing.JTextField txfimpfungid;
-    private javax.swing.JTextField txfimpfungschafid;
     private javax.swing.JTextField txfimpfungstoff;
     private javax.swing.JTextField txftpgrund;
     private javax.swing.JTextField txftptransportmittel;
