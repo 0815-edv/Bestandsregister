@@ -105,13 +105,13 @@ public class main extends javax.swing.JFrame {
         jTabSchaf = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabelZugang = new javax.swing.JLabel();
-        jTextZugang = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jTextAbgang = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jTextGrundFürAbgang = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jMutterKennung = new javax.swing.JTextField();
+        jDateZugangsdatum = new org.jdatepicker.JDatePicker();
+        jDateAbgang = new org.jdatepicker.JDatePicker();
         jPanel3 = new javax.swing.JPanel();
         jTextKennung = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -592,30 +592,30 @@ public class main extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jMutterKennung, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextZugang)
                         .addComponent(jLabelZugang)
-                        .addComponent(jTextAbgang)
                         .addComponent(jLabel1)
                         .addComponent(jTextGrundFürAbgang, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel5))
-                .addGap(96, 96, 96))
+                    .addComponent(jLabel5)
+                    .addComponent(jDateZugangsdatum, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                    .addComponent(jDateAbgang, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(69, 69, 69))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabelZugang)
-                .addGap(7, 7, 7)
-                .addComponent(jTextZugang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1)
-                .addGap(12, 12, 12)
-                .addComponent(jTextAbgang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(jDateZugangsdatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jDateAbgang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTextGrundFürAbgang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -796,6 +796,8 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JButton btnadd;
     private javax.swing.JButton btnchange;
     private javax.swing.JButton btnloeschen;
+    private org.jdatepicker.JDatePicker jDateAbgang;
+    private org.jdatepicker.JDatePicker jDateZugangsdatum;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -851,11 +853,9 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JPanel jTabSchaf;
     private javax.swing.JPanel jTabSchur;
     private javax.swing.JPanel jTabTransport;
-    private javax.swing.JTextField jTextAbgang;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextGrundFürAbgang;
     private javax.swing.JTextField jTextKennung;
-    private javax.swing.JTextField jTextZugang;
     private javax.swing.JList<String> lstausgabe;
     private javax.swing.JTextArea txabnbemerkung;
     private javax.swing.JTextField txfbnbetriebsid;
