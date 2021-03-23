@@ -5,9 +5,20 @@
  */
 package de.edv.bestandsregister.GUI;
 
+import de.edv.bestandsregister.Betriebsnummer;
+import de.edv.bestandsregister.Entwurmen;
+import de.edv.bestandsregister.Gedeckt;
+import de.edv.bestandsregister.Impfungen;
+import de.edv.bestandsregister.Klauenschneiden;
+import de.edv.bestandsregister.SQL.Get;
+import de.edv.bestandsregister.Schaf;
+import de.edv.bestandsregister.Schur;
+import de.edv.bestandsregister.Transport;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import org.jdatepicker.DateModel;
 
 /**
  *
@@ -20,6 +31,8 @@ public class main extends javax.swing.JFrame {
      */
     public main() {
         initComponents();
+        Get select = new Get();
+        lstausgabe.setListData(select.schafe().toArray());
     }
 
     /**
@@ -33,7 +46,7 @@ public class main extends javax.swing.JFrame {
 
         jLabel22 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        lstausgabe = new javax.swing.JList<>();
+        lstausgabe = new javax.swing.JList();
         jTabPlane = new javax.swing.JTabbedPane();
         jTabBetriebsnummer = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
@@ -72,7 +85,7 @@ public class main extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jDateSchur = new org.jdatepicker.JDatePicker();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jListSchur = new javax.swing.JList<>();
+        jListSchur = new javax.swing.JList();
         jTabTransport = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
@@ -116,6 +129,11 @@ public class main extends javax.swing.JFrame {
         setResizable(false);
 
         lstausgabe.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        lstausgabe.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                lstausgabeValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(lstausgabe);
 
         jLabel24.setText("Betriebsnummer");
@@ -699,6 +717,43 @@ public class main extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void lstausgabeValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstausgabeValueChanged
+        // TODO add your handling code here:
+        Schaf schaf = (Schaf) lstausgabe.getSelectedValue();
+        Get select = new Get();
+
+        ArrayList<Betriebsnummer> betriebsnummerList = select.betriebsnummer(schaf.getSchafID());
+        ArrayList<Entwurmen> entwurmenList = select.entwurmen(schaf.getSchafID());
+        ArrayList<Gedeckt> gedecktList = select.gedeckt(schaf.getSchafID());
+        ArrayList<Impfungen> impfungenList = select.impfungen(schaf.getSchafID());
+        ArrayList<Klauenschneiden> klauenList = select.klauenschneiden(schaf.getSchafID());
+        ArrayList<Schur> schurList = select.schur(schaf.getSchafID());
+        ArrayList<Transport> transportList = select.transport(schaf.getSchafID());
+
+        // Schur
+        // Add First Item in List as Displayed
+        if (schurList.size() > 0) {
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(schurList.get(0).getDatum());
+            DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateSchur.getModel();
+            dateModel.setValue(calendar);
+
+            jListSchur.setListData(schurList.toArray());
+        }
+
+        if (impfungenList.size() > 0) {
+            // Impfung
+            txfimpfungstoff.setText(impfungenList.get(0).getImpfstoff());
+            txfimpfungbemerkung.setText(impfungenList.get(0).getBemerkung());
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(schurList.get(0).getDatum());
+            DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateImpfungen.getModel();
+            dateModel.setValue(calendar);
+        }
+
+    }//GEN-LAST:event_lstausgabeValueChanged
+
     /**
      * @param args the command line arguments
      */
@@ -774,7 +829,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JList<String> jListGedeckt;
     private javax.swing.JList<String> jListImpfungen;
     private javax.swing.JList<String> jListKlauenschneiden;
-    private javax.swing.JList<String> jListSchur;
+    private javax.swing.JList jListSchur;
     private javax.swing.JList<String> jListTransport;
     private javax.swing.JTextField jMutterKennung;
     private javax.swing.JPanel jPanel1;
@@ -807,7 +862,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextGrundFürAbgang;
     private javax.swing.JTextField jTextKennung;
-    private javax.swing.JList<String> lstausgabe;
+    private javax.swing.JList lstausgabe;
     private javax.swing.JTextArea txabnbemerkung;
     private javax.swing.JTextField txfbnnummer;
     private javax.swing.JTextField txfgedecktvaterkennung;
