@@ -10,12 +10,15 @@ import de.edv.bestandsregister.Entwurmen;
 import de.edv.bestandsregister.Gedeckt;
 import de.edv.bestandsregister.Impfungen;
 import de.edv.bestandsregister.Klauenschneiden;
+import de.edv.bestandsregister.SQL.Add;
 import de.edv.bestandsregister.SQL.Get;
 import de.edv.bestandsregister.Schaf;
 import de.edv.bestandsregister.Schur;
 import de.edv.bestandsregister.Transport;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jdatepicker.DateModel;
@@ -79,7 +82,7 @@ public class main extends javax.swing.JFrame {
         txfimpfungstoff = new javax.swing.JTextField();
         jDateImpfungen = new org.jdatepicker.JDatePicker();
         jScrollPane7 = new javax.swing.JScrollPane();
-        jListImpfungen = new javax.swing.JList<>();
+        jListImpfungen = new javax.swing.JList();
         jTabSchur = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
@@ -126,6 +129,7 @@ public class main extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Bestandsregister");
+        setLocation(new java.awt.Point(350, 200));
         setResizable(false);
 
         lstausgabe.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -177,6 +181,11 @@ public class main extends javax.swing.JFrame {
         );
 
         jListBetriebsnummer.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jListBetriebsnummer.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jListBetriebsnummerValueChanged(evt);
+            }
+        });
         jScrollPane10.setViewportView(jListBetriebsnummer);
 
         javax.swing.GroupLayout jTabBetriebsnummerLayout = new javax.swing.GroupLayout(jTabBetriebsnummer);
@@ -229,6 +238,11 @@ public class main extends javax.swing.JFrame {
         );
 
         jListEntwurmen.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jListEntwurmen.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jListEntwurmenValueChanged(evt);
+            }
+        });
         jScrollPane9.setViewportView(jListEntwurmen);
 
         javax.swing.GroupLayout jTabEntwurmenLayout = new javax.swing.GroupLayout(jTabEntwurmen);
@@ -293,6 +307,11 @@ public class main extends javax.swing.JFrame {
         );
 
         jListGedeckt.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jListGedeckt.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jListGedecktValueChanged(evt);
+            }
+        });
         jScrollPane8.setViewportView(jListGedeckt);
 
         javax.swing.GroupLayout jTabGedecktLayout = new javax.swing.GroupLayout(jTabGedeckt);
@@ -327,6 +346,11 @@ public class main extends javax.swing.JFrame {
 
         jLabel21.setText("Datum");
 
+        jListImpfungen.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jListImpfungenValueChanged(evt);
+            }
+        });
         jScrollPane7.setViewportView(jListImpfungen);
 
         javax.swing.GroupLayout jTabImpfungenLayout = new javax.swing.GroupLayout(jTabImpfungen);
@@ -403,6 +427,11 @@ public class main extends javax.swing.JFrame {
         );
 
         jListSchur.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jListSchur.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jListSchurValueChanged(evt);
+            }
+        });
         jScrollPane5.setViewportView(jListSchur);
 
         javax.swing.GroupLayout jTabSchurLayout = new javax.swing.GroupLayout(jTabSchur);
@@ -473,6 +502,11 @@ public class main extends javax.swing.JFrame {
         );
 
         jListTransport.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jListTransport.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jListTransportValueChanged(evt);
+            }
+        });
         jScrollPane4.setViewportView(jListTransport);
 
         javax.swing.GroupLayout jTabTransportLayout = new javax.swing.GroupLayout(jTabTransport);
@@ -612,6 +646,11 @@ public class main extends javax.swing.JFrame {
         jLabel16.setText("Datum");
 
         jListKlauenschneiden.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jListKlauenschneiden.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jListKlauenschneidenValueChanged(evt);
+            }
+        });
         jScrollPane6.setViewportView(jListKlauenschneiden);
 
         javax.swing.GroupLayout jTabKlauenschneidenLayout = new javax.swing.GroupLayout(jTabKlauenschneiden);
@@ -648,6 +687,11 @@ public class main extends javax.swing.JFrame {
         jTabPlane.addTab("Klauenschneiden", jTabKlauenschneiden);
 
         btnadd.setText("Hinzufügen");
+        btnadd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnaddActionPerformed(evt);
+            }
+        });
 
         btnchange.setText("Ändern");
 
@@ -716,113 +760,262 @@ public class main extends javax.swing.JFrame {
 
     private void lstausgabeValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstausgabeValueChanged
         // TODO add your handling code here:
-        Schaf schaf = (Schaf) lstausgabe.getSelectedValue();
-        Get select = new Get();
+        if (lstausgabe.getSelectedValue() != null) {
+            Schaf schaf = (Schaf) lstausgabe.getSelectedValue();
+            Get select = new Get();
 
-        ArrayList<Betriebsnummer> betriebsnummerList = select.betriebsnummer(schaf.getSchafID());
-        ArrayList<Entwurmen> entwurmenList = select.entwurmen(schaf.getSchafID());
-        ArrayList<Gedeckt> gedecktList = select.gedeckt(schaf.getSchafID());
-        ArrayList<Impfungen> impfungenList = select.impfungen(schaf.getSchafID());
-        ArrayList<Klauenschneiden> klauenList = select.klauenschneiden(schaf.getSchafID());
-        ArrayList<Schur> schurList = select.schur(schaf.getSchafID());
-        ArrayList<Transport> transportList = select.transport(schaf.getSchafID());
+            ArrayList<Betriebsnummer> betriebsnummerList = select.betriebsnummer(schaf.getSchafID());
+            ArrayList<Entwurmen> entwurmenList = select.entwurmen(schaf.getSchafID());
+            ArrayList<Gedeckt> gedecktList = select.gedeckt(schaf.getSchafID());
+            ArrayList<Impfungen> impfungenList = select.impfungen(schaf.getSchafID());
+            ArrayList<Klauenschneiden> klauenList = select.klauenschneiden(schaf.getSchafID());
+            ArrayList<Schur> schurList = select.schur(schaf.getSchafID());
+            ArrayList<Transport> transportList = select.transport(schaf.getSchafID());
 
-        // Schur
-        // Add First Item in List as Displayed
-        if (schurList.size() > 0) {
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(schurList.get(0).getDatum());
-            DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateSchur.getModel();
-            dateModel.setValue(calendar);
+            // Schur
+            // Add First Item in List as Displayed
+            if (schurList.size() > 0) {
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(schurList.get(0).getDatum());
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateSchur.getModel();
+                dateModel.setValue(calendar);
 
-            jListSchur.setListData(schurList.toArray());
+                jListSchur.setListData(schurList.toArray());
+            }
+
+            // Impfungen
+            if (impfungenList.size() > 0) {
+                // Impfung
+                txfimpfungstoff.setText(impfungenList.get(0).getImpfstoff());
+                txfimpfungbemerkung.setText(impfungenList.get(0).getBemerkung());
+
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(impfungenList.get(0).getDatum());
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateImpfungen.getModel();
+                dateModel.setValue(calendar);
+            }
+
+            // Gedeckt
+            if (gedecktList.size() > 0) {
+                txfgedecktvaterkennung.setText(gedecktList.get(0).getVaterkennung());
+
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(gedecktList.get(0).getDatum());
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateGedeckt.getModel();
+                dateModel.setValue(calendar);
+
+                jListGedeckt.setListData(gedecktList.toArray());
+            }
+
+            // Entwurmen
+            if (entwurmenList.size() > 0) {
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(entwurmenList.get(0).getDatum());
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateEntwurmen.getModel();
+                dateModel.setValue(calendar);
+
+                jListEntwurmen.setListData(entwurmenList.toArray());
+            }
+
+            // Betriebsnummer
+            if (betriebsnummerList.size() > 0) {
+                txfbnnummer.setText(betriebsnummerList.get(0).getBetriebsnummer());
+                txabnbemerkung.setText(betriebsnummerList.get(0).getBemerkung());
+                jListBetriebsnummer.setListData(betriebsnummerList.toArray());
+            }
+
+            // Klauenschneiden
+            if (klauenList.size() > 0) {
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(klauenList.get(0).getDatum());
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateKlauenschneiden.getModel();
+                dateModel.setValue(calendar);
+
+                jListKlauenschneiden.setListData(klauenList.toArray());
+            }
+
+            // Schaf
+            {
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(schaf.getDatumZugang());
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateZugangsdatum.getModel();
+                dateModel.setValue(calendar);
+            }
+
+            {
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(schaf.getDatumAbgang());
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateAbgang.getModel();
+                dateModel.setValue(calendar);
+            }
+
+            jTextGrundFürAbgang.setText(schaf.getGrundFürAbgang());
+            jMutterKennung.setText(schaf.getKennung());
+            jTextKennung.setText(schaf.getKennung());
+            jTextBemerkung.setText(schaf.getBemerkung());
+
+            // Transport
+            if (transportList.size() > 0) {
+                txftptransportmittel.setText(transportList.get(0).getTransportMittel());
+                txftpgrund.setText(transportList.get(0).getGrund());
+
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(transportList.get(0).getDatum());
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateTransport.getModel();
+                dateModel.setValue(calendar);
+
+                jListTransport.setListData(transportList.toArray());
+            }
+        } else {
+            lstausgabe.repaint();
         }
-
-        // Impfungen
-        if (impfungenList.size() > 0) {
-            // Impfung
-            txfimpfungstoff.setText(impfungenList.get(0).getImpfstoff());
-            txfimpfungbemerkung.setText(impfungenList.get(0).getBemerkung());
-
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(impfungenList.get(0).getDatum());
-            DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateImpfungen.getModel();
-            dateModel.setValue(calendar);
-        }
-
-        // Gedeckt
-        if (gedecktList.size() > 0) {
-            txfgedecktvaterkennung.setText(gedecktList.get(0).getVaterkennung());
-
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(gedecktList.get(0).getDatum());
-            DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateGedeckt.getModel();
-            dateModel.setValue(calendar);
-
-            jListGedeckt.setListData(gedecktList.toArray());
-        }
-
-        // Entwurmen
-        if (entwurmenList.size() > 0) {
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(entwurmenList.get(0).getDatum());
-            DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateEntwurmen.getModel();
-            dateModel.setValue(calendar);
-            
-            jListEntwurmen.setListData(entwurmenList.toArray());
-        }
-        
-        // Betriebsnummer
-        if(betriebsnummerList.size() > 0){
-            txfbnnummer.setText(betriebsnummerList.get(0).getBetriebsnummer());
-            txabnbemerkung.setText(betriebsnummerList.get(0).getBemerkung());
-            jListBetriebsnummer.setListData(betriebsnummerList.toArray());
-        }
-        
-        // Klauenschneiden
-        if(klauenList.size() > 0){
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(klauenList.get(0).getDatum());
-            DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateKlauenschneiden.getModel();
-            dateModel.setValue(calendar);
-            
-            jListKlauenschneiden.setListData(klauenList.toArray());
-        }
-        
-        // Schaf
-        {
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(schaf.getDatumZugang());
-            DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateZugangsdatum.getModel();
-            dateModel.setValue(calendar);
-        }
-        
-        {
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(schaf.getDatumAbgang());
-            DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateAbgang.getModel();
-            dateModel.setValue(calendar);
-        }
-        
-        jTextGrundFürAbgang.setText(schaf.getGrundFürAbgang());
-        jMutterKennung.setText(schaf.getKennung());
-        jTextKennung.setText(schaf.getKennung());
-        jTextBemerkung.setText(schaf.getBemerkung());
-        
-        // Transport
-        if(transportList.size() > 0){
-            txftptransportmittel.setText(transportList.get(0).getTransportMittel());
-            txftpgrund.setText(transportList.get(0).getGrund());
-            
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(transportList.get(0).getDatum());
-            DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateTransport.getModel();
-            dateModel.setValue(calendar);
-            
-            jListTransport.setListData(transportList.toArray());
-        }
-
     }//GEN-LAST:event_lstausgabeValueChanged
+
+    // Betriebsnummer
+    private void jListBetriebsnummerValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListBetriebsnummerValueChanged
+        // TODO add your handling code here:
+        Betriebsnummer betrieb = (Betriebsnummer) jListBetriebsnummer.getSelectedValue();
+
+        txfbnnummer.setText(betrieb.getBetriebsnummer());
+        txabnbemerkung.setText(betrieb.getBemerkung());
+    }//GEN-LAST:event_jListBetriebsnummerValueChanged
+
+    // Entwurmen
+    private void jListEntwurmenValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListEntwurmenValueChanged
+        // TODO add your handling code here:
+        Entwurmen entwurmen = (Entwurmen) jListEntwurmen.getSelectedValue();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(entwurmen.getDatum());
+        DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateEntwurmen.getModel();
+        dateModel.setValue(calendar);
+    }//GEN-LAST:event_jListEntwurmenValueChanged
+
+    // Gedeckt
+    private void jListGedecktValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListGedecktValueChanged
+        // TODO add your handling code here:
+        Gedeckt gedeckt = (Gedeckt) jListGedeckt.getSelectedValue();
+
+        txfgedecktvaterkennung.setText(gedeckt.getVaterkennung());
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(gedeckt.getDatum());
+        DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateGedeckt.getModel();
+        dateModel.setValue(calendar);
+    }//GEN-LAST:event_jListGedecktValueChanged
+
+    // Inpfungen
+    private void jListImpfungenValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListImpfungenValueChanged
+        // TODO add your handling code here:
+        Impfungen impfung = (Impfungen) jListImpfungen.getSelectedValue();
+
+        txfimpfungstoff.setText(impfung.getImpfstoff());
+        txfimpfungbemerkung.setText(impfung.getBemerkung());
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(impfung.getDatum());
+        DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateImpfungen.getModel();
+        dateModel.setValue(calendar);
+    }//GEN-LAST:event_jListImpfungenValueChanged
+
+    // Schur
+    private void jListSchurValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListSchurValueChanged
+        // TODO add your handling code here:
+        Schur schur = (Schur) jListSchur.getSelectedValue();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(schur.getDatum());
+        DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateSchur.getModel();
+        dateModel.setValue(calendar);
+    }//GEN-LAST:event_jListSchurValueChanged
+
+    // Transport
+    private void jListTransportValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListTransportValueChanged
+        // TODO add your handling code here:
+        Transport transport = (Transport) jListTransport.getSelectedValue();
+
+        txftptransportmittel.setText(transport.getTransportMittel());
+        txftpgrund.setText(transport.getGrund());
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(transport.getDatum());
+        DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateTransport.getModel();
+        dateModel.setValue(calendar);
+    }//GEN-LAST:event_jListTransportValueChanged
+
+    // Klauenschneiden
+    private void jListKlauenschneidenValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListKlauenschneidenValueChanged
+        // TODO add your handling code here:
+        Klauenschneiden klauen = (Klauenschneiden) jListKlauenschneiden.getSelectedValue();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(klauen.getDatum());
+        DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateKlauenschneiden.getModel();
+        dateModel.setValue(calendar);
+    }//GEN-LAST:event_jListKlauenschneidenValueChanged
+
+    private void updateListView(Object obj) {
+        ArrayList<Object> objList = new ArrayList<Object>();
+        for (int i = 0; i < lstausgabe.getModel().getSize(); i++) {
+            objList.add(lstausgabe.getModel().getElementAt(i));
+        }
+        objList.add(obj);
+        lstausgabe.setListData(objList.toArray());
+        lstausgabe.repaint();
+    }
+
+    // Hinzufügen
+    private void btnaddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddActionPerformed
+        // TODO add your handling code here:
+        Add insert = new Add();
+        switch (jTabPlane.getSelectedIndex()) {
+            // Schur
+            case 4:
+
+                break;
+
+            // Betriebsnummer
+            case 0:
+                break;
+
+            // Entwurmen
+            case 1:
+                break;
+
+            // Gedeckt
+            case 2:
+                break;
+
+            // Impfungen
+            case 3:
+                break;
+
+            // Transport
+            case 5:
+                break;
+
+            // Schaf
+            case 6:
+                Schaf schaf = new Schaf();
+
+                schaf.setGrundFürAbgang(jTextGrundFürAbgang.getText());
+                schaf.setMutterkennung(jMutterKennung.getText());
+                schaf.setKennung(jTextKennung.getText());
+                schaf.setBemerkung(jTextBemerkung.getText());
+                schaf.setDatumAbgang(new java.sql.Date(((GregorianCalendar) jDateAbgang.getModel().getValue()).getTimeInMillis()));
+                schaf.setDatumZugang(new java.sql.Date(((GregorianCalendar) jDateZugangsdatum.getModel().getValue()).getTimeInMillis()));
+
+                insert.schaf(schaf);
+                updateListView(schaf);
+                break;
+
+            // Klauenschneiden
+            case 7:
+                break;
+
+            default:
+                break;
+        }
+    }//GEN-LAST:event_btnaddActionPerformed
 
     /**
      * @param args the command line arguments
@@ -897,7 +1090,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JList jListBetriebsnummer;
     private javax.swing.JList jListEntwurmen;
     private javax.swing.JList jListGedeckt;
-    private javax.swing.JList<String> jListImpfungen;
+    private javax.swing.JList jListImpfungen;
     private javax.swing.JList jListKlauenschneiden;
     private javax.swing.JList jListSchur;
     private javax.swing.JList jListTransport;
