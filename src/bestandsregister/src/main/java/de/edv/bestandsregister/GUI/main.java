@@ -56,21 +56,21 @@ public class main extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         txabnbemerkung = new javax.swing.JTextArea();
         jScrollPane10 = new javax.swing.JScrollPane();
-        jListBetriebsnummer = new javax.swing.JList<>();
+        jListBetriebsnummer = new javax.swing.JList();
         jTabEntwurmen = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jLabel29 = new javax.swing.JLabel();
         jDateEntwurmen = new org.jdatepicker.JDatePicker();
         jScrollPane9 = new javax.swing.JScrollPane();
-        jListEntwurmen = new javax.swing.JList<>();
+        jListEntwurmen = new javax.swing.JList();
         jTabGedeckt = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jLabel32 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
         txfgedecktvaterkennung = new javax.swing.JTextField();
-        jDatePicker1 = new org.jdatepicker.JDatePicker();
+        jDateGedeckt = new org.jdatepicker.JDatePicker();
         jScrollPane8 = new javax.swing.JScrollPane();
-        jListGedeckt = new javax.swing.JList<>();
+        jListGedeckt = new javax.swing.JList();
         jTabImpfungen = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
@@ -95,7 +95,7 @@ public class main extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jDateTransport = new org.jdatepicker.JDatePicker();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jListTransport = new javax.swing.JList<>();
+        jListTransport = new javax.swing.JList();
         jTabSchaf = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabelZugang = new javax.swing.JLabel();
@@ -111,12 +111,12 @@ public class main extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jTextBemerkung = new javax.swing.JTextArea();
         jTabKlauenschneiden = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         jDateKlauenschneiden = new org.jdatepicker.JDatePicker();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jListKlauenschneiden = new javax.swing.JList<>();
+        jListKlauenschneiden = new javax.swing.JList();
         jPanel1 = new javax.swing.JPanel();
         btnadd = new javax.swing.JButton();
         btnchange = new javax.swing.JButton();
@@ -273,7 +273,7 @@ public class main extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txfgedecktvaterkennung, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jDateGedeckt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(48, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
@@ -281,7 +281,7 @@ public class main extends javax.swing.JFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(8, 8, 8)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jDateGedeckt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGap(8, 8, 8)
                         .addComponent(jLabel32)))
@@ -517,11 +517,10 @@ public class main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jMutterKennung, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabelZugang)
-                        .addComponent(jLabel1)
-                        .addComponent(jTextGrundFürAbgang, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelZugang)
+                    .addComponent(jLabel1)
+                    .addComponent(jTextGrundFürAbgang, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addComponent(jDateZugangsdatum, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
                     .addComponent(jDateAbgang, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
@@ -553,9 +552,9 @@ public class main extends javax.swing.JFrame {
 
         jLabel4.setText("Bemerkung");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        jTextBemerkung.setColumns(20);
+        jTextBemerkung.setRows(5);
+        jScrollPane2.setViewportView(jTextBemerkung);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -712,8 +711,6 @@ public class main extends javax.swing.JFrame {
 
         jTabPlane.getAccessibleContext().setAccessibleName("Schaf");
 
-        getAccessibleContext().setAccessibleName("Bestandsregister");
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -741,15 +738,88 @@ public class main extends javax.swing.JFrame {
             jListSchur.setListData(schurList.toArray());
         }
 
+        // Impfungen
         if (impfungenList.size() > 0) {
             // Impfung
             txfimpfungstoff.setText(impfungenList.get(0).getImpfstoff());
             txfimpfungbemerkung.setText(impfungenList.get(0).getBemerkung());
 
             Calendar calendar = Calendar.getInstance();
-            calendar.setTime(schurList.get(0).getDatum());
+            calendar.setTime(impfungenList.get(0).getDatum());
             DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateImpfungen.getModel();
             dateModel.setValue(calendar);
+        }
+
+        // Gedeckt
+        if (gedecktList.size() > 0) {
+            txfgedecktvaterkennung.setText(gedecktList.get(0).getVaterkennung());
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(gedecktList.get(0).getDatum());
+            DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateGedeckt.getModel();
+            dateModel.setValue(calendar);
+
+            jListGedeckt.setListData(gedecktList.toArray());
+        }
+
+        // Entwurmen
+        if (entwurmenList.size() > 0) {
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(entwurmenList.get(0).getDatum());
+            DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateEntwurmen.getModel();
+            dateModel.setValue(calendar);
+            
+            jListEntwurmen.setListData(entwurmenList.toArray());
+        }
+        
+        // Betriebsnummer
+        if(betriebsnummerList.size() > 0){
+            txfbnnummer.setText(betriebsnummerList.get(0).getBetriebsnummer());
+            txabnbemerkung.setText(betriebsnummerList.get(0).getBemerkung());
+            jListBetriebsnummer.setListData(betriebsnummerList.toArray());
+        }
+        
+        // Klauenschneiden
+        if(klauenList.size() > 0){
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(klauenList.get(0).getDatum());
+            DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateKlauenschneiden.getModel();
+            dateModel.setValue(calendar);
+            
+            jListKlauenschneiden.setListData(klauenList.toArray());
+        }
+        
+        // Schaf
+        {
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(schaf.getDatumZugang());
+            DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateZugangsdatum.getModel();
+            dateModel.setValue(calendar);
+        }
+        
+        {
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(schaf.getDatumAbgang());
+            DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateAbgang.getModel();
+            dateModel.setValue(calendar);
+        }
+        
+        jTextGrundFürAbgang.setText(schaf.getGrundFürAbgang());
+        jMutterKennung.setText(schaf.getKennung());
+        jTextKennung.setText(schaf.getKennung());
+        jTextBemerkung.setText(schaf.getBemerkung());
+        
+        // Transport
+        if(transportList.size() > 0){
+            txftptransportmittel.setText(transportList.get(0).getTransportMittel());
+            txftpgrund.setText(transportList.get(0).getGrund());
+            
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(transportList.get(0).getDatum());
+            DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateTransport.getModel();
+            dateModel.setValue(calendar);
+            
+            jListTransport.setListData(transportList.toArray());
         }
 
     }//GEN-LAST:event_lstausgabeValueChanged
@@ -798,9 +868,9 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JButton btnloeschen;
     private org.jdatepicker.JDatePicker jDateAbgang;
     private org.jdatepicker.JDatePicker jDateEntwurmen;
+    private org.jdatepicker.JDatePicker jDateGedeckt;
     private org.jdatepicker.JDatePicker jDateImpfungen;
     private org.jdatepicker.JDatePicker jDateKlauenschneiden;
-    private org.jdatepicker.JDatePicker jDatePicker1;
     private org.jdatepicker.JDatePicker jDateSchur;
     private org.jdatepicker.JDatePicker jDateTransport;
     private org.jdatepicker.JDatePicker jDateZugangsdatum;
@@ -824,13 +894,13 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelZugang;
-    private javax.swing.JList<String> jListBetriebsnummer;
-    private javax.swing.JList<String> jListEntwurmen;
-    private javax.swing.JList<String> jListGedeckt;
+    private javax.swing.JList jListBetriebsnummer;
+    private javax.swing.JList jListEntwurmen;
+    private javax.swing.JList jListGedeckt;
     private javax.swing.JList<String> jListImpfungen;
-    private javax.swing.JList<String> jListKlauenschneiden;
+    private javax.swing.JList jListKlauenschneiden;
     private javax.swing.JList jListSchur;
-    private javax.swing.JList<String> jListTransport;
+    private javax.swing.JList jListTransport;
     private javax.swing.JTextField jMutterKennung;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -859,7 +929,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JPanel jTabSchaf;
     private javax.swing.JPanel jTabSchur;
     private javax.swing.JPanel jTabTransport;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextBemerkung;
     private javax.swing.JTextField jTextGrundFürAbgang;
     private javax.swing.JTextField jTextKennung;
     private javax.swing.JList lstausgabe;
