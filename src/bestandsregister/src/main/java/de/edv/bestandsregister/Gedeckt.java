@@ -13,30 +13,30 @@ import java.sql.Date;
  * @author lorenz
  */
 public class Gedeckt {
-    
+
     private String gedecktID;
     private String schafID;
     private Date datum;
     private String vaterkennung;
-    
-    public Gedeckt(String schafID){
+
+    public Gedeckt(String schafID) {
         this.schafID = schafID;
         this.gedecktID = IdentifierService.generateGUID();
     }
 
-    public Gedeckt(String schafID, String gedecktID){
+    public Gedeckt(String schafID, String gedecktID) {
         this.schafID = schafID;
         this.gedecktID = gedecktID;
     }
-    
-    public String getSchafID(){
+
+    public String getSchafID() {
         return schafID;
     }
-    
-    public String getGedecktID(){
+
+    public String getGedecktID() {
         return gedecktID;
     }
-    
+
     public Date getDatum() {
         return datum;
     }
@@ -51,5 +51,9 @@ public class Gedeckt {
 
     public void setVaterkennung(String vaterkennung) {
         this.vaterkennung = vaterkennung;
+    }
+
+    public String toString() {
+        return vaterkennung + " " + datum.toString();
     }
 }

@@ -12,28 +12,28 @@ import java.sql.Date;
  *
  * @author lorenz
  */
-
 public class Impfungen {
+
     private String schafID;
     private String impfID;
     private String impfstoff;
     private String bemerkung;
     private Date datum;
-    
-    public Impfungen(String schafID){
+
+    public Impfungen(String schafID) {
         this.schafID = schafID;
         this.impfID = IdentifierService.generateGUID();
     }
 
-    public Impfungen(String schafID, String impfID){
+    public Impfungen(String schafID, String impfID) {
         this.schafID = schafID;
         this.impfID = impfID;
     }
-    
-    public String getSchafID(){
+
+    public String getSchafID() {
         return schafID;
     }
-      
+
     public String getImpfID() {
         return impfID;
     }
@@ -42,10 +42,10 @@ public class Impfungen {
         return bemerkung;
     }
 
-    public String getImpfstoff(){
+    public String getImpfstoff() {
         return impfstoff;
     }
-    
+
     public Date getDatum() {
         return datum;
     }
@@ -60,5 +60,9 @@ public class Impfungen {
 
     public void setDatum(Date datum) {
         this.datum = datum;
+    }
+
+    public String toString() {
+        return impfstoff + " " + datum.toString();
     }
 }

@@ -18,16 +18,16 @@ public class Betriebsnummer {
     private String schafID;
     private String bemerkung;
 
-    public Betriebsnummer(String schafID){
+    public Betriebsnummer(String schafID) {
         this.schafID = schafID;
         this.betriebsID = IdentifierService.generateGUID();
     }
-    
-    public Betriebsnummer(String schafID, String betriebsID){
+
+    public Betriebsnummer(String schafID, String betriebsID) {
         this.schafID = schafID;
         this.betriebsID = betriebsID;
     }
-    
+
     public String getBetriebsnummer() {
         return betriebsnummer;
     }
@@ -35,12 +35,12 @@ public class Betriebsnummer {
     public void setBetriebsnummer(String betriebsnummer) {
         this.betriebsnummer = betriebsnummer;
     }
-    
-    public String getBetriebsID(){
+
+    public String getBetriebsID() {
         return betriebsID;
     }
-    
-    public String getSchafID(){
+
+    public String getSchafID() {
         return schafID;
     }
 
@@ -50,5 +50,9 @@ public class Betriebsnummer {
 
     public void setBemerkung(String bemerkung) {
         this.bemerkung = bemerkung;
+    }
+
+    public String toString() {
+        return betriebsnummer;
     }
 }

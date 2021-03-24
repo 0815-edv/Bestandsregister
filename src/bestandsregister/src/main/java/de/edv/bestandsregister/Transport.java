@@ -61,4 +61,8 @@ public class Transport {
     public void setDatum(Date datum) {
         this.datum = datum;
     }
+
+    public String toString() {
+        return grund + " " + datum.toString();
+    }
 }

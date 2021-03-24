@@ -22,25 +22,29 @@ public class Entwurmen {
         this.schafID = schafID;
         this.entwurmenID = IdentifierService.generateGUID();
     }
-    
-    public Entwurmen(String schafID, String entwurmenID){
+
+    public Entwurmen(String schafID, String entwurmenID) {
         this.schafID = schafID;
         this.entwurmenID = entwurmenID;
     }
 
-    public String getEntwurmenID(){
+    public String getEntwurmenID() {
         return entwurmenID;
     }
-    
-    public String getSchafID(){
+
+    public String getSchafID() {
         return schafID;
     }
-    
+
     public Date getDatum() {
         return datum;
     }
 
     public void setDatum(Date datum) {
         this.datum = datum;
+    }
+
+    public String toString() {
+        return datum.toString();
     }
 }
