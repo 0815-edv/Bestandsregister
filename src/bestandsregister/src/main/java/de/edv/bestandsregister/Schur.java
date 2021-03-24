@@ -43,8 +43,8 @@ public class Schur {
     public void setDatum(Date datum) {
         this.datum = datum;
     }
-    
-    public String toString(){
+
+    public String toString() {
         return datum.toString();
     }
 }

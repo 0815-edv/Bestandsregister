@@ -16,7 +16,7 @@ public class Klauenschneiden {
 
     private String klauenID;
     private String schafID;
-    private Date Datum;
+    private Date datum;
 
     public Klauenschneiden(String schafID) {
         this.schafID = schafID;
@@ -37,10 +37,14 @@ public class Klauenschneiden {
     }
 
     public Date getDatum() {
-        return Datum;
+        return datum;
     }
 
-    public void setDatum(Date Datum) {
-        this.Datum = Datum;
+    public void setDatum(Date datum) {
+        this.datum = datum;
+    }
+
+    public String toString() {
+        return datum.toString();
     }
 }
