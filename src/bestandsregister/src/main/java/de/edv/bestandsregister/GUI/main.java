@@ -10,12 +10,15 @@ import de.edv.bestandsregister.Entwurmen;
 import de.edv.bestandsregister.Gedeckt;
 import de.edv.bestandsregister.Impfungen;
 import de.edv.bestandsregister.Klauenschneiden;
+import de.edv.bestandsregister.SQL.Add;
 import de.edv.bestandsregister.SQL.Get;
 import de.edv.bestandsregister.Schaf;
 import de.edv.bestandsregister.Schur;
 import de.edv.bestandsregister.Transport;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jdatepicker.DateModel;
@@ -757,112 +760,115 @@ public class main extends javax.swing.JFrame {
 
     private void lstausgabeValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstausgabeValueChanged
         // TODO add your handling code here:
-        Schaf schaf = (Schaf) lstausgabe.getSelectedValue();
-        Get select = new Get();
+        if (lstausgabe.getSelectedValue() != null) {
+            Schaf schaf = (Schaf) lstausgabe.getSelectedValue();
+            Get select = new Get();
 
-        ArrayList<Betriebsnummer> betriebsnummerList = select.betriebsnummer(schaf.getSchafID());
-        ArrayList<Entwurmen> entwurmenList = select.entwurmen(schaf.getSchafID());
-        ArrayList<Gedeckt> gedecktList = select.gedeckt(schaf.getSchafID());
-        ArrayList<Impfungen> impfungenList = select.impfungen(schaf.getSchafID());
-        ArrayList<Klauenschneiden> klauenList = select.klauenschneiden(schaf.getSchafID());
-        ArrayList<Schur> schurList = select.schur(schaf.getSchafID());
-        ArrayList<Transport> transportList = select.transport(schaf.getSchafID());
+            ArrayList<Betriebsnummer> betriebsnummerList = select.betriebsnummer(schaf.getSchafID());
+            ArrayList<Entwurmen> entwurmenList = select.entwurmen(schaf.getSchafID());
+            ArrayList<Gedeckt> gedecktList = select.gedeckt(schaf.getSchafID());
+            ArrayList<Impfungen> impfungenList = select.impfungen(schaf.getSchafID());
+            ArrayList<Klauenschneiden> klauenList = select.klauenschneiden(schaf.getSchafID());
+            ArrayList<Schur> schurList = select.schur(schaf.getSchafID());
+            ArrayList<Transport> transportList = select.transport(schaf.getSchafID());
 
-        // Schur
-        // Add First Item in List as Displayed
-        if (schurList.size() > 0) {
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(schurList.get(0).getDatum());
-            DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateSchur.getModel();
-            dateModel.setValue(calendar);
+            // Schur
+            // Add First Item in List as Displayed
+            if (schurList.size() > 0) {
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(schurList.get(0).getDatum());
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateSchur.getModel();
+                dateModel.setValue(calendar);
 
-            jListSchur.setListData(schurList.toArray());
+                jListSchur.setListData(schurList.toArray());
+            }
+
+            // Impfungen
+            if (impfungenList.size() > 0) {
+                // Impfung
+                txfimpfungstoff.setText(impfungenList.get(0).getImpfstoff());
+                txfimpfungbemerkung.setText(impfungenList.get(0).getBemerkung());
+
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(impfungenList.get(0).getDatum());
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateImpfungen.getModel();
+                dateModel.setValue(calendar);
+            }
+
+            // Gedeckt
+            if (gedecktList.size() > 0) {
+                txfgedecktvaterkennung.setText(gedecktList.get(0).getVaterkennung());
+
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(gedecktList.get(0).getDatum());
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateGedeckt.getModel();
+                dateModel.setValue(calendar);
+
+                jListGedeckt.setListData(gedecktList.toArray());
+            }
+
+            // Entwurmen
+            if (entwurmenList.size() > 0) {
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(entwurmenList.get(0).getDatum());
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateEntwurmen.getModel();
+                dateModel.setValue(calendar);
+
+                jListEntwurmen.setListData(entwurmenList.toArray());
+            }
+
+            // Betriebsnummer
+            if (betriebsnummerList.size() > 0) {
+                txfbnnummer.setText(betriebsnummerList.get(0).getBetriebsnummer());
+                txabnbemerkung.setText(betriebsnummerList.get(0).getBemerkung());
+                jListBetriebsnummer.setListData(betriebsnummerList.toArray());
+            }
+
+            // Klauenschneiden
+            if (klauenList.size() > 0) {
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(klauenList.get(0).getDatum());
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateKlauenschneiden.getModel();
+                dateModel.setValue(calendar);
+
+                jListKlauenschneiden.setListData(klauenList.toArray());
+            }
+
+            // Schaf
+            {
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(schaf.getDatumZugang());
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateZugangsdatum.getModel();
+                dateModel.setValue(calendar);
+            }
+
+            {
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(schaf.getDatumAbgang());
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateAbgang.getModel();
+                dateModel.setValue(calendar);
+            }
+
+            jTextGrundFürAbgang.setText(schaf.getGrundFürAbgang());
+            jMutterKennung.setText(schaf.getKennung());
+            jTextKennung.setText(schaf.getKennung());
+            jTextBemerkung.setText(schaf.getBemerkung());
+
+            // Transport
+            if (transportList.size() > 0) {
+                txftptransportmittel.setText(transportList.get(0).getTransportMittel());
+                txftpgrund.setText(transportList.get(0).getGrund());
+
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(transportList.get(0).getDatum());
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateTransport.getModel();
+                dateModel.setValue(calendar);
+
+                jListTransport.setListData(transportList.toArray());
+            }
+        } else {
+            lstausgabe.repaint();
         }
-
-        // Impfungen
-        if (impfungenList.size() > 0) {
-            // Impfung
-            txfimpfungstoff.setText(impfungenList.get(0).getImpfstoff());
-            txfimpfungbemerkung.setText(impfungenList.get(0).getBemerkung());
-
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(impfungenList.get(0).getDatum());
-            DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateImpfungen.getModel();
-            dateModel.setValue(calendar);
-        }
-
-        // Gedeckt
-        if (gedecktList.size() > 0) {
-            txfgedecktvaterkennung.setText(gedecktList.get(0).getVaterkennung());
-
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(gedecktList.get(0).getDatum());
-            DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateGedeckt.getModel();
-            dateModel.setValue(calendar);
-
-            jListGedeckt.setListData(gedecktList.toArray());
-        }
-
-        // Entwurmen
-        if (entwurmenList.size() > 0) {
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(entwurmenList.get(0).getDatum());
-            DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateEntwurmen.getModel();
-            dateModel.setValue(calendar);
-
-            jListEntwurmen.setListData(entwurmenList.toArray());
-        }
-
-        // Betriebsnummer
-        if (betriebsnummerList.size() > 0) {
-            txfbnnummer.setText(betriebsnummerList.get(0).getBetriebsnummer());
-            txabnbemerkung.setText(betriebsnummerList.get(0).getBemerkung());
-            jListBetriebsnummer.setListData(betriebsnummerList.toArray());
-        }
-
-        // Klauenschneiden
-        if (klauenList.size() > 0) {
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(klauenList.get(0).getDatum());
-            DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateKlauenschneiden.getModel();
-            dateModel.setValue(calendar);
-
-            jListKlauenschneiden.setListData(klauenList.toArray());
-        }
-
-        // Schaf
-        {
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(schaf.getDatumZugang());
-            DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateZugangsdatum.getModel();
-            dateModel.setValue(calendar);
-        }
-
-        {
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(schaf.getDatumAbgang());
-            DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateAbgang.getModel();
-            dateModel.setValue(calendar);
-        }
-
-        jTextGrundFürAbgang.setText(schaf.getGrundFürAbgang());
-        jMutterKennung.setText(schaf.getKennung());
-        jTextKennung.setText(schaf.getKennung());
-        jTextBemerkung.setText(schaf.getBemerkung());
-
-        // Transport
-        if (transportList.size() > 0) {
-            txftptransportmittel.setText(transportList.get(0).getTransportMittel());
-            txftpgrund.setText(transportList.get(0).getGrund());
-
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(transportList.get(0).getDatum());
-            DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateTransport.getModel();
-            dateModel.setValue(calendar);
-
-            jListTransport.setListData(transportList.toArray());
-        }
-
     }//GEN-LAST:event_lstausgabeValueChanged
 
     // Betriebsnummer
@@ -947,9 +953,68 @@ public class main extends javax.swing.JFrame {
         dateModel.setValue(calendar);
     }//GEN-LAST:event_jListKlauenschneidenValueChanged
 
+    private void updateListView(Object obj) {
+        ArrayList<Object> objList = new ArrayList<Object>();
+        for (int i = 0; i < lstausgabe.getModel().getSize(); i++) {
+            objList.add(lstausgabe.getModel().getElementAt(i));
+        }
+        objList.add(obj);
+        lstausgabe.setListData(objList.toArray());
+        lstausgabe.repaint();
+    }
+
     // Hinzufügen
     private void btnaddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddActionPerformed
         // TODO add your handling code here:
+        Add insert = new Add();
+        switch (jTabPlane.getSelectedIndex()) {
+            // Schur
+            case 4:
+
+                break;
+
+            // Betriebsnummer
+            case 0:
+                break;
+
+            // Entwurmen
+            case 1:
+                break;
+
+            // Gedeckt
+            case 2:
+                break;
+
+            // Impfungen
+            case 3:
+                break;
+
+            // Transport
+            case 5:
+                break;
+
+            // Schaf
+            case 6:
+                Schaf schaf = new Schaf();
+
+                schaf.setGrundFürAbgang(jTextGrundFürAbgang.getText());
+                schaf.setMutterkennung(jMutterKennung.getText());
+                schaf.setKennung(jTextKennung.getText());
+                schaf.setBemerkung(jTextBemerkung.getText());
+                schaf.setDatumAbgang(new java.sql.Date(((GregorianCalendar) jDateAbgang.getModel().getValue()).getTimeInMillis()));
+                schaf.setDatumZugang(new java.sql.Date(((GregorianCalendar) jDateZugangsdatum.getModel().getValue()).getTimeInMillis()));
+
+                insert.schaf(schaf);
+                updateListView(schaf);
+                break;
+
+            // Klauenschneiden
+            case 7:
+                break;
+
+            default:
+                break;
+        }
     }//GEN-LAST:event_btnaddActionPerformed
 
     /**
