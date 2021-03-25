@@ -179,7 +179,7 @@ public class Get {
             String sql = "SELECT * FROM Impfungen WHERE SchafID = ?;";
             stm = Config.getSQLConnection().prepareStatement(sql);
             stm.setString(1, SchafID);
-            
+
             ResultSet rs = stm.executeQuery();
 
             while (rs.next()) {
@@ -215,7 +215,7 @@ public class Get {
             String sql = "SELECT * FROM Klauenschneiden WHERE SchafID = ?;";
             stm = Config.getSQLConnection().prepareStatement(sql);
             stm.setString(1, SchafID);
-            
+
             ResultSet rs = stm.executeQuery();
 
             while (rs.next()) {
@@ -249,7 +249,7 @@ public class Get {
             String sql = "SELECT * FROM Schur WHERE SchafID = ?;";
             stm = Config.getSQLConnection().prepareStatement(sql);
             stm.setString(1, SchafID);
-            
+
             ResultSet rs = stm.executeQuery();
 
             while (rs.next()) {
@@ -283,7 +283,7 @@ public class Get {
             String sql = "SELECT * FROM Transport WHERE SchafID = ?;";
             stm = Config.getSQLConnection().prepareStatement(sql);
             stm.setString(1, SchafID);
-            
+
             ResultSet rs = stm.executeQuery();
 
             while (rs.next()) {

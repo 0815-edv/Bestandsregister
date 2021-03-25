@@ -45,6 +45,10 @@ public class Del {
         }
     }
 
+    /**
+     * Delete Betriebsnummer from DB
+     * @param bNummer 
+     */
     public void betriebsnummer(Betriebsnummer bNummer) {
         Config.open();
         PreparedStatement stm = null;
@@ -63,6 +67,10 @@ public class Del {
         }
     }
 
+    /**
+     * Delete Entwurmen from DB
+     * @param entwurmen 
+     */
     public void entwurmen(Entwurmen entwurmen) {
         Config.open();
         PreparedStatement stm = null;
@@ -81,6 +89,10 @@ public class Del {
         }
     }
 
+    /**
+     * Delete Gedeckt fron DB
+     * @param gedeckt 
+     */
     public void gedeckt(Gedeckt gedeckt) {
         Config.open();
         PreparedStatement stm = null;
@@ -99,6 +111,10 @@ public class Del {
         }
     }
 
+    /**
+     * Delete Impfungen from DB
+     * @param impfung 
+     */
     public void impfungen(Impfungen impfung) {
         Config.open();
         PreparedStatement stm = null;
@@ -117,6 +133,10 @@ public class Del {
         }
     }
 
+    /**
+     * Delete Klauenschneiden from DB
+     * @param klauen 
+     */
     public void klauenschneiden(Klauenschneiden klauen) {
         Config.open();
         PreparedStatement stm = null;
@@ -135,6 +155,10 @@ public class Del {
         }
     }
 
+    /**
+     * Delete Schur from DB
+     * @param schur 
+     */
     public void schur(Schur schur) {
         Config.open();
         PreparedStatement stm = null;
@@ -153,6 +177,10 @@ public class Del {
         }
     }
 
+    /**
+     * Delete Transport from DB
+     * @param transport 
+     */
     public void transport(Transport transport) {
         Config.open();
         PreparedStatement stm = null;

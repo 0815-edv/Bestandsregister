@@ -16,7 +16,6 @@ import de.edv.bestandsregister.SQL.Get;
 import de.edv.bestandsregister.Schaf;
 import de.edv.bestandsregister.Schur;
 import de.edv.bestandsregister.Transport;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -27,7 +26,7 @@ import org.jdatepicker.DateModel;
 
 /**
  *
- * @author Markus
+ * @author Markus, flwerner
  */
 public class main extends javax.swing.JFrame {
 

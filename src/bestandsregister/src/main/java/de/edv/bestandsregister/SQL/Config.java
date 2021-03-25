@@ -130,7 +130,7 @@ public class Config {
                 + "	 Bemerkung 	TEXT,\n"
                 + "	 MutterKennung 	TEXT\n"
                 + ");");
-        
+
         tables.add("CREATE TABLE IF NOT EXISTS Transport (\n"
                 + "	TransportID     TEXT NOT NULL PRIMARY KEY,\n"
                 + "	SchafID         TEXT NOT NULL,\n"

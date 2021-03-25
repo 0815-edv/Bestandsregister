@@ -10,7 +10,8 @@ package de.edv.bestandsregister;
  * @author Markus
  */
 public class main {
-    public static void main(String[] args){
+
+    public static void main(String[] args) {
         de.edv.bestandsregister.GUI.main.main(args);
     }
 }
