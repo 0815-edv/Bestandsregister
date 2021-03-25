@@ -1133,6 +1133,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="L&#xf6;schen"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnloeschenActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
