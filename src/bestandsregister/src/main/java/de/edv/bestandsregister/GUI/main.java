@@ -788,6 +788,10 @@ public class main extends javax.swing.JFrame {
                 dateModel.setValue(calendar);
 
                 jListSchur.setListData(schurList.toArray());
+            } else {
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateSchur.getModel();
+                dateModel.setValue(null);
+                jListSchur.setListData(new Object[]{});
             }
 
             // Impfungen
@@ -800,6 +804,14 @@ public class main extends javax.swing.JFrame {
                 calendar.setTime(impfungenList.get(0).getDatum());
                 DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateImpfungen.getModel();
                 dateModel.setValue(calendar);
+
+                jListImpfungen.setListData(impfungenList.toArray());
+            } else {
+                txfimpfungstoff.setText(null);
+                txfimpfungbemerkung.setText(null);
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateImpfungen.getModel();
+                dateModel.setValue(null);
+                jListImpfungen.setListData(new Object[]{});
             }
 
             // Gedeckt
@@ -812,6 +824,10 @@ public class main extends javax.swing.JFrame {
                 dateModel.setValue(calendar);
 
                 jListGedeckt.setListData(gedecktList.toArray());
+            } else {
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateGedeckt.getModel();
+                dateModel.setValue(null);
+                jListGedeckt.setListData(new Object[]{});
             }
 
             // Entwurmen
@@ -822,6 +838,10 @@ public class main extends javax.swing.JFrame {
                 dateModel.setValue(calendar);
 
                 jListEntwurmen.setListData(entwurmenList.toArray());
+            } else {
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateEntwurmen.getModel();
+                dateModel.setValue(null);
+                jListEntwurmen.setListData(new Object[]{});
             }
 
             // Betriebsnummer
@@ -829,6 +849,10 @@ public class main extends javax.swing.JFrame {
                 txfbnnummer.setText(betriebsnummerList.get(0).getBetriebsnummer());
                 txabnbemerkung.setText(betriebsnummerList.get(0).getBemerkung());
                 jListBetriebsnummer.setListData(betriebsnummerList.toArray());
+            } else {
+                txfbnnummer.setText(null);
+                txabnbemerkung.setText(null);
+                jListBetriebsnummer.setListData(new Object[]{});
             }
 
             // Klauenschneiden
@@ -839,6 +863,10 @@ public class main extends javax.swing.JFrame {
                 dateModel.setValue(calendar);
 
                 jListKlauenschneiden.setListData(klauenList.toArray());
+            } else {
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateKlauenschneiden.getModel();
+                dateModel.setValue(null);
+                jListKlauenschneiden.setListData(new Object[]{});
             }
 
             // Schaf
@@ -872,6 +900,12 @@ public class main extends javax.swing.JFrame {
                 dateModel.setValue(calendar);
 
                 jListTransport.setListData(transportList.toArray());
+            } else {
+                txftptransportmittel.setText(null);
+                txftpgrund.setText(null);
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateTransport.getModel();
+                dateModel.setValue(null);
+                jListTransport.setListData(new Object[]{});
             }
         } else {
             lstausgabe.repaint();
@@ -886,9 +920,6 @@ public class main extends javax.swing.JFrame {
 
             txfbnnummer.setText(betrieb.getBetriebsnummer());
             txabnbemerkung.setText(betrieb.getBemerkung());
-        } else {
-            txfbnnummer.setText(null);
-            txabnbemerkung.setText(null);
         }
     }//GEN-LAST:event_jListBetriebsnummerValueChanged
 
