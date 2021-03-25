@@ -11,6 +11,7 @@ import de.edv.bestandsregister.Gedeckt;
 import de.edv.bestandsregister.Impfungen;
 import de.edv.bestandsregister.Klauenschneiden;
 import de.edv.bestandsregister.SQL.Add;
+import de.edv.bestandsregister.SQL.Del;
 import de.edv.bestandsregister.SQL.Get;
 import de.edv.bestandsregister.Schaf;
 import de.edv.bestandsregister.Schur;
@@ -697,6 +698,11 @@ public class main extends javax.swing.JFrame {
         btnchange.setText("Ändern");
 
         btnloeschen.setText("Löschen");
+        btnloeschen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnloeschenActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -875,83 +881,100 @@ public class main extends javax.swing.JFrame {
     // Betriebsnummer
     private void jListBetriebsnummerValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListBetriebsnummerValueChanged
         // TODO add your handling code here:
-        Betriebsnummer betrieb = (Betriebsnummer) jListBetriebsnummer.getSelectedValue();
+        if (jListBetriebsnummer.getSelectedValue() != null) {
+            Betriebsnummer betrieb = (Betriebsnummer) jListBetriebsnummer.getSelectedValue();
 
-        txfbnnummer.setText(betrieb.getBetriebsnummer());
-        txabnbemerkung.setText(betrieb.getBemerkung());
+            txfbnnummer.setText(betrieb.getBetriebsnummer());
+            txabnbemerkung.setText(betrieb.getBemerkung());
+        } else {
+            txfbnnummer.setText(null);
+            txabnbemerkung.setText(null);
+        }
     }//GEN-LAST:event_jListBetriebsnummerValueChanged
 
     // Entwurmen
     private void jListEntwurmenValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListEntwurmenValueChanged
         // TODO add your handling code here:
-        Entwurmen entwurmen = (Entwurmen) jListEntwurmen.getSelectedValue();
+        if (jListEntwurmen.getSelectedValue() != null) {
+            Entwurmen entwurmen = (Entwurmen) jListEntwurmen.getSelectedValue();
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(entwurmen.getDatum());
-        DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateEntwurmen.getModel();
-        dateModel.setValue(calendar);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(entwurmen.getDatum());
+            DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateEntwurmen.getModel();
+            dateModel.setValue(calendar);
+        }
     }//GEN-LAST:event_jListEntwurmenValueChanged
 
     // Gedeckt
     private void jListGedecktValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListGedecktValueChanged
         // TODO add your handling code here:
-        Gedeckt gedeckt = (Gedeckt) jListGedeckt.getSelectedValue();
+        if (jListGedeckt.getSelectedValue() != null) {
+            Gedeckt gedeckt = (Gedeckt) jListGedeckt.getSelectedValue();
 
-        txfgedecktvaterkennung.setText(gedeckt.getVaterkennung());
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(gedeckt.getDatum());
-        DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateGedeckt.getModel();
-        dateModel.setValue(calendar);
+            txfgedecktvaterkennung.setText(gedeckt.getVaterkennung());
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(gedeckt.getDatum());
+            DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateGedeckt.getModel();
+            dateModel.setValue(calendar);
+        }
     }//GEN-LAST:event_jListGedecktValueChanged
 
     // Inpfungen
     private void jListImpfungenValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListImpfungenValueChanged
         // TODO add your handling code here:
-        Impfungen impfung = (Impfungen) jListImpfungen.getSelectedValue();
+        if (jListImpfungen.getSelectedValue() != null) {
+            Impfungen impfung = (Impfungen) jListImpfungen.getSelectedValue();
 
-        txfimpfungstoff.setText(impfung.getImpfstoff());
-        txfimpfungbemerkung.setText(impfung.getBemerkung());
+            txfimpfungstoff.setText(impfung.getImpfstoff());
+            txfimpfungbemerkung.setText(impfung.getBemerkung());
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(impfung.getDatum());
-        DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateImpfungen.getModel();
-        dateModel.setValue(calendar);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(impfung.getDatum());
+            DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateImpfungen.getModel();
+            dateModel.setValue(calendar);
+        }
     }//GEN-LAST:event_jListImpfungenValueChanged
 
     // Schur
     private void jListSchurValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListSchurValueChanged
         // TODO add your handling code here:
-        Schur schur = (Schur) jListSchur.getSelectedValue();
+        if (jListSchur.getSelectedValue() != null) {
+            Schur schur = (Schur) jListSchur.getSelectedValue();
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(schur.getDatum());
-        DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateSchur.getModel();
-        dateModel.setValue(calendar);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(schur.getDatum());
+            DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateSchur.getModel();
+            dateModel.setValue(calendar);
+        }
     }//GEN-LAST:event_jListSchurValueChanged
 
     // Transport
     private void jListTransportValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListTransportValueChanged
         // TODO add your handling code here:
-        Transport transport = (Transport) jListTransport.getSelectedValue();
+        if (jListTransport.getSelectedValue() != null) {
+            Transport transport = (Transport) jListTransport.getSelectedValue();
 
-        txftptransportmittel.setText(transport.getTransportMittel());
-        txftpgrund.setText(transport.getGrund());
+            txftptransportmittel.setText(transport.getTransportMittel());
+            txftpgrund.setText(transport.getGrund());
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(transport.getDatum());
-        DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateTransport.getModel();
-        dateModel.setValue(calendar);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(transport.getDatum());
+            DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateTransport.getModel();
+            dateModel.setValue(calendar);
+        }
     }//GEN-LAST:event_jListTransportValueChanged
 
     // Klauenschneiden
     private void jListKlauenschneidenValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListKlauenschneidenValueChanged
         // TODO add your handling code here:
-        Klauenschneiden klauen = (Klauenschneiden) jListKlauenschneiden.getSelectedValue();
+        if (jListKlauenschneiden.getSelectedValue() != null) {
+            Klauenschneiden klauen = (Klauenschneiden) jListKlauenschneiden.getSelectedValue();
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(klauen.getDatum());
-        DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateKlauenschneiden.getModel();
-        dateModel.setValue(calendar);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(klauen.getDatum());
+            DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateKlauenschneiden.getModel();
+            dateModel.setValue(calendar);
+        }
     }//GEN-LAST:event_jListKlauenschneidenValueChanged
 
     // Update Main JList
@@ -961,6 +984,16 @@ public class main extends javax.swing.JFrame {
             objList.add(lstausgabe.getModel().getElementAt(i));
         }
         objList.add(obj);
+        lstausgabe.setListData(objList.toArray());
+        lstausgabe.repaint();
+    }
+
+    private void updateListView(Object obj, boolean remove) {
+        ArrayList<Object> objList = new ArrayList<Object>();
+        for (int i = 0; i < lstausgabe.getModel().getSize(); i++) {
+            objList.add(lstausgabe.getModel().getElementAt(i));
+        }
+        objList.remove(lstausgabe.getSelectedIndex());
         lstausgabe.setListData(objList.toArray());
         lstausgabe.repaint();
     }
@@ -976,6 +1009,17 @@ public class main extends javax.swing.JFrame {
         list.repaint();
     }
 
+    // Update given JList
+    private void updateListView(Object obj, JList list, boolean remove) {
+        ArrayList<Object> objList = new ArrayList<Object>();
+        for (int i = 0; i < list.getModel().getSize(); i++) {
+            objList.add(list.getModel().getElementAt(i));
+        }
+        objList.remove(list.getSelectedIndex());
+        list.setListData(objList.toArray());
+        list.repaint();
+    }
+
     // Hinzufügen
     private void btnaddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddActionPerformed
         // TODO add your handling code here:
@@ -987,7 +1031,7 @@ public class main extends javax.swing.JFrame {
                 case 4:
                     Schur schur = new Schur(schafID);
                     schur.setDatum(new java.sql.Date(((GregorianCalendar) jDateSchur.getModel().getValue()).getTimeInMillis()));
-                    
+
                     insert.schur(schur);
                     updateListView(schur, jListSchur);
                     break;
@@ -1070,6 +1114,100 @@ public class main extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnaddActionPerformed
+
+    // Button Löschen
+    private void btnloeschenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnloeschenActionPerformed
+        // TODO add your handling code here:
+        Del del = new Del();
+        if (lstausgabe.getSelectedValue() != null) {
+            String schafID = ((Schaf) lstausgabe.getSelectedValue()).getSchafID();
+            switch (jTabPlane.getSelectedIndex()) {
+                // Schur
+                case 4:
+                    Schur schur = new Schur(schafID);
+                    schur.setDatum(new java.sql.Date(((GregorianCalendar) jDateSchur.getModel().getValue()).getTimeInMillis()));
+
+                    del.schur(schur);
+                    updateListView(schur, jListSchur, true);
+                    break;
+
+                // Betriebsnummer
+                case 0:
+                    Betriebsnummer betrieb = new Betriebsnummer(schafID);
+                    betrieb.setBemerkung(txabnbemerkung.getText());
+                    betrieb.setBetriebsnummer(txfbnnummer.getText());
+
+                    del.betriebsnummer(betrieb);
+                    updateListView(betrieb, jListBetriebsnummer, true);
+                    break;
+
+                // Entwurmen
+                case 1:
+                    Entwurmen entwurmen = new Entwurmen(schafID);
+                    entwurmen.setDatum(new java.sql.Date(((GregorianCalendar) jDateEntwurmen.getModel().getValue()).getTimeInMillis()));
+
+                    del.entwurmen(entwurmen);
+                    updateListView(entwurmen, jListEntwurmen, true);
+                    break;
+
+                // Gedeckt
+                case 2:
+                    Gedeckt gedeckt = new Gedeckt(schafID);
+                    gedeckt.setDatum(new java.sql.Date(((GregorianCalendar) jDateGedeckt.getModel().getValue()).getTimeInMillis()));
+
+                    del.gedeckt(gedeckt);
+                    updateListView(gedeckt, jListGedeckt, true);
+                    break;
+
+                // Impfungen
+                case 3:
+                    Impfungen impfungen = new Impfungen(schafID);
+                    impfungen.setBemerkung(txfimpfungbemerkung.getText());
+                    impfungen.setImpfstoff(txfimpfungstoff.getText());
+                    impfungen.setDatum(new java.sql.Date(((GregorianCalendar) jDateImpfungen.getModel().getValue()).getTimeInMillis()));
+
+                    del.impfungen(impfungen);
+                    updateListView(impfungen, jListImpfungen, true);
+                    break;
+
+                // Transport
+                case 5:
+                    Transport transport = new Transport(schafID);
+                    transport.setGrund(txftpgrund.getText());
+                    transport.setTransportMittel(txftptransportmittel.getText());
+                    transport.setDatum(new java.sql.Date(((GregorianCalendar) jDateTransport.getModel().getValue()).getTimeInMillis()));
+
+                    del.transport(transport);
+                    updateListView(transport, jListTransport, true);
+                    break;
+
+                // Klauenschneiden
+                case 7:
+                    Klauenschneiden klauen = new Klauenschneiden(schafID);
+                    klauen.setDatum(new java.sql.Date(((GregorianCalendar) jDateKlauenschneiden.getModel().getValue()).getTimeInMillis()));
+
+                    del.klauenschneiden(klauen);
+                    updateListView(klauen, jListKlauenschneiden, true);
+                    break;
+                // Schaf
+                case 6:
+                    Schaf schaf = new Schaf(schafID);
+
+                    schaf.setGrundFürAbgang(jTextGrundFürAbgang.getText());
+                    schaf.setMutterkennung(jMutterKennung.getText());
+                    schaf.setKennung(jTextKennung.getText());
+                    schaf.setBemerkung(jTextBemerkung.getText());
+                    schaf.setDatumAbgang(new java.sql.Date(((GregorianCalendar) jDateAbgang.getModel().getValue()).getTimeInMillis()));
+                    schaf.setDatumZugang(new java.sql.Date(((GregorianCalendar) jDateZugangsdatum.getModel().getValue()).getTimeInMillis()));
+
+                    del.schaf(schaf);
+                    updateListView(schaf, true);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }//GEN-LAST:event_btnloeschenActionPerformed
 
     /**
      * @param args the command line arguments
