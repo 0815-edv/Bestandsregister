@@ -1336,8 +1336,10 @@ public class main extends javax.swing.JFrame {
                     schaf.setMutterkennung(jMutterKennung.getText());
                     schaf.setKennung(jTextKennung.getText());
                     schaf.setBemerkung(jTextBemerkung.getText());
-                    schaf.setDatumAbgang(new java.sql.Date(((GregorianCalendar) jDateAbgang.getModel().getValue()).getTimeInMillis()));
-                    schaf.setDatumZugang(new java.sql.Date(((GregorianCalendar) jDateZugangsdatum.getModel().getValue()).getTimeInMillis()));
+                    if(jDateAbgang.getModel().getValue() != null)
+                        schaf.setDatumAbgang(new java.sql.Date(((GregorianCalendar) jDateAbgang.getModel().getValue()).getTimeInMillis()));
+                    if(jDateZugangsdatum.getModel().getValue() != null)
+                        schaf.setDatumZugang(new java.sql.Date(((GregorianCalendar) jDateZugangsdatum.getModel().getValue()).getTimeInMillis()));
 
                     del.schaf(schaf);
                     updateListView(schaf, true);
