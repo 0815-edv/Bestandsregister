@@ -817,7 +817,7 @@ public class main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void clearAllFields() {
-        
+
         // Clear Date Fields
         List<JDatePicker> date = Arrays.asList(jDateSchur, jDateTransport, jDateZugangsdatum, jDateAbgang, jDateKlauenschneiden, jDateEntwurmen, jDateGedeckt, jDateImpfungen);
 
@@ -825,28 +825,28 @@ public class main extends javax.swing.JFrame {
             DateModel<Calendar> dateModel = (DateModel<Calendar>) j.getModel();
             dateModel.setValue(null);
         }
-        
+
         // Clear JList
         List<JList> listen = Arrays.asList(jListImpfungen, jListGedeckt, jListEntwurmen, jListBetriebsnummer, jListKlauenschneiden, jListTransport, jListSchur);
 
         for (JList j : listen) {
             j.setListData(new Object[]{});
         }
-        
+
         // Clear Test Fields
         List<JTextField> text = Arrays.asList(txftptransportmittel, txftpgrund, jTextKennung, jTextGrundFürAbgang, jMutterKennung, txfbnnummer, txfgedecktvaterkennung, txfimpfungstoff);
 
         for (JTextField j : text) {
             j.setText(null);
         }
-        
+
         // Clear Text Area
         List<JTextArea> area = Arrays.asList(jTextBemerkung, txabnbemerkung);
 
         for (JTextArea j : area) {
             j.setText(null);
         }
-        
+
     }
 
     private void lstausgabeValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstausgabeValueChanged
@@ -954,14 +954,14 @@ public class main extends javax.swing.JFrame {
             }
 
             // Schaf
-            {
+            if (schaf.getDatumZugang().getTime() != 0) {
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(schaf.getDatumZugang());
                 DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateZugangsdatum.getModel();
                 dateModel.setValue(calendar);
             }
 
-            {
+            if (schaf.getDatumAbgang().getTime() != 0) {
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(schaf.getDatumAbgang());
                 DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateAbgang.getModel();
@@ -1218,12 +1218,20 @@ public class main extends javax.swing.JFrame {
             if (jTabPlane.getSelectedIndex() == 6) {
                 Schaf schaf = new Schaf();
 
-                schaf.setGrundFürAbgang(jTextGrundFürAbgang.getText());
+                if (jTextGrundFürAbgang != null) {
+                    schaf.setGrundFürAbgang(jTextGrundFürAbgang.getText());
+                }
                 schaf.setMutterkennung(jMutterKennung.getText());
                 schaf.setKennung(jTextKennung.getText());
-                schaf.setBemerkung(jTextBemerkung.getText());
-                schaf.setDatumAbgang(new java.sql.Date(((GregorianCalendar) jDateAbgang.getModel().getValue()).getTimeInMillis()));
-                schaf.setDatumZugang(new java.sql.Date(((GregorianCalendar) jDateZugangsdatum.getModel().getValue()).getTimeInMillis()));
+                if (jTextBemerkung != null) {
+                    schaf.setBemerkung(jTextBemerkung.getText());
+                }
+                if (jDateAbgang.getModel().getValue() != null) {
+                    schaf.setDatumAbgang(new java.sql.Date(((GregorianCalendar) jDateAbgang.getModel().getValue()).getTimeInMillis()));
+                }
+                if (jDateAbgang.getModel().getValue() != null) {
+                    schaf.setDatumZugang(new java.sql.Date(((GregorianCalendar) jDateZugangsdatum.getModel().getValue()).getTimeInMillis()));
+                }
 
                 insert.schaf(schaf);
                 updateListView(schaf);
