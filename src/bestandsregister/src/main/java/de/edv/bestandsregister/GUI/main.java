@@ -851,6 +851,7 @@ public class main extends javax.swing.JFrame {
 
     private void lstausgabeValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstausgabeValueChanged
         // TODO add your handling code here:
+        clearAllFields();
         if (lstausgabe.getSelectedValue() != null) {
             Schaf schaf = (Schaf) lstausgabe.getSelectedValue();
             Get select = new Get();
@@ -954,14 +955,14 @@ public class main extends javax.swing.JFrame {
             }
 
             // Schaf
-            if (schaf.getDatumZugang().getTime() != 0) {
+            if (schaf.getDatumZugang() != null && schaf.getDatumZugang().getTime() != 0) {
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(schaf.getDatumZugang());
                 DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateZugangsdatum.getModel();
                 dateModel.setValue(calendar);
             }
 
-            if (schaf.getDatumAbgang().getTime() != 0) {
+            if (schaf.getDatumAbgang() != null && schaf.getDatumAbgang().getTime() != 0) {
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(schaf.getDatumAbgang());
                 DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateAbgang.getModel();
@@ -969,7 +970,7 @@ public class main extends javax.swing.JFrame {
             }
 
             jTextGrundFürAbgang.setText(schaf.getGrundFürAbgang());
-            jMutterKennung.setText(schaf.getKennung());
+            jMutterKennung.setText(schaf.getMutterkennung());
             jTextKennung.setText(schaf.getKennung());
             jTextBemerkung.setText(schaf.getBemerkung());
 
@@ -1443,8 +1444,10 @@ public class main extends javax.swing.JFrame {
                     schaf.setMutterkennung(jMutterKennung.getText());
                     schaf.setKennung(jTextKennung.getText());
                     schaf.setBemerkung(jTextBemerkung.getText());
-                    schaf.setDatumAbgang(new java.sql.Date(((GregorianCalendar) jDateAbgang.getModel().getValue()).getTimeInMillis()));
-                    schaf.setDatumZugang(new java.sql.Date(((GregorianCalendar) jDateZugangsdatum.getModel().getValue()).getTimeInMillis()));
+                    if(jDateAbgang.getModel().getValue() != null)
+                        schaf.setDatumAbgang(new java.sql.Date(((GregorianCalendar) jDateAbgang.getModel().getValue()).getTimeInMillis()));
+                    if(jDateZugangsdatum.getModel() != null)
+                        schaf.setDatumZugang(new java.sql.Date(((GregorianCalendar) jDateZugangsdatum.getModel().getValue()).getTimeInMillis()));
 
                     update.schaf(schaf);
                     updateListView(schaf, true);
