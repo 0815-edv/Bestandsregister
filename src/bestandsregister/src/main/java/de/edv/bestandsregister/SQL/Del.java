@@ -33,6 +33,8 @@ import de.edv.bestandsregister.Schur;
 import de.edv.bestandsregister.Transport;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -50,11 +52,15 @@ public class Del {
         PreparedStatement stm = null;
 
         try {
-            stm = Config.getSQLConnection().prepareStatement("DELETE FROM Schaf WHERE SchafID = ?");
+            List<String> tables = Arrays.asList("Schaf", "Betriebsnummer", "Entwurmen", "Gedeckt", "Impfungen", "Klauenschneiden", "Schur", "Transport");
 
-            stm.setString(1, schaf.getSchafID());
+            for (String tabel : tables) {
+                stm = Config.getSQLConnection().prepareStatement("DELETE FROM "+tabel+" WHERE SchafID = ?");
 
-            stm.executeUpdate();
+                stm.setString(1, schaf.getSchafID());
+
+                stm.executeUpdate();
+            }
 
         } catch (SQLException ex) {
             Logger.getLogger(Add.class.getName()).log(Level.SEVERE, null, ex);
@@ -65,7 +71,8 @@ public class Del {
 
     /**
      * Delete Betriebsnummer from DB
-     * @param bNummer 
+     *
+     * @param bNummer
      */
     public void betriebsnummer(Betriebsnummer bNummer) {
         Config.open();
@@ -87,7 +94,8 @@ public class Del {
 
     /**
      * Delete Entwurmen from DB
-     * @param entwurmen 
+     *
+     * @param entwurmen
      */
     public void entwurmen(Entwurmen entwurmen) {
         Config.open();
@@ -109,7 +117,8 @@ public class Del {
 
     /**
      * Delete Gedeckt fron DB
-     * @param gedeckt 
+     *
+     * @param gedeckt
      */
     public void gedeckt(Gedeckt gedeckt) {
         Config.open();
@@ -131,7 +140,8 @@ public class Del {
 
     /**
      * Delete Impfungen from DB
-     * @param impfung 
+     *
+     * @param impfung
      */
     public void impfungen(Impfungen impfung) {
         Config.open();
@@ -153,7 +163,8 @@ public class Del {
 
     /**
      * Delete Klauenschneiden from DB
-     * @param klauen 
+     *
+     * @param klauen
      */
     public void klauenschneiden(Klauenschneiden klauen) {
         Config.open();
@@ -175,7 +186,8 @@ public class Del {
 
     /**
      * Delete Schur from DB
-     * @param schur 
+     *
+     * @param schur
      */
     public void schur(Schur schur) {
         Config.open();
@@ -197,7 +209,8 @@ public class Del {
 
     /**
      * Delete Transport from DB
-     * @param transport 
+     *
+     * @param transport
      */
     public void transport(Transport transport) {
         Config.open();
