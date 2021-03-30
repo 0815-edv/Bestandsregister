@@ -55,7 +55,7 @@ public class Del {
             List<String> tables = Arrays.asList("Schaf", "Betriebsnummer", "Entwurmen", "Gedeckt", "Impfungen", "Klauenschneiden", "Schur", "Transport");
 
             for (String tabel : tables) {
-                stm = Config.getSQLConnection().prepareStatement("DELETE FROM "+tabel+" WHERE SchafID = ?");
+                stm = Config.getSQLConnection().prepareStatement("DELETE FROM " + tabel + " WHERE SchafID = ?");
 
                 stm.setString(1, schaf.getSchafID());
 
