@@ -35,13 +35,18 @@ import de.edv.bestandsregister.SQL.Update;
 import de.edv.bestandsregister.Schaf;
 import de.edv.bestandsregister.Schur;
 import de.edv.bestandsregister.Transport;
+import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JList;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import org.jdatepicker.DateModel;
+import org.jdatepicker.JDatePicker;
 
 /**
  *
@@ -811,6 +816,39 @@ public class main extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void clearAllFields() {
+        
+        // Clear Date Fields
+        List<JDatePicker> date = Arrays.asList(jDateSchur, jDateTransport, jDateZugangsdatum, jDateAbgang, jDateKlauenschneiden, jDateEntwurmen, jDateGedeckt, jDateImpfungen);
+
+        for (JDatePicker j : date) {
+            DateModel<Calendar> dateModel = (DateModel<Calendar>) j.getModel();
+            dateModel.setValue(null);
+        }
+        
+        // Clear JList
+        List<JList> listen = Arrays.asList(jListImpfungen, jListGedeckt, jListEntwurmen, jListBetriebsnummer, jListKlauenschneiden, jListTransport, jListSchur);
+
+        for (JList j : listen) {
+            j.setListData(new Object[]{});
+        }
+        
+        // Clear Test Fields
+        List<JTextField> text = Arrays.asList(txftptransportmittel, txftpgrund, jTextKennung, jTextGrundFürAbgang, jMutterKennung, txfbnnummer, txfgedecktvaterkennung, txfimpfungstoff);
+
+        for (JTextField j : text) {
+            j.setText(null);
+        }
+        
+        // Clear Text Area
+        List<JTextArea> area = Arrays.asList(jTextBemerkung, txabnbemerkung);
+
+        for (JTextArea j : area) {
+            j.setText(null);
+        }
+        
+    }
+
     private void lstausgabeValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstausgabeValueChanged
         // TODO add your handling code here:
         if (lstausgabe.getSelectedValue() != null) {
@@ -1295,6 +1333,7 @@ public class main extends javax.swing.JFrame {
 
                     del.schaf(schaf);
                     updateListView(schaf, true);
+                    clearAllFields();
                     break;
                 default:
                     break;
