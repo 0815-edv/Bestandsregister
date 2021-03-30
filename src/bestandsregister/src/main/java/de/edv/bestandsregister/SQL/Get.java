@@ -55,7 +55,7 @@ public class Get {
         ArrayList<Schaf> dbSchafe = new ArrayList<Schaf>();
 
         try {
-            String sql = "SELECT * FROM Schaf;";
+            String sql = "SELECT * FROM Schaf ORDER BY DatumZugang DESC;";
             stm = Config.getSQLConnection().prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
 
@@ -127,7 +127,7 @@ public class Get {
         ArrayList<Entwurmen> dbEntwurmen = new ArrayList<Entwurmen>();
 
         try {
-            String sql = "SELECT * FROM Entwurmen WHERE SchafID = ? ORDER BY Datum;";
+            String sql = "SELECT * FROM Entwurmen WHERE SchafID = ? ORDER BY Datum DESC;";
             stm = Config.getSQLConnection().prepareStatement(sql);
             stm.setString(1, SchafID);
             ResultSet rs = stm.executeQuery();
@@ -160,7 +160,7 @@ public class Get {
         ArrayList<Gedeckt> dbGedeckt = new ArrayList<Gedeckt>();
 
         try {
-            String sql = "SELECT * FROM Gedeckt WHERE SchafID = ? ORDER BY Datum;";
+            String sql = "SELECT * FROM Gedeckt WHERE SchafID = ? ORDER BY Datum DESC;";
             stm = Config.getSQLConnection().prepareStatement(sql);
             stm.setString(1, SchafID);
             ResultSet rs = stm.executeQuery();
@@ -194,7 +194,7 @@ public class Get {
         ArrayList<Impfungen> dbImpfung = new ArrayList<Impfungen>();
 
         try {
-            String sql = "SELECT * FROM Impfungen WHERE SchafID = ? ORDER BY Datum;";
+            String sql = "SELECT * FROM Impfungen WHERE SchafID = ? ORDER BY Datum DESC;";
             stm = Config.getSQLConnection().prepareStatement(sql);
             stm.setString(1, SchafID);
 
@@ -230,7 +230,7 @@ public class Get {
         ArrayList<Klauenschneiden> dbKlauenschneiden = new ArrayList<Klauenschneiden>();
 
         try {
-            String sql = "SELECT * FROM Klauenschneiden WHERE SchafID = ? ORDER BY Datum;";
+            String sql = "SELECT * FROM Klauenschneiden WHERE SchafID = ? ORDER BY Datum DESC;";
             stm = Config.getSQLConnection().prepareStatement(sql);
             stm.setString(1, SchafID);
 
@@ -264,7 +264,7 @@ public class Get {
         ArrayList<Schur> dbSchur = new ArrayList<Schur>();
 
         try {
-            String sql = "SELECT * FROM Schur WHERE SchafID = ? ORDER BY Datum;";
+            String sql = "SELECT * FROM Schur WHERE SchafID = ? ORDER BY Datum DESC;";
             stm = Config.getSQLConnection().prepareStatement(sql);
             stm.setString(1, SchafID);
 
@@ -298,7 +298,7 @@ public class Get {
         ArrayList<Transport> dbTransport = new ArrayList<Transport>();
 
         try {
-            String sql = "SELECT * FROM Transport WHERE SchafID = ? ORDER BY Datum;";
+            String sql = "SELECT * FROM Transport WHERE SchafID = ? ORDER BY Datum DESC;";
             stm = Config.getSQLConnection().prepareStatement(sql);
             stm.setString(1, SchafID);
 
