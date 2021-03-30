@@ -22,8 +22,8 @@ public class Update {
 
     Add insert = null;
     Del delete = null;
-    
-    public Update(){
+
+    public Update() {
         insert = new Add();
         delete = new Del();
     }
@@ -32,38 +32,38 @@ public class Update {
         delete.schaf(schaf);
         insert.schaf(schaf);
     }
-    
-    public void betriebsnummer(Betriebsnummer bNummer){
+
+    public void betriebsnummer(Betriebsnummer bNummer) {
         delete.betriebsnummer(bNummer);
         insert.betriebsnummer(bNummer);
     }
-    
-    public void entwurmen(Entwurmen entwurmen){
+
+    public void entwurmen(Entwurmen entwurmen) {
         delete.entwurmen(entwurmen);
         insert.entwurmen(entwurmen);
     }
-    
-    public void impfungen(Impfungen impfungen){
+
+    public void impfungen(Impfungen impfungen) {
         delete.impfungen(impfungen);
         insert.impfungen(impfungen);
     }
-    
-    public void klauenschneiden(Klauenschneiden klauen){
+
+    public void klauenschneiden(Klauenschneiden klauen) {
         delete.klauenschneiden(klauen);
         insert.klauenschneiden(klauen);
     }
-    
-    public void schur(Schur schur){
+
+    public void schur(Schur schur) {
         delete.schur(schur);
         insert.schur(schur);
     }
-    
-    public void transport(Transport transport){
+
+    public void transport(Transport transport) {
         delete.transport(transport);
         insert.transport(transport);
     }
-    
-    public void gedeckt(Gedeckt gedeckt){
+
+    public void gedeckt(Gedeckt gedeckt) {
         delete.gedeckt(gedeckt);
         insert.gedeckt(gedeckt);
     }
