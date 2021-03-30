@@ -54,6 +54,7 @@ public class main extends javax.swing.JFrame {
      */
     public main() {
         initComponents();
+        jTabPlane.setSelectedIndex(6);
         Get select = new Get();
         Object[] schafe = select.schafe().toArray();
         lstausgabe.setListData(schafe);
@@ -1201,75 +1202,89 @@ public class main extends javax.swing.JFrame {
             switch (jTabPlane.getSelectedIndex()) {
                 // Schur
                 case 4:
-                    Schur schur = new Schur(schafID);
-                    schur.setDatum(new java.sql.Date(((GregorianCalendar) jDateSchur.getModel().getValue()).getTimeInMillis()));
+                    Schur schur = (Schur) jListSchur.getSelectedValue();
+                    if (schur != null) {
+                        schur.setDatum(new java.sql.Date(((GregorianCalendar) jDateSchur.getModel().getValue()).getTimeInMillis()));
 
-                    del.schur(schur);
-                    updateListView(schur, jListSchur, true);
+                        del.schur(schur);
+                        updateListView(schur, jListSchur, true);
+                    }
                     break;
 
                 // Betriebsnummer
                 case 0:
-                    Betriebsnummer betrieb = new Betriebsnummer(schafID);
-                    betrieb.setBemerkung(txabnbemerkung.getText());
-                    betrieb.setBetriebsnummer(txfbnnummer.getText());
+                    Betriebsnummer betrieb = (Betriebsnummer) jListBetriebsnummer.getSelectedValue();
+                    if (betrieb != null) {
+                        betrieb.setBemerkung(txabnbemerkung.getText());
+                        betrieb.setBetriebsnummer(txfbnnummer.getText());
 
-                    del.betriebsnummer(betrieb);
-                    updateListView(betrieb, jListBetriebsnummer, true);
+                        del.betriebsnummer(betrieb);
+                        updateListView(betrieb, jListBetriebsnummer, true);
+                    }
                     break;
 
                 // Entwurmen
                 case 1:
-                    Entwurmen entwurmen = new Entwurmen(schafID);
-                    entwurmen.setDatum(new java.sql.Date(((GregorianCalendar) jDateEntwurmen.getModel().getValue()).getTimeInMillis()));
+                    Entwurmen entwurmen = (Entwurmen) jListEntwurmen.getSelectedValue();
+                    if (entwurmen != null) {
+                        entwurmen.setDatum(new java.sql.Date(((GregorianCalendar) jDateEntwurmen.getModel().getValue()).getTimeInMillis()));
 
-                    del.entwurmen(entwurmen);
-                    updateListView(entwurmen, jListEntwurmen, true);
+                        del.entwurmen(entwurmen);
+                        updateListView(entwurmen, jListEntwurmen, true);
+                    }
                     break;
 
                 // Gedeckt
                 case 2:
-                    Gedeckt gedeckt = new Gedeckt(schafID);
-                    gedeckt.setDatum(new java.sql.Date(((GregorianCalendar) jDateGedeckt.getModel().getValue()).getTimeInMillis()));
-                    gedeckt.setVaterkennung(txfgedecktvaterkennung.getText());
+                    Gedeckt gedeckt = (Gedeckt) jListGedeckt.getSelectedValue();
+                    if (gedeckt != null) {
+                        gedeckt.setDatum(new java.sql.Date(((GregorianCalendar) jDateGedeckt.getModel().getValue()).getTimeInMillis()));
+                        gedeckt.setVaterkennung(txfgedecktvaterkennung.getText());
 
-                    del.gedeckt(gedeckt);
-                    updateListView(gedeckt, jListGedeckt, true);
+                        updateListView(gedeckt, jListGedeckt, true);
+                        del.gedeckt(gedeckt);
+                    }
                     break;
 
                 // Impfungen
                 case 3:
-                    Impfungen impfungen = new Impfungen(schafID);
-                    impfungen.setBemerkung(txfimpfungbemerkung.getText());
-                    impfungen.setImpfstoff(txfimpfungstoff.getText());
-                    impfungen.setDatum(new java.sql.Date(((GregorianCalendar) jDateImpfungen.getModel().getValue()).getTimeInMillis()));
+                    Impfungen impfungen = (Impfungen) jListImpfungen.getSelectedValue();
+                    if (impfungen != null) {
+                        impfungen.setBemerkung(txfimpfungbemerkung.getText());
+                        impfungen.setImpfstoff(txfimpfungstoff.getText());
+                        impfungen.setDatum(new java.sql.Date(((GregorianCalendar) jDateImpfungen.getModel().getValue()).getTimeInMillis()));
 
-                    del.impfungen(impfungen);
-                    updateListView(impfungen, jListImpfungen, true);
+                        del.impfungen(impfungen);
+                        updateListView(impfungen, jListImpfungen, true);
+                    }
                     break;
 
                 // Transport
                 case 5:
-                    Transport transport = new Transport(schafID);
-                    transport.setGrund(txftpgrund.getText());
-                    transport.setTransportMittel(txftptransportmittel.getText());
-                    transport.setDatum(new java.sql.Date(((GregorianCalendar) jDateTransport.getModel().getValue()).getTimeInMillis()));
+                    Transport transport = (Transport) jListTransport.getSelectedValue();
+                    if (transport != null) {
+                        transport.setGrund(txftpgrund.getText());
+                        transport.setTransportMittel(txftptransportmittel.getText());
+                        transport.setDatum(new java.sql.Date(((GregorianCalendar) jDateTransport.getModel().getValue()).getTimeInMillis()));
 
-                    del.transport(transport);
-                    updateListView(transport, jListTransport, true);
+                        del.transport(transport);
+                        updateListView(transport, jListTransport, true);
+                    }
                     break;
 
                 // Klauenschneiden
                 case 7:
-                    Klauenschneiden klauen = new Klauenschneiden(schafID);
-                    klauen.setDatum(new java.sql.Date(((GregorianCalendar) jDateKlauenschneiden.getModel().getValue()).getTimeInMillis()));
+                    Klauenschneiden klauen = (Klauenschneiden) jListKlauenschneiden.getSelectedValue();
+                    if (klauen != null) {
+                        klauen.setDatum(new java.sql.Date(((GregorianCalendar) jDateKlauenschneiden.getModel().getValue()).getTimeInMillis()));
 
-                    del.klauenschneiden(klauen);
-                    updateListView(klauen, jListKlauenschneiden, true);
+                        del.klauenschneiden(klauen);
+                        updateListView(klauen, jListKlauenschneiden, true);
+                    }
                     break;
                 // Schaf
                 case 6:
-                    Schaf schaf = new Schaf(schafID);
+                    Schaf schaf = (Schaf) lstausgabe.getSelectedValue();
 
                     schaf.setGrundFürAbgang(jTextGrundFürAbgang.getText());
                     schaf.setMutterkennung(jMutterKennung.getText());
