@@ -42,7 +42,9 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import org.jdatepicker.DateModel;
@@ -88,6 +90,7 @@ public class main extends javax.swing.JFrame {
         txabnbemerkung = new javax.swing.JTextArea();
         jScrollPane10 = new javax.swing.JScrollPane();
         jListBetriebsnummer = new javax.swing.JList();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
         jTabEntwurmen = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jLabel29 = new javax.swing.JLabel();
@@ -226,8 +229,11 @@ public class main extends javax.swing.JFrame {
             .addGroup(jTabBetriebsnummerLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jTabBetriebsnummerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jTabBetriebsnummerLayout.createSequentialGroup()
+                        .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
         jTabBetriebsnummerLayout.setVerticalGroup(
@@ -235,8 +241,13 @@ public class main extends javax.swing.JFrame {
             .addGroup(jTabBetriebsnummerLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jTabBetriebsnummerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jTabBetriebsnummerLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jTabBetriebsnummerLayout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
@@ -1236,6 +1247,9 @@ public class main extends javax.swing.JFrame {
 
                 insert.schaf(schaf);
                 updateListView(schaf);
+            } else {
+                JOptionPane.showMessageDialog(new JFrame(), "Bitte zuerst ein Schaf aus der Übersichtsliste auswählen.", "Fehler",
+                        JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_btnaddActionPerformed
@@ -1351,6 +1365,9 @@ public class main extends javax.swing.JFrame {
                 default:
                     break;
             }
+        } else {
+            JOptionPane.showMessageDialog(new JFrame(), "Bitte zuerst ein Feld zum Löschen auswählen.", "Fehler",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnloeschenActionPerformed
 
@@ -1444,10 +1461,12 @@ public class main extends javax.swing.JFrame {
                     schaf.setMutterkennung(jMutterKennung.getText());
                     schaf.setKennung(jTextKennung.getText());
                     schaf.setBemerkung(jTextBemerkung.getText());
-                    if(jDateAbgang.getModel().getValue() != null)
+                    if (jDateAbgang.getModel().getValue() != null) {
                         schaf.setDatumAbgang(new java.sql.Date(((GregorianCalendar) jDateAbgang.getModel().getValue()).getTimeInMillis()));
-                    if(jDateZugangsdatum.getModel() != null)
+                    }
+                    if (jDateZugangsdatum.getModel() != null) {
                         schaf.setDatumZugang(new java.sql.Date(((GregorianCalendar) jDateZugangsdatum.getModel().getValue()).getTimeInMillis()));
+                    }
 
                     update.schaf(schaf);
                     updateListView(schaf, true);
@@ -1456,6 +1475,9 @@ public class main extends javax.swing.JFrame {
                 default:
                     break;
             }
+        } else {
+            JOptionPane.showMessageDialog(new JFrame(), "Bitte zuerst ein Feld zum Ändern auswählen.", "Fehler",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnchangeActionPerformed
 
@@ -1501,6 +1523,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JButton btnadd;
     private javax.swing.JButton btnchange;
     private javax.swing.JButton btnloeschen;
+    private javax.swing.Box.Filler filler1;
     private org.jdatepicker.JDatePicker jDateAbgang;
     private org.jdatepicker.JDatePicker jDateEntwurmen;
     private org.jdatepicker.JDatePicker jDateGedeckt;
