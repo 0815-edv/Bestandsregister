@@ -42,7 +42,9 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import org.jdatepicker.DateModel;
@@ -88,6 +90,7 @@ public class main extends javax.swing.JFrame {
         txabnbemerkung = new javax.swing.JTextArea();
         jScrollPane10 = new javax.swing.JScrollPane();
         jListBetriebsnummer = new javax.swing.JList();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
         jTabEntwurmen = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jLabel29 = new javax.swing.JLabel();
@@ -226,8 +229,11 @@ public class main extends javax.swing.JFrame {
             .addGroup(jTabBetriebsnummerLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jTabBetriebsnummerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jTabBetriebsnummerLayout.createSequentialGroup()
+                        .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
         jTabBetriebsnummerLayout.setVerticalGroup(
@@ -235,8 +241,13 @@ public class main extends javax.swing.JFrame {
             .addGroup(jTabBetriebsnummerLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jTabBetriebsnummerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jTabBetriebsnummerLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jTabBetriebsnummerLayout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
@@ -1146,70 +1157,105 @@ public class main extends javax.swing.JFrame {
                 // Schur
                 case 4:
                     Schur schur = new Schur(schafID);
-                    schur.setDatum(new java.sql.Date(((GregorianCalendar) jDateSchur.getModel().getValue()).getTimeInMillis()));
+                    if (jDateSchur.getModel().getValue() != null) {
+                        schur.setDatum(new java.sql.Date(((GregorianCalendar) jDateSchur.getModel().getValue()).getTimeInMillis()));
 
-                    insert.schur(schur);
-                    updateListView(schur, jListSchur);
+                        insert.schur(schur);
+                        updateListView(schur, jListSchur);
+                    } else {
+                        JOptionPane.showMessageDialog(new JFrame(), "Bitte zuerst ein Datum auswählen.", "Fehler",
+                                JOptionPane.ERROR_MESSAGE);
+                    }
                     break;
 
                 // Betriebsnummer
                 case 0:
                     Betriebsnummer betrieb = new Betriebsnummer(schafID);
                     betrieb.setBemerkung(txabnbemerkung.getText());
-                    betrieb.setBetriebsnummer(txfbnnummer.getText());
+                    if (!txfbnnummer.getText().isBlank()) {
+                        betrieb.setBetriebsnummer(txfbnnummer.getText());
 
-                    insert.betriebsnummer(betrieb);
-                    updateListView(betrieb, jListBetriebsnummer);
+                        insert.betriebsnummer(betrieb);
+                        updateListView(betrieb, jListBetriebsnummer);
+                    } else {
+                        JOptionPane.showMessageDialog(new JFrame(), "Bitte zuerst eine Betriebsnummer eingeben.", "Fehler",
+                                JOptionPane.ERROR_MESSAGE);
+                    }
                     break;
 
                 // Entwurmen
                 case 1:
                     Entwurmen entwurmen = new Entwurmen(schafID);
-                    entwurmen.setDatum(new java.sql.Date(((GregorianCalendar) jDateEntwurmen.getModel().getValue()).getTimeInMillis()));
+                    if (jDateSchur.getModel().getValue() != null) {
+                        entwurmen.setDatum(new java.sql.Date(((GregorianCalendar) jDateEntwurmen.getModel().getValue()).getTimeInMillis()));
 
-                    insert.entwurmen(entwurmen);
-                    updateListView(entwurmen, jListEntwurmen);
+                        insert.entwurmen(entwurmen);
+                        updateListView(entwurmen, jListEntwurmen);
+                    } else {
+                        JOptionPane.showMessageDialog(new JFrame(), "Bitte zuerst ein Datum auswählen.", "Fehler",
+                                JOptionPane.ERROR_MESSAGE);
+                    }
                     break;
 
                 // Gedeckt
                 case 2:
                     Gedeckt gedeckt = new Gedeckt(schafID);
-                    gedeckt.setDatum(new java.sql.Date(((GregorianCalendar) jDateGedeckt.getModel().getValue()).getTimeInMillis()));
-                    gedeckt.setVaterkennung(txfgedecktvaterkennung.getText());
+                    if (!txfgedecktvaterkennung.getText().isBlank()) {
+                        gedeckt.setDatum(new java.sql.Date(((GregorianCalendar) jDateGedeckt.getModel().getValue()).getTimeInMillis()));
+                        gedeckt.setVaterkennung(txfgedecktvaterkennung.getText());
 
-                    insert.gedeckt(gedeckt);
-                    updateListView(gedeckt, jListGedeckt);
+                        insert.gedeckt(gedeckt);
+                        updateListView(gedeckt, jListGedeckt);
+                    } else {
+                        JOptionPane.showMessageDialog(new JFrame(), "Bitte zuerst ein Datum auswählen und Vaterkennung eingeben.", "Fehler",
+                                JOptionPane.ERROR_MESSAGE);
+                    }
                     break;
 
                 // Impfungen
                 case 3:
                     Impfungen impfungen = new Impfungen(schafID);
-                    impfungen.setBemerkung(txfimpfungbemerkung.getText());
-                    impfungen.setImpfstoff(txfimpfungstoff.getText());
-                    impfungen.setDatum(new java.sql.Date(((GregorianCalendar) jDateImpfungen.getModel().getValue()).getTimeInMillis()));
+                    if (!txfimpfungstoff.getText().isBlank() || jDateImpfungen.getModel().getValue() != null) {
+                        impfungen.setBemerkung(txfimpfungbemerkung.getText());
+                        impfungen.setImpfstoff(txfimpfungstoff.getText());
+                        impfungen.setDatum(new java.sql.Date(((GregorianCalendar) jDateImpfungen.getModel().getValue()).getTimeInMillis()));
 
-                    insert.impfungen(impfungen);
-                    updateListView(impfungen, jListImpfungen);
+                        insert.impfungen(impfungen);
+                        updateListView(impfungen, jListImpfungen);
+                    } else {
+                        JOptionPane.showMessageDialog(new JFrame(), "Bitte zuerst ein Impfstoff und Datum angeben.", "Fehler",
+                                JOptionPane.ERROR_MESSAGE);
+                    }
                     break;
 
                 // Transport
                 case 5:
                     Transport transport = new Transport(schafID);
-                    transport.setGrund(txftpgrund.getText());
-                    transport.setTransportMittel(txftptransportmittel.getText());
-                    transport.setDatum(new java.sql.Date(((GregorianCalendar) jDateTransport.getModel().getValue()).getTimeInMillis()));
+                    if (!txftpgrund.getText().isBlank()) {
+                        transport.setGrund(txftpgrund.getText());
+                        transport.setTransportMittel(txftptransportmittel.getText());
+                        transport.setDatum(new java.sql.Date(((GregorianCalendar) jDateTransport.getModel().getValue()).getTimeInMillis()));
 
-                    insert.transport(transport);
-                    updateListView(transport, jListTransport);
+                        insert.transport(transport);
+                        updateListView(transport, jListTransport);
+                    } else {
+                        JOptionPane.showMessageDialog(new JFrame(), "Bitte zuerst ein Transportgrund angeben.", "Fehler",
+                                JOptionPane.ERROR_MESSAGE);
+                    }
                     break;
 
                 // Klauenschneiden
                 case 7:
                     Klauenschneiden klauen = new Klauenschneiden(schafID);
-                    klauen.setDatum(new java.sql.Date(((GregorianCalendar) jDateKlauenschneiden.getModel().getValue()).getTimeInMillis()));
+                    if (jDateKlauenschneiden.getModel().getValue() != null) {
+                        klauen.setDatum(new java.sql.Date(((GregorianCalendar) jDateKlauenschneiden.getModel().getValue()).getTimeInMillis()));
 
-                    insert.klauenschneiden(klauen);
-                    updateListView(klauen, jListKlauenschneiden);
+                        insert.klauenschneiden(klauen);
+                        updateListView(klauen, jListKlauenschneiden);
+                    } else {
+                        JOptionPane.showMessageDialog(new JFrame(), "Bitte zuerst ein Datum auswählen.", "Fehler",
+                                JOptionPane.ERROR_MESSAGE);
+                    }
                     break;
 
                 default:
@@ -1219,23 +1265,32 @@ public class main extends javax.swing.JFrame {
             if (jTabPlane.getSelectedIndex() == 6) {
                 Schaf schaf = new Schaf();
 
-                if (jTextGrundFürAbgang != null) {
-                    schaf.setGrundFürAbgang(jTextGrundFürAbgang.getText());
-                }
-                schaf.setMutterkennung(jMutterKennung.getText());
-                schaf.setKennung(jTextKennung.getText());
-                if (jTextBemerkung != null) {
-                    schaf.setBemerkung(jTextBemerkung.getText());
-                }
-                if (jDateAbgang.getModel().getValue() != null) {
-                    schaf.setDatumAbgang(new java.sql.Date(((GregorianCalendar) jDateAbgang.getModel().getValue()).getTimeInMillis()));
-                }
-                if (jDateAbgang.getModel().getValue() != null) {
-                    schaf.setDatumZugang(new java.sql.Date(((GregorianCalendar) jDateZugangsdatum.getModel().getValue()).getTimeInMillis()));
-                }
+                if (!jTextKennung.getText().isBlank()) {
 
-                insert.schaf(schaf);
-                updateListView(schaf);
+                    if (jTextGrundFürAbgang != null) {
+                        schaf.setGrundFürAbgang(jTextGrundFürAbgang.getText());
+                    }
+                    schaf.setMutterkennung(jMutterKennung.getText());
+                    schaf.setKennung(jTextKennung.getText());
+                    if (jTextBemerkung != null) {
+                        schaf.setBemerkung(jTextBemerkung.getText());
+                    }
+                    if (jDateAbgang.getModel().getValue() != null) {
+                        schaf.setDatumAbgang(new java.sql.Date(((GregorianCalendar) jDateAbgang.getModel().getValue()).getTimeInMillis()));
+                    }
+                    if (jDateAbgang.getModel().getValue() != null) {
+                        schaf.setDatumZugang(new java.sql.Date(((GregorianCalendar) jDateZugangsdatum.getModel().getValue()).getTimeInMillis()));
+                    }
+
+                    insert.schaf(schaf);
+                    updateListView(schaf);
+                } else {
+                    JOptionPane.showMessageDialog(new JFrame(), "Bitte zuerst eine Kennung vergeben.", "Fehler",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(new JFrame(), "Bitte zuerst ein Schaf aus der Übersichtsliste auswählen.", "Fehler",
+                        JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_btnaddActionPerformed
@@ -1255,6 +1310,9 @@ public class main extends javax.swing.JFrame {
 
                         del.schur(schur);
                         updateListView(schur, jListSchur, true);
+                    } else {
+                        JOptionPane.showMessageDialog(new JFrame(), "Bitte zuerst ein Schur Eintrag aus der Übersichtsliste auswählen.", "Fehler",
+                                JOptionPane.ERROR_MESSAGE);
                     }
                     break;
 
@@ -1267,6 +1325,9 @@ public class main extends javax.swing.JFrame {
 
                         del.betriebsnummer(betrieb);
                         updateListView(betrieb, jListBetriebsnummer, true);
+                    } else {
+                        JOptionPane.showMessageDialog(new JFrame(), "Bitte zuerst ein Betriebsnummer Eintrag aus der Übersichtsliste auswählen.", "Fehler",
+                                JOptionPane.ERROR_MESSAGE);
                     }
                     break;
 
@@ -1278,6 +1339,9 @@ public class main extends javax.swing.JFrame {
 
                         del.entwurmen(entwurmen);
                         updateListView(entwurmen, jListEntwurmen, true);
+                    } else {
+                        JOptionPane.showMessageDialog(new JFrame(), "Bitte zuerst ein Entwurmen Eintrag aus der Übersichtsliste auswählen.", "Fehler",
+                                JOptionPane.ERROR_MESSAGE);
                     }
                     break;
 
@@ -1290,6 +1354,9 @@ public class main extends javax.swing.JFrame {
 
                         updateListView(gedeckt, jListGedeckt, true);
                         del.gedeckt(gedeckt);
+                    } else {
+                        JOptionPane.showMessageDialog(new JFrame(), "Bitte zuerst ein Gedeckt Eintrag aus der Übersichtsliste auswählen.", "Fehler",
+                                JOptionPane.ERROR_MESSAGE);
                     }
                     break;
 
@@ -1303,6 +1370,9 @@ public class main extends javax.swing.JFrame {
 
                         del.impfungen(impfungen);
                         updateListView(impfungen, jListImpfungen, true);
+                    } else {
+                        JOptionPane.showMessageDialog(new JFrame(), "Bitte zuerst ein Impf Eintrag aus der Übersichtsliste auswählen.", "Fehler",
+                                JOptionPane.ERROR_MESSAGE);
                     }
                     break;
 
@@ -1316,6 +1386,9 @@ public class main extends javax.swing.JFrame {
 
                         del.transport(transport);
                         updateListView(transport, jListTransport, true);
+                    } else {
+                        JOptionPane.showMessageDialog(new JFrame(), "Bitte zuerst ein Transport Eintrag aus der Übersichtsliste auswählen.", "Fehler",
+                                JOptionPane.ERROR_MESSAGE);
                     }
                     break;
 
@@ -1327,6 +1400,9 @@ public class main extends javax.swing.JFrame {
 
                         del.klauenschneiden(klauen);
                         updateListView(klauen, jListKlauenschneiden, true);
+                    } else {
+                        JOptionPane.showMessageDialog(new JFrame(), "Bitte zuerst ein Klauen Eintrag aus der Übersichtsliste auswählen.", "Fehler",
+                                JOptionPane.ERROR_MESSAGE);
                     }
                     break;
                 // Schaf
@@ -1351,6 +1427,9 @@ public class main extends javax.swing.JFrame {
                 default:
                     break;
             }
+        } else {
+            JOptionPane.showMessageDialog(new JFrame(), "Bitte zuerst ein Schaf aus der Übersicht auswählen.", "Fehler",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnloeschenActionPerformed
 
@@ -1444,10 +1523,12 @@ public class main extends javax.swing.JFrame {
                     schaf.setMutterkennung(jMutterKennung.getText());
                     schaf.setKennung(jTextKennung.getText());
                     schaf.setBemerkung(jTextBemerkung.getText());
-                    if(jDateAbgang.getModel().getValue() != null)
+                    if (jDateAbgang.getModel().getValue() != null) {
                         schaf.setDatumAbgang(new java.sql.Date(((GregorianCalendar) jDateAbgang.getModel().getValue()).getTimeInMillis()));
-                    if(jDateZugangsdatum.getModel() != null)
+                    }
+                    if (jDateZugangsdatum.getModel().getValue() != null) {
                         schaf.setDatumZugang(new java.sql.Date(((GregorianCalendar) jDateZugangsdatum.getModel().getValue()).getTimeInMillis()));
+                    }
 
                     update.schaf(schaf);
                     updateListView(schaf, true);
@@ -1456,6 +1537,9 @@ public class main extends javax.swing.JFrame {
                 default:
                     break;
             }
+        } else {
+            JOptionPane.showMessageDialog(new JFrame(), "Bitte zuerst ein Feld zum Ändern auswählen.", "Fehler",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnchangeActionPerformed
 
@@ -1501,6 +1585,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JButton btnadd;
     private javax.swing.JButton btnchange;
     private javax.swing.JButton btnloeschen;
+    private javax.swing.Box.Filler filler1;
     private org.jdatepicker.JDatePicker jDateAbgang;
     private org.jdatepicker.JDatePicker jDateEntwurmen;
     private org.jdatepicker.JDatePicker jDateGedeckt;
