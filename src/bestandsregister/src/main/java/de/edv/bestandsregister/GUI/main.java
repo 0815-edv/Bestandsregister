@@ -1526,7 +1526,7 @@ public class main extends javax.swing.JFrame {
                     if (jDateAbgang.getModel().getValue() != null) {
                         schaf.setDatumAbgang(new java.sql.Date(((GregorianCalendar) jDateAbgang.getModel().getValue()).getTimeInMillis()));
                     }
-                    if (jDateZugangsdatum.getModel() != null) {
+                    if (jDateZugangsdatum.getModel().getValue() != null) {
                         schaf.setDatumZugang(new java.sql.Date(((GregorianCalendar) jDateZugangsdatum.getModel().getValue()).getTimeInMillis()));
                     }
 
