@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.edv</groupId>
     <artifactId>bestandsregister</artifactId>
-    <version>1.0.1</version>
+    <version>1.1.0</version>
     <packaging>jar</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -91,7 +91,7 @@
                         </goals>
                             <configuration>
                             <headerType>gui</headerType>
-                            <jar>target/bestandsregister-1.0.1-jar-with-dependencies.jar</jar>
+                            <jar>target/bestandsregister-${project.version}-jar-with-dependencies.jar</jar>
                             <outfile>target/Bestandsregister.exe</outfile>
                             <downloadUrl>https://jdk.java.net/java-se-ri/11</downloadUrl>
                             <classPath>
@@ -105,12 +105,12 @@
                                 <runtimeBits>64</runtimeBits>
                             </jre>
                             <versionInfo>
-                                <fileVersion>1.0.1.0</fileVersion>
+                                <fileVersion>${project.version}.0</fileVersion>
                                 <txtFileVersion>${project.version}</txtFileVersion>
                                 <fileDescription>${project.name}</fileDescription>
                                 <copyright>Copyright (c) 2021 0815-EDV</copyright>
-                                <productVersion>1.0.1.0</productVersion>
-                                <txtProductVersion>1.0.1.0</txtProductVersion>
+                                <productVersion>${project.version}.0</productVersion>
+                                <txtProductVersion>${project.version}.0</txtProductVersion>
                                 <productName>Bestandsregister</productName>
                                 <companyName>0815 EDV</companyName>
                                 <internalName>bestandsregister</internalName>
