@@ -23,7 +23,7 @@ public class CellRenderer extends DefaultListCellRenderer {
         Component c = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
         if (value instanceof Schaf) {
             Schaf schaf = (Schaf) value;
-            setText(schaf.getKennung());
+            setText(schaf.toString());
             if (schaf.getDatumAbgang() != null) {
                 if (schaf.getDatumAbgang().getTime() != 0) {
                     setBackground(Color.RED);
