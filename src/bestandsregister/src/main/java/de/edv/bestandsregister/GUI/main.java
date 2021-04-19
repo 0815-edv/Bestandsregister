@@ -64,13 +64,14 @@ public class main extends javax.swing.JFrame {
         initComponents();
         jTabPlane.setSelectedIndex(6);
         Get select = new Get();
-        var schaf = select.schafe();
-        Collections.sort(schaf, new SortByAbgang());
-        
-        Object[] schafe = schaf.toArray();
-        lstausgabe.setListData(schafe);
+        // Get Schafe from DB
+        var schafe = select.schafe();
+        // Sort List
+        Collections.sort(schafe, new SortByAbgang());
+        // Set List Data
+        lstausgabe.setListData(schafe.toArray());
         lstausgabe.setCellRenderer(new CellRenderer());
-        jTextAnzahl.setText(String.valueOf(schafe.length));
+        jTextAnzahl.setText(String.valueOf(schafe.size()));
     }
 
     /**
@@ -1111,23 +1112,33 @@ public class main extends javax.swing.JFrame {
 
     // Update Main JList
     private void updateListView(Schaf obj) {
+        // Initializing List
         ArrayList<Schaf> objList = new ArrayList<Schaf>();
+        // Filling List
         for (int i = 0; i < lstausgabe.getModel().getSize(); i++) {
             objList.add((Schaf)lstausgabe.getModel().getElementAt(i));
         }
+        // Add Object to List
         objList.add(obj);
+        // Sort List
         Collections.sort(objList, new SortByAbgang());
+        // Set List to JList
         lstausgabe.setListData(objList.toArray());
         lstausgabe.repaint();
     }
 
     private void updateListView(Object Schaf, boolean remove) {
+        // Initializing List
         ArrayList<Schaf> objList = new ArrayList<Schaf>();
+        // Filling List
         for (int i = 0; i < lstausgabe.getModel().getSize(); i++) {
             objList.add((Schaf)lstausgabe.getModel().getElementAt(i));
         }
+        // Remove Object from List
         objList.remove(lstausgabe.getSelectedIndex());
+        // Sort List
         Collections.sort(objList, new SortByAbgang());
+        // Set List to JList
         lstausgabe.setListData(objList.toArray());
         lstausgabe.repaint();
     }
