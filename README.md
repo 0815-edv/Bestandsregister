@@ -1,45 +1,37 @@
-# Bestandsregister
-Bestandsregister für Schäfer lol
+# Benutzerhandbuch Bestandsregister
+Das Bestandsregister Programm wurde Entwickelt um die stetig wachsenden Anforderungen an Schäfer durch das Veterinäramt zu vereinfachen.
 
-### Roadmap (v1)
+Indem es eine zentrale Anlaufstelle bildet für die wichtigsten Daten, die in einem Bestand erfasst und archiviert werden müssen.
 
-**Standart Anforderungen (Klasse Schafe):**
-+ Laufende Nummer (1:1)
-+ Datum des Zugangs/Abgangs (Geburtsdatum/Todestag mit Grund) (1:1)
-+ Betriebsnummer/Name/Anschrift vorheriger Besitzer (1:1)
-+ Betriebsnummer/Name/Anschrift des Übernehmers (1:1)
-+ Kennzeichen des Transportmittels Zugmaschine/Anhänger (1:n)
-+ Kennzeichen des Tieres (1:1)
-+ Bemerkungen (1:1)
-+ Mutterschaf (Ohrmarken Nummer) (1:1)
+## Funktionen
++ Erfassen von einzelnen Schafen
+    + Zugangsdatum
+    + Abgangsdatum
+    + Grund für den Abgang
+    + Mutter Kennung
+    + Eigene Kennung
++ Erfassen und Dokumentierung der Pflege
+    + Klauenschneiden
+    + Impfungen
+    + Schur
+    + Entwurmen
++ Erfassung der Betriebsnummern bei erhalt oder verkauf
++ Erfassung der Transportmittel
++ Erfassung wie oft das Schaf gedeckt wurde
 
-**Pflege:**
-+ Datum letzte Schur (1:n)
-+ Datum letztes Entwurmen (1:n)
-+ Impfungen (1:n)
-+ Datum letztes Klauenschneiden (1:n)
-+ Wie oft und von wem gedeckt (1:n)
+## Programmaufbau
+Das Programm besitzt eine datenorientierte Benutzeroberfläche, dies bedeutet das die Steuerung durch anklicken der einzelnen Datenelemente erfolgt.
 
-**Bestand**
-+ Herkunft vom Schaf (gekauft -> von wem/geboren eigener Betrieb) (1:n)
-+ Speicherung Kauf und Verkauf Kontakte (1:n)
+<img src="docs/main.png" alt="drawing" width="80%"/>
+<img src="docs/main_befüllt.png" alt="drawing" width="80%"/>
 
-### Roadmap (v2)
-**Ausgaben und einnahmen:**
-+ Kauf und Verkauf von Schafen
-[Neu anlegbare Kategorien z.B.]
-+ Futter
-+ Zubehör
-+ Fahrezeuge
-+ Zäune
-+ Gesamt Bestandsliste
-+ Monatliche Bilanz
-+ Gesamt Bilanz
+<img src="docs/Übersicht.png" alt="drawing" width="110%"/>
 
-### ERM Datenbank Übersicht
+## Unterfunktionen
+Alle Unterfunktionen in den Tabs sind ähnlich Aufgebaut.
 
-![](docs/ERM-DB.png)
+Der Hinzufügen Button ist immer nur im aktuell aktiven Tab gültig, das bedeutet das im hier gezeigen Beispiel durch das Hinzufügen weitere Einträge in der Liste Entwurmen landen.
 
-### Klassendiagramm
+![](tab.png)
 
-![](docs/ClassDiagram.PNG)
+Zu Beachten hierbei ist das die Aktions Buttons (Ändern und Löschen) durch das Auswählen eines der im Beispiel gezeigten Einträge auf diese umgeleitet werden!
