@@ -65,6 +65,7 @@ public class main extends javax.swing.JFrame {
         Get select = new Get();
         Object[] schafe = select.schafe().toArray();
         lstausgabe.setListData(schafe);
+        lstausgabe.setCellRenderer(new CellRenderer());
         jTextAnzahl.setText(String.valueOf(schafe.length));
     }
 
