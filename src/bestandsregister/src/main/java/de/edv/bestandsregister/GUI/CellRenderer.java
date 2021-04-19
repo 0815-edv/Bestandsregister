@@ -25,7 +25,13 @@ public class CellRenderer extends DefaultListCellRenderer {
             Schaf schaf = (Schaf) value;
             setText(schaf.getKennung());
             if (schaf.getDatumAbgang() != null) {
-                setBackground(Color.RED);
+                if (schaf.getDatumAbgang().getTime() != 0) {
+                    setBackground(Color.RED);
+                } else {
+                    setBackground(Color.GREEN);
+                }
+            } else {
+                setBackground(Color.GREEN);
             }
             if (isSelected) {
                 setBackground(getBackground().darker());

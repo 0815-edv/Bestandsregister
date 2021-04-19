@@ -39,6 +39,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -63,7 +64,10 @@ public class main extends javax.swing.JFrame {
         initComponents();
         jTabPlane.setSelectedIndex(6);
         Get select = new Get();
-        Object[] schafe = select.schafe().toArray();
+        var schaf = select.schafe();
+        Collections.sort(schaf, new SortByAbgang());
+        
+        Object[] schafe = schaf.toArray();
         lstausgabe.setListData(schafe);
         lstausgabe.setCellRenderer(new CellRenderer());
         jTextAnzahl.setText(String.valueOf(schafe.length));
@@ -1106,22 +1110,24 @@ public class main extends javax.swing.JFrame {
     }//GEN-LAST:event_jListKlauenschneidenValueChanged
 
     // Update Main JList
-    private void updateListView(Object obj) {
-        ArrayList<Object> objList = new ArrayList<Object>();
+    private void updateListView(Schaf obj) {
+        ArrayList<Schaf> objList = new ArrayList<Schaf>();
         for (int i = 0; i < lstausgabe.getModel().getSize(); i++) {
-            objList.add(lstausgabe.getModel().getElementAt(i));
+            objList.add((Schaf)lstausgabe.getModel().getElementAt(i));
         }
         objList.add(obj);
+        Collections.sort(objList, new SortByAbgang());
         lstausgabe.setListData(objList.toArray());
         lstausgabe.repaint();
     }
 
-    private void updateListView(Object obj, boolean remove) {
-        ArrayList<Object> objList = new ArrayList<Object>();
+    private void updateListView(Object Schaf, boolean remove) {
+        ArrayList<Schaf> objList = new ArrayList<Schaf>();
         for (int i = 0; i < lstausgabe.getModel().getSize(); i++) {
-            objList.add(lstausgabe.getModel().getElementAt(i));
+            objList.add((Schaf)lstausgabe.getModel().getElementAt(i));
         }
         objList.remove(lstausgabe.getSelectedIndex());
+        Collections.sort(objList, new SortByAbgang());
         lstausgabe.setListData(objList.toArray());
         lstausgabe.repaint();
     }
