@@ -168,7 +168,7 @@ public class main extends javax.swing.JFrame {
         jLabel22.setText("jLabel22");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Bestandsregister");
+        setTitle("Bestandsregister v1.1.0");
         setLocation(new java.awt.Point(350, 200));
         setResizable(false);
 
