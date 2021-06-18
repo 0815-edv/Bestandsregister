@@ -1,5 +1,5 @@
-/*
- * MIT License
+/* 
+* MIT License
  *
  *  Copyright (c) 2021 Markus, Lorenz, flwerner
  *
@@ -26,30 +26,32 @@ package de.edv.bestandsregister.GUI;
 import de.edv.bestandsregister.Schaf;
 import java.awt.Color;
 import java.awt.Component;
+import java.sql.Date;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JList;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  *
  * @author Markus
  */
-public class CellRenderer extends DefaultListCellRenderer {
+public class CellRenderer extends DefaultTableCellRenderer {
 
-    @Override
     /**
-     * Custom Cell Renderer Um die Einträge der Übersichts JListe optimal
-     * entsprechend des Bestands entsprechend als aktiv oder inaktiv zu setzen.
+     * Custom Cell Renderer
+     * Um die Einträge der Übersichts JListe optimal entsprechend
+     * des Bestands entsprechend als aktiv oder inaktiv zu setzen.
      */
-    public Component getListCellRendererComponent(JList list, Object value, int index,
-            boolean isSelected, boolean cellHasFocus) {
-        Component c = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-        if (value instanceof Schaf) {
-            Schaf schaf = (Schaf) value;
+    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean cellHasFocus, int rowCount, int columCount) {
+        Component c = super.getTableCellRendererComponent(table, value, isSelected, cellHasFocus, rowCount, columCount);
+        if (table.getModel().getValueAt(rowCount, columCount) != null) {
+            Object schaf = table.getModel().getValueAt(rowCount, columCount);
             // Setze Anzeige Text
             setText(schaf.toString());
-
-            if (schaf.getDatumAbgang() != null) {
-                if (schaf.getDatumAbgang().getTime() != 0) {
+            
+            if (schaf != null) {
+                if (schaf instanceof Date) {
                     // Setzte Abgangs Kennzeichnung
                     setBackground(Color.RED);
                 } else {
