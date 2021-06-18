@@ -47,6 +47,7 @@ import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -69,17 +70,24 @@ public class main extends javax.swing.JFrame {
     /**
      * Creates new form main
      */
+    List<Schaf> schafe = null;
     public main() {
         initComponents();
         jTabPlane.setSelectedIndex(6);
         Get select = new Get();
         // Get Schafe from DB
-        var schafe = select.schafe();
+        schafe = select.schafe();
         // Sort List
         Collections.sort(schafe, new SortByAbgang());
-        // Set List Data
-        lstausgabe.setListData(schafe.toArray());
-        lstausgabe.setCellRenderer(new CellRenderer());
+        // Set Table Data
+        
+        DefaultListModel listModel = new DefaultListModel();
+        listModel.addAll(schafe);
+        jTable.setModel(new GUITableModel(schafe));
+
+        
+        //lstausgabe.setListData(schafe.toArray());
+        //lstausgabe.setCellRenderer(new CellRenderer());
         jTextAnzahl.setText(String.valueOf(schafe.size()));
     }
 
@@ -93,8 +101,6 @@ public class main extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel22 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        lstausgabe = new javax.swing.JList();
         jTabPlane = new javax.swing.JTabbedPane();
         jTabBetriebsnummer = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
@@ -177,21 +183,15 @@ public class main extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jTextAnzahl = new javax.swing.JTextField();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        jTable = new javax.swing.JTable();
 
         jLabel22.setText("jLabel22");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Bestandsregister v1.2.0-pre1");
+        setTitle("Bestandsregister v2.0.0-pre1");
         setLocation(new java.awt.Point(350, 200));
         setResizable(false);
-
-        lstausgabe.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        lstausgabe.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                lstausgabeValueChanged(evt);
-            }
-        });
-        jScrollPane1.setViewportView(lstausgabe);
 
         jLabel24.setText("Betriebsnummer");
 
@@ -827,6 +827,24 @@ public class main extends javax.swing.JFrame {
 
         jTextAnzahl.setEditable(false);
 
+        jTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableMouseClicked(evt);
+            }
+        });
+        jScrollPane11.setViewportView(jTable);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -834,36 +852,37 @@ public class main extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextAnzahl, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
-                .addComponent(jTabPlane, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextAnzahl, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                        .addComponent(jTabPlane, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(20, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabPlane, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
-                        .addGap(4, 4, 4)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(jTextAnzahl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTabPlane, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel7)
+                        .addComponent(jTextAnzahl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         jTabPlane.getAccessibleContext().setAccessibleName("Schaf");
@@ -903,154 +922,6 @@ public class main extends javax.swing.JFrame {
         }
 
     }
-
-    private void lstausgabeValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstausgabeValueChanged
-        // TODO add your handling code here:
-        clearAllFields();
-        if (lstausgabe.getSelectedValue() != null) {
-            Schaf schaf = (Schaf) lstausgabe.getSelectedValue();
-            Get select = new Get();
-
-            ArrayList<Betriebsnummer> betriebsnummerList = select.betriebsnummer(schaf.getSchafID());
-            ArrayList<Entwurmen> entwurmenList = select.entwurmen(schaf.getSchafID());
-            ArrayList<Gedeckt> gedecktList = select.gedeckt(schaf.getSchafID());
-            ArrayList<Impfungen> impfungenList = select.impfungen(schaf.getSchafID());
-            ArrayList<Klauenschneiden> klauenList = select.klauenschneiden(schaf.getSchafID());
-            ArrayList<Schur> schurList = select.schur(schaf.getSchafID());
-            ArrayList<Transport> transportList = select.transport(schaf.getSchafID());
-
-            // Schur
-            // Add First Item in List as Displayed
-            if (schurList.size() > 0) {
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(schurList.get(0).getDatum());
-                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateSchur.getModel();
-                dateModel.setValue(calendar);
-
-                jListSchur.setListData(schurList.toArray());
-            } else {
-                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateSchur.getModel();
-                dateModel.setValue(null);
-                jListSchur.setListData(new Object[]{});
-            }
-
-            // Impfungen
-            if (impfungenList.size() > 0) {
-                // Impfung
-                txfimpfungstoff.setText(impfungenList.get(0).getImpfstoff());
-                txfimpfungbemerkung.setText(impfungenList.get(0).getBemerkung());
-
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(impfungenList.get(0).getDatum());
-                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateImpfungen.getModel();
-                dateModel.setValue(calendar);
-
-                jListImpfungen.setListData(impfungenList.toArray());
-            } else {
-                txfimpfungstoff.setText(null);
-                txfimpfungbemerkung.setText(null);
-                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateImpfungen.getModel();
-                dateModel.setValue(null);
-                jListImpfungen.setListData(new Object[]{});
-            }
-
-            // Gedeckt
-            if (gedecktList.size() > 0) {
-                txfgedecktvaterkennung.setText(gedecktList.get(0).getVaterkennung());
-
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(gedecktList.get(0).getDatum());
-                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateGedeckt.getModel();
-                dateModel.setValue(calendar);
-
-                jListGedeckt.setListData(gedecktList.toArray());
-            } else {
-                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateGedeckt.getModel();
-                dateModel.setValue(null);
-                jListGedeckt.setListData(new Object[]{});
-            }
-
-            // Entwurmen
-            if (entwurmenList.size() > 0) {
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(entwurmenList.get(0).getDatum());
-                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateEntwurmen.getModel();
-                dateModel.setValue(calendar);
-
-                jListEntwurmen.setListData(entwurmenList.toArray());
-            } else {
-                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateEntwurmen.getModel();
-                dateModel.setValue(null);
-                jListEntwurmen.setListData(new Object[]{});
-            }
-
-            // Betriebsnummer
-            if (betriebsnummerList.size() > 0) {
-                txfbnnummer.setText(betriebsnummerList.get(0).getBetriebsnummer());
-                txabnbemerkung.setText(betriebsnummerList.get(0).getBemerkung());
-                jListBetriebsnummer.setListData(betriebsnummerList.toArray());
-            } else {
-                txfbnnummer.setText(null);
-                txabnbemerkung.setText(null);
-                jListBetriebsnummer.setListData(new Object[]{});
-            }
-
-            // Klauenschneiden
-            if (klauenList.size() > 0) {
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(klauenList.get(0).getDatum());
-                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateKlauenschneiden.getModel();
-                dateModel.setValue(calendar);
-
-                jListKlauenschneiden.setListData(klauenList.toArray());
-            } else {
-                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateKlauenschneiden.getModel();
-                dateModel.setValue(null);
-                jListKlauenschneiden.setListData(new Object[]{});
-            }
-
-            // Schaf
-            if (schaf.getDatumZugang() != null && schaf.getDatumZugang().getTime() != 0) {
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(schaf.getDatumZugang());
-                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateZugangsdatum.getModel();
-                dateModel.setValue(calendar);
-            }
-
-            if (schaf.getDatumAbgang() != null && schaf.getDatumAbgang().getTime() != 0) {
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(schaf.getDatumAbgang());
-                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateAbgang.getModel();
-                dateModel.setValue(calendar);
-            }
-
-            jTextGrundFürAbgang.setText(schaf.getGrundFürAbgang());
-            jMutterKennung.setText(schaf.getMutterkennung());
-            jTextKennung.setText(schaf.getKennung());
-            jTextBemerkung.setText(schaf.getBemerkung());
-
-            // Transport
-            if (transportList.size() > 0) {
-                txftptransportmittel.setText(transportList.get(0).getTransportMittel());
-                txftpgrund.setText(transportList.get(0).getGrund());
-
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(transportList.get(0).getDatum());
-                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateTransport.getModel();
-                dateModel.setValue(calendar);
-
-                jListTransport.setListData(transportList.toArray());
-            } else {
-                txftptransportmittel.setText(null);
-                txftpgrund.setText(null);
-                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateTransport.getModel();
-                dateModel.setValue(null);
-                jListTransport.setListData(new Object[]{});
-            }
-        } else {
-            lstausgabe.repaint();
-        }
-    }//GEN-LAST:event_lstausgabeValueChanged
 
     // Betriebsnummer
     private void jListBetriebsnummerValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListBetriebsnummerValueChanged
@@ -1150,35 +1021,22 @@ public class main extends javax.swing.JFrame {
 
     // Update Main JList
     private void updateListView(Schaf obj) {
-        // Initializing List
-        ArrayList<Schaf> objList = new ArrayList<Schaf>();
-        // Filling List
-        for (int i = 0; i < lstausgabe.getModel().getSize(); i++) {
-            objList.add((Schaf)lstausgabe.getModel().getElementAt(i));
-        }
-        // Add Object to List
-        objList.add(obj);
+        schafe.add((Schaf)obj);
         // Sort List
-        Collections.sort(objList, new SortByAbgang());
+        Collections.sort(schafe, new SortByAbgang());
         // Set List to JList
-        lstausgabe.setListData(objList.toArray());
-        lstausgabe.repaint();
+        jTable.setModel(new GUITableModel(schafe));
+        jTable.repaint();
     }
 
     private void updateListView(Object Schaf, boolean remove) {
-        // Initializing List
-        ArrayList<Schaf> objList = new ArrayList<Schaf>();
-        // Filling List
-        for (int i = 0; i < lstausgabe.getModel().getSize(); i++) {
-            objList.add((Schaf)lstausgabe.getModel().getElementAt(i));
-        }
         // Remove Object from List
-        objList.remove(lstausgabe.getSelectedIndex());
+        schafe.remove(jTable.getSelectedRow());
         // Sort List
-        Collections.sort(objList, new SortByAbgang());
+        Collections.sort(schafe, new SortByAbgang());
         // Set List to JList
-        lstausgabe.setListData(objList.toArray());
-        lstausgabe.repaint();
+        jTable.setModel(new GUITableModel(schafe));
+        jTable.repaint();
     }
 
     // Update given JList
@@ -1207,8 +1065,8 @@ public class main extends javax.swing.JFrame {
     private void btnaddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddActionPerformed
         // TODO add your handling code here:
         Add insert = new Add();
-        if (lstausgabe.getSelectedValue() != null) {
-            String schafID = ((Schaf) lstausgabe.getSelectedValue()).getSchafID();
+        if (jTable.getSelectedRow() != -1) {
+            String schafID = ((Schaf) schafe.get(jTable.getSelectedRow())).getSchafID();
             switch (jTabPlane.getSelectedIndex()) {
                 // Schur
                 case 4:
@@ -1355,8 +1213,8 @@ public class main extends javax.swing.JFrame {
     private void btnloeschenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnloeschenActionPerformed
         // TODO add your handling code here:
         Del del = new Del();
-        if (lstausgabe.getSelectedValue() != null) {
-            String schafID = ((Schaf) lstausgabe.getSelectedValue()).getSchafID();
+        if (jTable.getSelectedRow() != -1) {
+            String schafID = ((Schaf) schafe.get(jTable.getSelectedRow())).getSchafID();
             switch (jTabPlane.getSelectedIndex()) {
                 // Schur
                 case 4:
@@ -1463,7 +1321,7 @@ public class main extends javax.swing.JFrame {
                     break;
                 // Schaf
                 case 6:
-                    Schaf schaf = (Schaf) lstausgabe.getSelectedValue();
+                    Schaf schaf = (Schaf) schafe.get(jTable.getSelectedRow());
 
                     schaf.setGrundFürAbgang(jTextGrundFürAbgang.getText());
                     schaf.setMutterkennung(jMutterKennung.getText());
@@ -1492,8 +1350,8 @@ public class main extends javax.swing.JFrame {
     private void btnchangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnchangeActionPerformed
         // TODO add your handling code here:
         Update update = new Update();
-        if (lstausgabe.getSelectedValue() != null) {
-            String schafID = ((Schaf) lstausgabe.getSelectedValue()).getSchafID();
+        if (jTable.getSelectedRow() != -1) {
+            String schafID = ((Schaf) schafe.get(jTable.getSelectedRow())).getSchafID();
             switch (jTabPlane.getSelectedIndex()) {
                 // Schur
                 case 4:
@@ -1628,6 +1486,154 @@ public class main extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMutterKennungActionPerformed
 
+    private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
+       // TODO add your handling code here:
+        clearAllFields();
+        if (jTable.getSelectedRow() != -1) {
+            Schaf schaf = (Schaf) schafe.get(jTable.getSelectedRow());
+            Get select = new Get();
+
+            ArrayList<Betriebsnummer> betriebsnummerList = select.betriebsnummer(schaf.getSchafID());
+            ArrayList<Entwurmen> entwurmenList = select.entwurmen(schaf.getSchafID());
+            ArrayList<Gedeckt> gedecktList = select.gedeckt(schaf.getSchafID());
+            ArrayList<Impfungen> impfungenList = select.impfungen(schaf.getSchafID());
+            ArrayList<Klauenschneiden> klauenList = select.klauenschneiden(schaf.getSchafID());
+            ArrayList<Schur> schurList = select.schur(schaf.getSchafID());
+            ArrayList<Transport> transportList = select.transport(schaf.getSchafID());
+
+            // Schur
+            // Add First Item in List as Displayed
+            if (schurList.size() > 0) {
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(schurList.get(0).getDatum());
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateSchur.getModel();
+                dateModel.setValue(calendar);
+
+                jListSchur.setListData(schurList.toArray());
+            } else {
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateSchur.getModel();
+                dateModel.setValue(null);
+                jListSchur.setListData(new Object[]{});
+            }
+
+            // Impfungen
+            if (impfungenList.size() > 0) {
+                // Impfung
+                txfimpfungstoff.setText(impfungenList.get(0).getImpfstoff());
+                txfimpfungbemerkung.setText(impfungenList.get(0).getBemerkung());
+
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(impfungenList.get(0).getDatum());
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateImpfungen.getModel();
+                dateModel.setValue(calendar);
+
+                jListImpfungen.setListData(impfungenList.toArray());
+            } else {
+                txfimpfungstoff.setText(null);
+                txfimpfungbemerkung.setText(null);
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateImpfungen.getModel();
+                dateModel.setValue(null);
+                jListImpfungen.setListData(new Object[]{});
+            }
+
+            // Gedeckt
+            if (gedecktList.size() > 0) {
+                txfgedecktvaterkennung.setText(gedecktList.get(0).getVaterkennung());
+
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(gedecktList.get(0).getDatum());
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateGedeckt.getModel();
+                dateModel.setValue(calendar);
+
+                jListGedeckt.setListData(gedecktList.toArray());
+            } else {
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateGedeckt.getModel();
+                dateModel.setValue(null);
+                jListGedeckt.setListData(new Object[]{});
+            }
+
+            // Entwurmen
+            if (entwurmenList.size() > 0) {
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(entwurmenList.get(0).getDatum());
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateEntwurmen.getModel();
+                dateModel.setValue(calendar);
+
+                jListEntwurmen.setListData(entwurmenList.toArray());
+            } else {
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateEntwurmen.getModel();
+                dateModel.setValue(null);
+                jListEntwurmen.setListData(new Object[]{});
+            }
+
+            // Betriebsnummer
+            if (betriebsnummerList.size() > 0) {
+                txfbnnummer.setText(betriebsnummerList.get(0).getBetriebsnummer());
+                txabnbemerkung.setText(betriebsnummerList.get(0).getBemerkung());
+                jListBetriebsnummer.setListData(betriebsnummerList.toArray());
+            } else {
+                txfbnnummer.setText(null);
+                txabnbemerkung.setText(null);
+                jListBetriebsnummer.setListData(new Object[]{});
+            }
+
+            // Klauenschneiden
+            if (klauenList.size() > 0) {
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(klauenList.get(0).getDatum());
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateKlauenschneiden.getModel();
+                dateModel.setValue(calendar);
+
+                jListKlauenschneiden.setListData(klauenList.toArray());
+            } else {
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateKlauenschneiden.getModel();
+                dateModel.setValue(null);
+                jListKlauenschneiden.setListData(new Object[]{});
+            }
+
+            // Schaf
+            if (schaf.getDatumZugang() != null && schaf.getDatumZugang().getTime() != 0) {
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(schaf.getDatumZugang());
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateZugangsdatum.getModel();
+                dateModel.setValue(calendar);
+            }
+
+            if (schaf.getDatumAbgang() != null && schaf.getDatumAbgang().getTime() != 0) {
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(schaf.getDatumAbgang());
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateAbgang.getModel();
+                dateModel.setValue(calendar);
+            }
+
+            jTextGrundFürAbgang.setText(schaf.getGrundFürAbgang());
+            jMutterKennung.setText(schaf.getMutterkennung());
+            jTextKennung.setText(schaf.getKennung());
+            jTextBemerkung.setText(schaf.getBemerkung());
+
+            // Transport
+            if (transportList.size() > 0) {
+                txftptransportmittel.setText(transportList.get(0).getTransportMittel());
+                txftpgrund.setText(transportList.get(0).getGrund());
+
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(transportList.get(0).getDatum());
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateTransport.getModel();
+                dateModel.setValue(calendar);
+
+                jListTransport.setListData(transportList.toArray());
+            } else {
+                txftptransportmittel.setText(null);
+                txftpgrund.setText(null);
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateTransport.getModel();
+                dateModel.setValue(null);
+                jListTransport.setListData(new Object[]{});
+            }
+        } else {
+            jTable.repaint();
+        }
+    }//GEN-LAST:event_jTableMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1720,8 +1726,8 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -1740,11 +1746,11 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JPanel jTabSchaf;
     private javax.swing.JPanel jTabSchur;
     private javax.swing.JPanel jTabTransport;
+    private javax.swing.JTable jTable;
     private javax.swing.JTextField jTextAnzahl;
     private javax.swing.JTextArea jTextBemerkung;
     private javax.swing.JTextField jTextGrundFürAbgang;
     private javax.swing.JTextField jTextKennung;
-    private javax.swing.JList lstausgabe;
     private javax.swing.JTextArea txabnbemerkung;
     private javax.swing.JTextField txfbnnummer;
     private javax.swing.JTextField txfgedecktvaterkennung;
