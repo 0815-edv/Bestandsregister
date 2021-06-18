@@ -35,6 +35,9 @@ import de.edv.bestandsregister.SQL.Update;
 import de.edv.bestandsregister.Schaf;
 import de.edv.bestandsregister.Schur;
 import de.edv.bestandsregister.Transport;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -43,11 +46,18 @@ import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import org.jdatepicker.DateModel;
 import org.jdatepicker.JDatePicker;
 
@@ -60,17 +70,24 @@ public class main extends javax.swing.JFrame {
     /**
      * Creates new form main
      */
+    List<Schaf> schafe = null;
     public main() {
         initComponents();
         jTabPlane.setSelectedIndex(6);
         Get select = new Get();
         // Get Schafe from DB
-        var schafe = select.schafe();
+        schafe = select.schafe();
         // Sort List
         Collections.sort(schafe, new SortByAbgang());
-        // Set List Data
-        lstausgabe.setListData(schafe.toArray());
-        lstausgabe.setCellRenderer(new CellRenderer());
+        // Set Table Data
+        
+        DefaultListModel listModel = new DefaultListModel();
+        listModel.addAll(schafe);
+        jTable.setModel(new GUITableModel(schafe));
+
+        
+        //lstausgabe.setListData(schafe.toArray());
+        //lstausgabe.setCellRenderer(new CellRenderer());
         jTextAnzahl.setText(String.valueOf(schafe.size()));
     }
 
@@ -84,8 +101,6 @@ public class main extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel22 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        lstausgabe = new javax.swing.JList();
         jTabPlane = new javax.swing.JTabbedPane();
         jTabBetriebsnummer = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
@@ -146,12 +161,16 @@ public class main extends javax.swing.JFrame {
         jMutterKennung = new javax.swing.JTextField();
         jDateZugangsdatum = new org.jdatepicker.JDatePicker();
         jDateAbgang = new org.jdatepicker.JDatePicker();
+        jLabel11 = new javax.swing.JLabel();
+        JBtnBild = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jTextKennung = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextBemerkung = new javax.swing.JTextArea();
+        JPicture = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
         jTabKlauenschneiden = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         jDateKlauenschneiden = new org.jdatepicker.JDatePicker();
@@ -164,6 +183,8 @@ public class main extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jTextAnzahl = new javax.swing.JTextField();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        jTable = new javax.swing.JTable();
 
         jLabel22.setText("jLabel22");
 
@@ -171,14 +192,6 @@ public class main extends javax.swing.JFrame {
         setTitle("Bestandsregister v1.1.0");
         setLocation(new java.awt.Point(350, 200));
         setResizable(false);
-
-        lstausgabe.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        lstausgabe.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                lstausgabeValueChanged(evt);
-            }
-        });
-        jScrollPane1.setViewportView(lstausgabe);
 
         jLabel24.setText("Betriebsnummer");
 
@@ -249,12 +262,12 @@ public class main extends javax.swing.JFrame {
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jTabBetriebsnummerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jTabBetriebsnummerLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jTabBetriebsnummerLayout.createSequentialGroup()
                         .addGap(57, 57, 57)
-                        .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(16, Short.MAX_VALUE))
+                        .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jTabBetriebsnummerLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         jTabPlane.addTab("Betriebsnummer", jTabBetriebsnummer);
@@ -313,8 +326,8 @@ public class main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         jTabPlane.addTab("Entwurmen", jTabEntwurmen);
@@ -382,8 +395,8 @@ public class main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         jTabPlane.addTab("Gedeckt", jTabGedeckt);
@@ -442,7 +455,7 @@ public class main extends javax.swing.JFrame {
                         .addGap(8, 8, 8)
                         .addComponent(jLabel21)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15))
         );
 
@@ -501,8 +514,8 @@ public class main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         jTabPlane.addTab("Schur", jTabSchur);
@@ -576,8 +589,8 @@ public class main extends javax.swing.JFrame {
             .addGroup(jTabTransportLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(17, 17, 17))
         );
 
@@ -591,21 +604,41 @@ public class main extends javax.swing.JFrame {
 
         jLabel5.setText("Mutter Kennung");
 
+        jMutterKennung.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMutterKennungActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setText("Bild");
+
+        JBtnBild.setText("...");
+        JBtnBild.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBtnBildActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jMutterKennung, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelZugang)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextGrundFürAbgang, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(jDateZugangsdatum, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
-                    .addComponent(jDateAbgang, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jMutterKennung, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabelZugang)
+                        .addComponent(jLabel1)
+                        .addComponent(jTextGrundFürAbgang, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel5)
+                        .addComponent(jDateZugangsdatum, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                        .addComponent(jDateAbgang, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(JBtnBild)))
                 .addGap(69, 69, 69))
         );
         jPanel2Layout.setVerticalGroup(
@@ -627,7 +660,11 @@ public class main extends javax.swing.JFrame {
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jMutterKennung, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(JBtnBild))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel3.setText("Kennung");
@@ -638,6 +675,8 @@ public class main extends javax.swing.JFrame {
         jTextBemerkung.setRows(5);
         jScrollPane2.setViewportView(jTextBemerkung);
 
+        JPicture.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -645,11 +684,14 @@ public class main extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextKennung, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel3)
+                        .addComponent(jTextKennung, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4)
+                        .addComponent(JPicture, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                        .addComponent(jSeparator1))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(117, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -661,8 +703,11 @@ public class main extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(JPicture, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout jTabSchafLayout = new javax.swing.GroupLayout(jTabSchaf);
@@ -672,21 +717,19 @@ public class main extends javax.swing.JFrame {
             .addGroup(jTabSchafLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jTabSchafLayout.setVerticalGroup(
             jTabSchafLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jTabSchafLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
                 .addGroup(jTabSchafLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jTabSchafLayout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jTabSchafLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(16, Short.MAX_VALUE))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         jTabPlane.addTab("Schaf", jTabSchaf);
@@ -728,8 +771,8 @@ public class main extends javax.swing.JFrame {
                         .addGap(14, 14, 14)
                         .addComponent(jDateKlauenschneiden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(36, 36, 36)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         jTabPlane.addTab("Klauenschneiden", jTabKlauenschneiden);
@@ -760,22 +803,21 @@ public class main extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnadd, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46)
+                .addGap(60, 60, 60)
                 .addComponent(btnchange)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addGap(70, 70, 70)
                 .addComponent(btnloeschen)
                 .addGap(74, 74, 74))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(7, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnadd)
-                    .addComponent(btnchange)
-                    .addComponent(btnloeschen))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnadd, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                    .addComponent(btnchange, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnloeschen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -785,47 +827,62 @@ public class main extends javax.swing.JFrame {
 
         jTextAnzahl.setEditable(false);
 
+        jTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableMouseClicked(evt);
+            }
+        });
+        jScrollPane11.setViewportView(jTable);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextAnzahl, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jTextAnzahl, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                         .addComponent(jTabPlane, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addContainerGap(20, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(jTabPlane, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel6)
-                .addGap(4, 4, 4)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jTextAnzahl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTabPlane, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel7)
+                        .addComponent(jTextAnzahl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         jTabPlane.getAccessibleContext().setAccessibleName("Schaf");
@@ -865,154 +922,6 @@ public class main extends javax.swing.JFrame {
         }
 
     }
-
-    private void lstausgabeValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstausgabeValueChanged
-        // TODO add your handling code here:
-        clearAllFields();
-        if (lstausgabe.getSelectedValue() != null) {
-            Schaf schaf = (Schaf) lstausgabe.getSelectedValue();
-            Get select = new Get();
-
-            ArrayList<Betriebsnummer> betriebsnummerList = select.betriebsnummer(schaf.getSchafID());
-            ArrayList<Entwurmen> entwurmenList = select.entwurmen(schaf.getSchafID());
-            ArrayList<Gedeckt> gedecktList = select.gedeckt(schaf.getSchafID());
-            ArrayList<Impfungen> impfungenList = select.impfungen(schaf.getSchafID());
-            ArrayList<Klauenschneiden> klauenList = select.klauenschneiden(schaf.getSchafID());
-            ArrayList<Schur> schurList = select.schur(schaf.getSchafID());
-            ArrayList<Transport> transportList = select.transport(schaf.getSchafID());
-
-            // Schur
-            // Add First Item in List as Displayed
-            if (schurList.size() > 0) {
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(schurList.get(0).getDatum());
-                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateSchur.getModel();
-                dateModel.setValue(calendar);
-
-                jListSchur.setListData(schurList.toArray());
-            } else {
-                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateSchur.getModel();
-                dateModel.setValue(null);
-                jListSchur.setListData(new Object[]{});
-            }
-
-            // Impfungen
-            if (impfungenList.size() > 0) {
-                // Impfung
-                txfimpfungstoff.setText(impfungenList.get(0).getImpfstoff());
-                txfimpfungbemerkung.setText(impfungenList.get(0).getBemerkung());
-
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(impfungenList.get(0).getDatum());
-                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateImpfungen.getModel();
-                dateModel.setValue(calendar);
-
-                jListImpfungen.setListData(impfungenList.toArray());
-            } else {
-                txfimpfungstoff.setText(null);
-                txfimpfungbemerkung.setText(null);
-                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateImpfungen.getModel();
-                dateModel.setValue(null);
-                jListImpfungen.setListData(new Object[]{});
-            }
-
-            // Gedeckt
-            if (gedecktList.size() > 0) {
-                txfgedecktvaterkennung.setText(gedecktList.get(0).getVaterkennung());
-
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(gedecktList.get(0).getDatum());
-                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateGedeckt.getModel();
-                dateModel.setValue(calendar);
-
-                jListGedeckt.setListData(gedecktList.toArray());
-            } else {
-                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateGedeckt.getModel();
-                dateModel.setValue(null);
-                jListGedeckt.setListData(new Object[]{});
-            }
-
-            // Entwurmen
-            if (entwurmenList.size() > 0) {
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(entwurmenList.get(0).getDatum());
-                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateEntwurmen.getModel();
-                dateModel.setValue(calendar);
-
-                jListEntwurmen.setListData(entwurmenList.toArray());
-            } else {
-                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateEntwurmen.getModel();
-                dateModel.setValue(null);
-                jListEntwurmen.setListData(new Object[]{});
-            }
-
-            // Betriebsnummer
-            if (betriebsnummerList.size() > 0) {
-                txfbnnummer.setText(betriebsnummerList.get(0).getBetriebsnummer());
-                txabnbemerkung.setText(betriebsnummerList.get(0).getBemerkung());
-                jListBetriebsnummer.setListData(betriebsnummerList.toArray());
-            } else {
-                txfbnnummer.setText(null);
-                txabnbemerkung.setText(null);
-                jListBetriebsnummer.setListData(new Object[]{});
-            }
-
-            // Klauenschneiden
-            if (klauenList.size() > 0) {
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(klauenList.get(0).getDatum());
-                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateKlauenschneiden.getModel();
-                dateModel.setValue(calendar);
-
-                jListKlauenschneiden.setListData(klauenList.toArray());
-            } else {
-                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateKlauenschneiden.getModel();
-                dateModel.setValue(null);
-                jListKlauenschneiden.setListData(new Object[]{});
-            }
-
-            // Schaf
-            if (schaf.getDatumZugang() != null && schaf.getDatumZugang().getTime() != 0) {
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(schaf.getDatumZugang());
-                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateZugangsdatum.getModel();
-                dateModel.setValue(calendar);
-            }
-
-            if (schaf.getDatumAbgang() != null && schaf.getDatumAbgang().getTime() != 0) {
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(schaf.getDatumAbgang());
-                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateAbgang.getModel();
-                dateModel.setValue(calendar);
-            }
-
-            jTextGrundFürAbgang.setText(schaf.getGrundFürAbgang());
-            jMutterKennung.setText(schaf.getMutterkennung());
-            jTextKennung.setText(schaf.getKennung());
-            jTextBemerkung.setText(schaf.getBemerkung());
-
-            // Transport
-            if (transportList.size() > 0) {
-                txftptransportmittel.setText(transportList.get(0).getTransportMittel());
-                txftpgrund.setText(transportList.get(0).getGrund());
-
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(transportList.get(0).getDatum());
-                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateTransport.getModel();
-                dateModel.setValue(calendar);
-
-                jListTransport.setListData(transportList.toArray());
-            } else {
-                txftptransportmittel.setText(null);
-                txftpgrund.setText(null);
-                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateTransport.getModel();
-                dateModel.setValue(null);
-                jListTransport.setListData(new Object[]{});
-            }
-        } else {
-            lstausgabe.repaint();
-        }
-    }//GEN-LAST:event_lstausgabeValueChanged
 
     // Betriebsnummer
     private void jListBetriebsnummerValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListBetriebsnummerValueChanged
@@ -1112,35 +1021,22 @@ public class main extends javax.swing.JFrame {
 
     // Update Main JList
     private void updateListView(Schaf obj) {
-        // Initializing List
-        ArrayList<Schaf> objList = new ArrayList<Schaf>();
-        // Filling List
-        for (int i = 0; i < lstausgabe.getModel().getSize(); i++) {
-            objList.add((Schaf)lstausgabe.getModel().getElementAt(i));
-        }
-        // Add Object to List
-        objList.add(obj);
+        schafe.add((Schaf)obj);
         // Sort List
-        Collections.sort(objList, new SortByAbgang());
+        Collections.sort(schafe, new SortByAbgang());
         // Set List to JList
-        lstausgabe.setListData(objList.toArray());
-        lstausgabe.repaint();
+        jTable.setModel(new GUITableModel(schafe));
+        jTable.repaint();
     }
 
     private void updateListView(Object Schaf, boolean remove) {
-        // Initializing List
-        ArrayList<Schaf> objList = new ArrayList<Schaf>();
-        // Filling List
-        for (int i = 0; i < lstausgabe.getModel().getSize(); i++) {
-            objList.add((Schaf)lstausgabe.getModel().getElementAt(i));
-        }
         // Remove Object from List
-        objList.remove(lstausgabe.getSelectedIndex());
+        schafe.remove(jTable.getSelectedRow());
         // Sort List
-        Collections.sort(objList, new SortByAbgang());
+        Collections.sort(schafe, new SortByAbgang());
         // Set List to JList
-        lstausgabe.setListData(objList.toArray());
-        lstausgabe.repaint();
+        jTable.setModel(new GUITableModel(schafe));
+        jTable.repaint();
     }
 
     // Update given JList
@@ -1169,8 +1065,8 @@ public class main extends javax.swing.JFrame {
     private void btnaddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddActionPerformed
         // TODO add your handling code here:
         Add insert = new Add();
-        if (lstausgabe.getSelectedValue() != null) {
-            String schafID = ((Schaf) lstausgabe.getSelectedValue()).getSchafID();
+        if (jTable.getSelectedRow() != -1) {
+            String schafID = ((Schaf) schafe.get(jTable.getSelectedRow())).getSchafID();
             switch (jTabPlane.getSelectedIndex()) {
                 // Schur
                 case 4:
@@ -1317,8 +1213,8 @@ public class main extends javax.swing.JFrame {
     private void btnloeschenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnloeschenActionPerformed
         // TODO add your handling code here:
         Del del = new Del();
-        if (lstausgabe.getSelectedValue() != null) {
-            String schafID = ((Schaf) lstausgabe.getSelectedValue()).getSchafID();
+        if (jTable.getSelectedRow() != -1) {
+            String schafID = ((Schaf) schafe.get(jTable.getSelectedRow())).getSchafID();
             switch (jTabPlane.getSelectedIndex()) {
                 // Schur
                 case 4:
@@ -1425,7 +1321,7 @@ public class main extends javax.swing.JFrame {
                     break;
                 // Schaf
                 case 6:
-                    Schaf schaf = (Schaf) lstausgabe.getSelectedValue();
+                    Schaf schaf = (Schaf) schafe.get(jTable.getSelectedRow());
 
                     schaf.setGrundFürAbgang(jTextGrundFürAbgang.getText());
                     schaf.setMutterkennung(jMutterKennung.getText());
@@ -1454,8 +1350,8 @@ public class main extends javax.swing.JFrame {
     private void btnchangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnchangeActionPerformed
         // TODO add your handling code here:
         Update update = new Update();
-        if (lstausgabe.getSelectedValue() != null) {
-            String schafID = ((Schaf) lstausgabe.getSelectedValue()).getSchafID();
+        if (jTable.getSelectedRow() != -1) {
+            String schafID = ((Schaf) schafe.get(jTable.getSelectedRow())).getSchafID();
             switch (jTabPlane.getSelectedIndex()) {
                 // Schur
                 case 4:
@@ -1562,6 +1458,183 @@ public class main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnchangeActionPerformed
 
     /**
+     * Bild Button
+     * @param evt 
+     */
+    private void JBtnBildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBtnBildActionPerformed
+        // JFileChooser-Objekt erstellen
+        JFileChooser chooser = new JFileChooser("Dateiauswahl");
+        // Dialog zum Oeffnen von Dateien anzeigen
+        FileFilter filter = new FileNameExtensionFilter("Bilder", "png", "jpg");
+        chooser.setFileFilter(filter);
+        chooser.setFileHidingEnabled(true);
+
+        int rueckgabeWert = chooser.showOpenDialog(null);
+
+        /* Abfrage, ob auf "Öffnen" geklickt wurde */
+        if (rueckgabeWert == JFileChooser.APPROVE_OPTION) {
+            try {
+                BufferedImage bfimg = ImageIO.read(new File(chooser.getSelectedFile().getAbsolutePath()));
+                JPicture.setIcon(new ImageIcon(bfimg));
+            } catch (IOException ex) {
+                Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_JBtnBildActionPerformed
+
+    private void jMutterKennungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMutterKennungActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMutterKennungActionPerformed
+
+    private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
+       // TODO add your handling code here:
+        clearAllFields();
+        if (jTable.getSelectedRow() != -1) {
+            Schaf schaf = (Schaf) schafe.get(jTable.getSelectedRow());
+            Get select = new Get();
+
+            ArrayList<Betriebsnummer> betriebsnummerList = select.betriebsnummer(schaf.getSchafID());
+            ArrayList<Entwurmen> entwurmenList = select.entwurmen(schaf.getSchafID());
+            ArrayList<Gedeckt> gedecktList = select.gedeckt(schaf.getSchafID());
+            ArrayList<Impfungen> impfungenList = select.impfungen(schaf.getSchafID());
+            ArrayList<Klauenschneiden> klauenList = select.klauenschneiden(schaf.getSchafID());
+            ArrayList<Schur> schurList = select.schur(schaf.getSchafID());
+            ArrayList<Transport> transportList = select.transport(schaf.getSchafID());
+
+            // Schur
+            // Add First Item in List as Displayed
+            if (schurList.size() > 0) {
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(schurList.get(0).getDatum());
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateSchur.getModel();
+                dateModel.setValue(calendar);
+
+                jListSchur.setListData(schurList.toArray());
+            } else {
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateSchur.getModel();
+                dateModel.setValue(null);
+                jListSchur.setListData(new Object[]{});
+            }
+
+            // Impfungen
+            if (impfungenList.size() > 0) {
+                // Impfung
+                txfimpfungstoff.setText(impfungenList.get(0).getImpfstoff());
+                txfimpfungbemerkung.setText(impfungenList.get(0).getBemerkung());
+
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(impfungenList.get(0).getDatum());
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateImpfungen.getModel();
+                dateModel.setValue(calendar);
+
+                jListImpfungen.setListData(impfungenList.toArray());
+            } else {
+                txfimpfungstoff.setText(null);
+                txfimpfungbemerkung.setText(null);
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateImpfungen.getModel();
+                dateModel.setValue(null);
+                jListImpfungen.setListData(new Object[]{});
+            }
+
+            // Gedeckt
+            if (gedecktList.size() > 0) {
+                txfgedecktvaterkennung.setText(gedecktList.get(0).getVaterkennung());
+
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(gedecktList.get(0).getDatum());
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateGedeckt.getModel();
+                dateModel.setValue(calendar);
+
+                jListGedeckt.setListData(gedecktList.toArray());
+            } else {
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateGedeckt.getModel();
+                dateModel.setValue(null);
+                jListGedeckt.setListData(new Object[]{});
+            }
+
+            // Entwurmen
+            if (entwurmenList.size() > 0) {
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(entwurmenList.get(0).getDatum());
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateEntwurmen.getModel();
+                dateModel.setValue(calendar);
+
+                jListEntwurmen.setListData(entwurmenList.toArray());
+            } else {
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateEntwurmen.getModel();
+                dateModel.setValue(null);
+                jListEntwurmen.setListData(new Object[]{});
+            }
+
+            // Betriebsnummer
+            if (betriebsnummerList.size() > 0) {
+                txfbnnummer.setText(betriebsnummerList.get(0).getBetriebsnummer());
+                txabnbemerkung.setText(betriebsnummerList.get(0).getBemerkung());
+                jListBetriebsnummer.setListData(betriebsnummerList.toArray());
+            } else {
+                txfbnnummer.setText(null);
+                txabnbemerkung.setText(null);
+                jListBetriebsnummer.setListData(new Object[]{});
+            }
+
+            // Klauenschneiden
+            if (klauenList.size() > 0) {
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(klauenList.get(0).getDatum());
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateKlauenschneiden.getModel();
+                dateModel.setValue(calendar);
+
+                jListKlauenschneiden.setListData(klauenList.toArray());
+            } else {
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateKlauenschneiden.getModel();
+                dateModel.setValue(null);
+                jListKlauenschneiden.setListData(new Object[]{});
+            }
+
+            // Schaf
+            if (schaf.getDatumZugang() != null && schaf.getDatumZugang().getTime() != 0) {
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(schaf.getDatumZugang());
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateZugangsdatum.getModel();
+                dateModel.setValue(calendar);
+            }
+
+            if (schaf.getDatumAbgang() != null && schaf.getDatumAbgang().getTime() != 0) {
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(schaf.getDatumAbgang());
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateAbgang.getModel();
+                dateModel.setValue(calendar);
+            }
+
+            jTextGrundFürAbgang.setText(schaf.getGrundFürAbgang());
+            jMutterKennung.setText(schaf.getMutterkennung());
+            jTextKennung.setText(schaf.getKennung());
+            jTextBemerkung.setText(schaf.getBemerkung());
+
+            // Transport
+            if (transportList.size() > 0) {
+                txftptransportmittel.setText(transportList.get(0).getTransportMittel());
+                txftpgrund.setText(transportList.get(0).getGrund());
+
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(transportList.get(0).getDatum());
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateTransport.getModel();
+                dateModel.setValue(calendar);
+
+                jListTransport.setListData(transportList.toArray());
+            } else {
+                txftptransportmittel.setText(null);
+                txftpgrund.setText(null);
+                DateModel<Calendar> dateModel = (DateModel<Calendar>) jDateTransport.getModel();
+                dateModel.setValue(null);
+                jListTransport.setListData(new Object[]{});
+            }
+        } else {
+            jTable.repaint();
+        }
+    }//GEN-LAST:event_jTableMouseClicked
+
+    /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -1600,6 +1673,8 @@ public class main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton JBtnBild;
+    private javax.swing.JLabel JPicture;
     private javax.swing.JButton btnadd;
     private javax.swing.JButton btnchange;
     private javax.swing.JButton btnloeschen;
@@ -1614,6 +1689,7 @@ public class main extends javax.swing.JFrame {
     private org.jdatepicker.JDatePicker jDateZugangsdatum;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel19;
@@ -1650,8 +1726,8 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -1660,6 +1736,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JPanel jTabBetriebsnummer;
     private javax.swing.JPanel jTabEntwurmen;
     private javax.swing.JPanel jTabGedeckt;
@@ -1669,11 +1746,11 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JPanel jTabSchaf;
     private javax.swing.JPanel jTabSchur;
     private javax.swing.JPanel jTabTransport;
+    private javax.swing.JTable jTable;
     private javax.swing.JTextField jTextAnzahl;
     private javax.swing.JTextArea jTextBemerkung;
     private javax.swing.JTextField jTextGrundFürAbgang;
     private javax.swing.JTextField jTextKennung;
-    private javax.swing.JList lstausgabe;
     private javax.swing.JTextArea txabnbemerkung;
     private javax.swing.JTextField txfbnnummer;
     private javax.swing.JTextField txfgedecktvaterkennung;
