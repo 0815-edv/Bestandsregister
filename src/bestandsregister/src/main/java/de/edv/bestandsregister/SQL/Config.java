@@ -146,7 +146,8 @@ public class Config {
                 + "	 GrundFürAbgang TEXT,\n"
                 + "	 Kennung 	TEXT,\n"
                 + "	 Bemerkung 	TEXT,\n"
-                + "	 MutterKennung 	TEXT\n"
+                + "	 MutterKennung 	TEXT,\n"
+                + "      Bild           BLOB\n"
                 + ");");
 
         tables.add("CREATE TABLE IF NOT EXISTS Transport (\n"

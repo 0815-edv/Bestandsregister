@@ -31,10 +31,15 @@ import de.edv.bestandsregister.Klauenschneiden;
 import de.edv.bestandsregister.Schaf;
 import de.edv.bestandsregister.Schur;
 import de.edv.bestandsregister.Transport;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -52,7 +57,7 @@ public class Add {
         PreparedStatement stm = null;
 
         try {
-            stm = Config.getSQLConnection().prepareStatement("INSERT INTO Schaf(SchafID, DatumZugang, DatumAbgang, GrundFürAbgang, Kennung, Bemerkung, MutterKennung) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            stm = Config.getSQLConnection().prepareStatement("INSERT INTO Schaf(SchafID, DatumZugang, DatumAbgang, GrundFürAbgang, Kennung, Bemerkung, MutterKennung, Bild) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 
             stm.setString(1, schaf.getSchafID());
             stm.setDate(2, schaf.getDatumZugang());
@@ -61,10 +66,22 @@ public class Add {
             stm.setString(5, schaf.getKennung());
             stm.setString(6, schaf.getBemerkung());
             stm.setString(7, schaf.getMutterkennung());
+            
+            Image img = schaf.getBild();
+            BufferedImage bi = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+            bi.getGraphics().drawImage(img, 0, 0 , null);
+            
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(bi, "jpg", baos );
+            byte[] imageInByte = baos.toByteArray();
+            
+            stm.setBytes(1, imageInByte);
 
             stm.executeUpdate();
 
         } catch (SQLException ex) {
+            Logger.getLogger(Add.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
             Logger.getLogger(Add.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             Config.close();

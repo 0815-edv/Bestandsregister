@@ -24,6 +24,7 @@
 package de.edv.bestandsregister;
 
 import de.edv.bestandsregister.utils.IdentifierService;
+import java.awt.Image;
 import java.sql.Date;
 
 /**
@@ -39,6 +40,7 @@ public class Schaf {
     private String kennung;
     private String bemerkung;
     private String mutterkennung;
+    private Image bild;
 
     public Schaf() {
         this.schafID = IdentifierService.generateGUID();
@@ -98,6 +100,14 @@ public class Schaf {
 
     public void setMutterkennung(String mutterkennung) {
         this.mutterkennung = mutterkennung;
+    }
+    
+    public Image getBild(){
+        return this.bild;
+    }
+    
+    public void setBild(Image bild){
+        this.bild = bild;
     }
 
     public String toString() {
