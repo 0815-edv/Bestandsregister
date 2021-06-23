@@ -66,17 +66,18 @@ public class Add {
             stm.setString(5, schaf.getKennung());
             stm.setString(6, schaf.getBemerkung());
             stm.setString(7, schaf.getMutterkennung());
-            
-            Image img = schaf.getBild();
-            BufferedImage bi = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
-            bi.getGraphics().drawImage(img, 0, 0 , null);
-            
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ImageIO.write(bi, "jpg", baos );
-            byte[] imageInByte = baos.toByteArray();
-            
-            stm.setBytes(1, imageInByte);
 
+            Image img = schaf.getBild();
+            if (img != null) {
+                BufferedImage bi = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+                bi.getGraphics().drawImage(img, 0, 0, null);
+
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                ImageIO.write(bi, "jpg", baos);
+                byte[] imageInByte = baos.toByteArray();
+
+                stm.setBytes(8, imageInByte);
+            }
             stm.executeUpdate();
 
         } catch (SQLException ex) {

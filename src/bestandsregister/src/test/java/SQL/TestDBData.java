@@ -42,6 +42,7 @@ public class TestDBData {
             s.setMutterkennung("mutterkennung");
             s.setDatumAbgang(new Date(System.currentTimeMillis()));
             s.setDatumZugang(new Date(System.currentTimeMillis() + 100000));
+            s.setBild(RandomImage.read());
             insert.schaf(s);
         } catch (Exception e) {
             assertTrue(false);

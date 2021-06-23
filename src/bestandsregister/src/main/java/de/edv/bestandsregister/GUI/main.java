@@ -35,6 +35,8 @@ import de.edv.bestandsregister.SQL.Update;
 import de.edv.bestandsregister.Schaf;
 import de.edv.bestandsregister.Schur;
 import de.edv.bestandsregister.Transport;
+import de.edv.bestandsregister.utils.ImageConverter;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -48,6 +50,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -1195,7 +1198,8 @@ public class main extends javax.swing.JFrame {
                     if (jDateAbgang.getModel().getValue() != null) {
                         schaf.setDatumZugang(new java.sql.Date(((GregorianCalendar) jDateZugangsdatum.getModel().getValue()).getTimeInMillis()));
                     }
-
+                    Icon icon = JPicture.getIcon();
+                    schaf.setBild(ImageConverter.iconToImage(icon));
                     insert.schaf(schaf);
                     updateListView(schaf);
                 } else {

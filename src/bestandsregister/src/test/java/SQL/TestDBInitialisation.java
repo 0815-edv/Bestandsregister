@@ -11,6 +11,7 @@ import de.edv.bestandsregister.SQL.*;
 import de.edv.bestandsregister.Schaf;
 import java.sql.Array;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -34,8 +35,17 @@ public class TestDBInitialisation {
         File f = new File("register.db");
         if (!f.exists() && !f.isDirectory()) {
             Add insert = new Add();
-            insert.schaf(new Schaf() {
-            });
+            
+            Schaf s = new Schaf();
+            s.setBemerkung("bemerkung");
+            s.setGrundFürAbgang("grundFürAbgang");
+            s.setKennung("kennung");
+            s.setMutterkennung("mutterkennung");
+            s.setDatumAbgang(new Date(System.currentTimeMillis()));
+            s.setDatumZugang(new Date(System.currentTimeMillis() + 100000));
+            s.setBild(RandomImage.read());
+            
+            insert.schaf(s);
         }
 
         ArrayList<String> tables = new ArrayList<String>();
