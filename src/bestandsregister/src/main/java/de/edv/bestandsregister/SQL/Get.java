@@ -31,12 +31,15 @@ import de.edv.bestandsregister.Klauenschneiden;
 import de.edv.bestandsregister.Schaf;
 import de.edv.bestandsregister.Schur;
 import de.edv.bestandsregister.Transport;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -69,11 +72,15 @@ public class Get {
                 // Cast from String Possible ???
                 s.setDatumAbgang(new java.sql.Date(rs.getLong("DatumAbgang")));
                 s.setDatumZugang(new java.sql.Date(rs.getLong("DatumZugang")));
+                if(rs.getBytes("Bild") != null)
+                    s.setBild(ImageIO.read(new ByteArrayInputStream(rs.getBytes("Bild"))));
 
                 dbSchafe.add(s);
             }
 
         } catch (SQLException ex) {
+            Logger.getLogger(Get.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
             Logger.getLogger(Get.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             Config.close();

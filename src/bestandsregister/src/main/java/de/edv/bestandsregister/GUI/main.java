@@ -54,7 +54,6 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
@@ -925,6 +924,9 @@ public class main extends javax.swing.JFrame {
         for (JTextArea j : area) {
             j.setText(null);
         }
+        
+        // Clear Picture
+        JPicture.setIcon(null);
 
     }
 
@@ -1204,10 +1206,10 @@ public class main extends javax.swing.JFrame {
                     schaf.setBild(ImageConverter.iconToImage(icon));
 
                     // Scale Picture after DB Inset
-                    ImageIcon image = (ImageIcon)icon;
+                    ImageIcon image = (ImageIcon) icon;
                     Image inew = image.getImage().getScaledInstance(pWithd, pHeight, java.awt.Image.SCALE_SMOOTH);
                     JPicture.setIcon(new ImageIcon(inew));
-                    
+
                     insert.schaf(schaf);
                     updateListView(schaf);
                 } else {
@@ -1623,6 +1625,11 @@ public class main extends javax.swing.JFrame {
             jMutterKennung.setText(schaf.getMutterkennung());
             jTextKennung.setText(schaf.getKennung());
             jTextBemerkung.setText(schaf.getBemerkung());
+
+            if (schaf.getBild() != null) {
+                Image icon = schaf.getBild().getScaledInstance(pWithd, pHeight, java.awt.Image.SCALE_SMOOTH);
+                JPicture.setIcon(new ImageIcon(icon));
+            }
 
             // Transport
             if (transportList.size() > 0) {
