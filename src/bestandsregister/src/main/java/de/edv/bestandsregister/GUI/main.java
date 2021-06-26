@@ -73,7 +73,10 @@ public class main extends javax.swing.JFrame {
     /**
      * Creates new form main
      */
-    List<Schaf> schafe = null;
+    private List<Schaf> schafe = null;
+    private final int pWithd = 183;
+    private final int pHeight = 193;
+
     public main() {
         initComponents();
         jTabPlane.setSelectedIndex(6);
@@ -83,12 +86,11 @@ public class main extends javax.swing.JFrame {
         // Sort List
         Collections.sort(schafe, new SortByAbgang());
         // Set Table Data
-        
+
         DefaultListModel listModel = new DefaultListModel();
         listModel.addAll(schafe);
         jTable.setModel(new GUITableModel(schafe));
 
-        
         //lstausgabe.setListData(schafe.toArray());
         //lstausgabe.setCellRenderer(new CellRenderer());
         jTextAnzahl.setText(String.valueOf(schafe.size()));
@@ -1024,7 +1026,7 @@ public class main extends javax.swing.JFrame {
 
     // Update Main JList
     private void updateListView(Schaf obj) {
-        schafe.add((Schaf)obj);
+        schafe.add((Schaf) obj);
         // Sort List
         Collections.sort(schafe, new SortByAbgang());
         // Set List to JList
@@ -1200,6 +1202,12 @@ public class main extends javax.swing.JFrame {
                     }
                     Icon icon = JPicture.getIcon();
                     schaf.setBild(ImageConverter.iconToImage(icon));
+
+                    // Scale Picture after DB Inset
+                    ImageIcon image = (ImageIcon)icon;
+                    Image inew = image.getImage().getScaledInstance(pWithd, pHeight, java.awt.Image.SCALE_SMOOTH);
+                    JPicture.setIcon(new ImageIcon(inew));
+                    
                     insert.schaf(schaf);
                     updateListView(schaf);
                 } else {
@@ -1463,7 +1471,8 @@ public class main extends javax.swing.JFrame {
 
     /**
      * Bild Button
-     * @param evt 
+     *
+     * @param evt
      */
     private void JBtnBildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBtnBildActionPerformed
         // JFileChooser-Objekt erstellen
@@ -1491,7 +1500,7 @@ public class main extends javax.swing.JFrame {
     }//GEN-LAST:event_jMutterKennungActionPerformed
 
     private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
-       // TODO add your handling code here:
+        // TODO add your handling code here:
         clearAllFields();
         if (jTable.getSelectedRow() != -1) {
             Schaf schaf = (Schaf) schafe.get(jTable.getSelectedRow());
