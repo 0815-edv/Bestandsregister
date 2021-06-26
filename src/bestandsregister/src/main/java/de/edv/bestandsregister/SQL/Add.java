@@ -31,6 +31,7 @@ import de.edv.bestandsregister.Klauenschneiden;
 import de.edv.bestandsregister.Schaf;
 import de.edv.bestandsregister.Schur;
 import de.edv.bestandsregister.Transport;
+import de.edv.bestandsregister.utils.ImageConverter;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
@@ -69,9 +70,8 @@ public class Add {
 
             Image img = schaf.getBild();
             if (img != null) {
-                BufferedImage bi = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
-                bi.getGraphics().drawImage(img, 0, 0, null);
-
+                BufferedImage bi = ImageConverter.toBufferedImage(img);
+                
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 ImageIO.write(bi, "jpg", baos);
                 byte[] imageInByte = baos.toByteArray();
