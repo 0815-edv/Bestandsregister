@@ -71,9 +71,8 @@ public class Add {
             Image img = schaf.getBild();
             if (img != null) {
                 BufferedImage bi = ImageConverter.toBufferedImage(img);
-                
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                ImageIO.write(bi, "jpg", baos);
+                ImageIO.write(bi, "png", baos);
                 byte[] imageInByte = baos.toByteArray();
 
                 stm.setBytes(8, imageInByte);
