@@ -924,7 +924,7 @@ public class main extends javax.swing.JFrame {
         for (JTextArea j : area) {
             j.setText(null);
         }
-        
+
         // Clear Picture
         JPicture.setIcon(null);
 
@@ -1465,7 +1465,7 @@ public class main extends javax.swing.JFrame {
                     ImageIcon image = (ImageIcon) icon;
                     Image inew = image.getImage().getScaledInstance(pWithd, pHeight, java.awt.Image.SCALE_SMOOTH);
                     JPicture.setIcon(new ImageIcon(inew));
-                    
+
                     update.schaf(schaf);
                     updateListView(schaf, true);
                     updateListView(schaf);

@@ -101,12 +101,12 @@ public class Schaf {
     public void setMutterkennung(String mutterkennung) {
         this.mutterkennung = mutterkennung;
     }
-    
-    public Image getBild(){
+
+    public Image getBild() {
         return this.bild;
     }
-    
-    public void setBild(Image bild){
+
+    public void setBild(Image bild) {
         this.bild = bild;
     }
 

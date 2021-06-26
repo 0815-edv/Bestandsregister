@@ -72,8 +72,9 @@ public class Get {
                 // Cast from String Possible ???
                 s.setDatumAbgang(new java.sql.Date(rs.getLong("DatumAbgang")));
                 s.setDatumZugang(new java.sql.Date(rs.getLong("DatumZugang")));
-                if(rs.getBytes("Bild") != null)
+                if (rs.getBytes("Bild") != null) {
                     s.setBild(ImageIO.read(new ByteArrayInputStream(rs.getBytes("Bild"))));
+                }
 
                 dbSchafe.add(s);
             }
