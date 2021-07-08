@@ -849,6 +849,7 @@ public class main extends javax.swing.JFrame {
                 jTableMouseClicked(evt);
             }
         });
+        jTable.setDefaultRenderer(Object.class, new CellRenderer());
         jScrollPane11.setViewportView(jTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

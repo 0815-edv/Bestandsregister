@@ -26,47 +26,44 @@ package de.edv.bestandsregister.GUI;
 import de.edv.bestandsregister.Schaf;
 import java.awt.Color;
 import java.awt.Component;
-import javax.swing.DefaultListCellRenderer;
-import javax.swing.JList;
+import java.sql.Date;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  *
  * @author Markus
  */
-public class CellRenderer extends DefaultListCellRenderer {
+public class CellRenderer extends DefaultTableCellRenderer {
+
+    private static final long serialVersionUID = 1L;
 
     @Override
     /**
      * Custom Cell Renderer Um die Einträge der Übersichts JListe optimal
      * entsprechend des Bestands entsprechend als aktiv oder inaktiv zu setzen.
      */
-    public Component getListCellRendererComponent(JList list, Object value, int index,
-            boolean isSelected, boolean cellHasFocus) {
-        Component c = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-        if (value instanceof Schaf) {
-            Schaf schaf = (Schaf) value;
-            // Setze Anzeige Text
-            setText(schaf.toString());
+    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int col) {
+        Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, col);
+        Object date = table.getModel().getValueAt(row, col);
 
-            if (schaf.getDatumAbgang() != null) {
-                if (schaf.getDatumAbgang().getTime() != 0) {
+        c.setBackground(null);
+        if (date instanceof Date) {
+            if (table.getModel().getColumnName(col).equals("Abgang")) {
+                if ((Date) date != null) {
                     // Setzte Abgangs Kennzeichnung
-                    setBackground(Color.RED);
-                } else {
-                    // Setze Bestands Kennzeichnung
-                    setBackground(Color.GREEN);
+                    c.setBackground(Color.RED);
                 }
-            } else {
-                // Setze Bestandskennzeichnung wenn Datum NULL
-                setBackground(Color.GREEN);
+            }
+            if (table.getModel().getColumnName(col).equals("Zugang")) {
+
+                // Setze Bestands Kennzeichnung
+                c.setBackground(Color.GREEN);
             }
             if (isSelected) {
                 // Hebt das Aktiv ausgewählte Item hervor
-                setBackground(getBackground().darker());
+                c.setBackground(getBackground().darker());
             }
-        } else {
-            // Fehler Objekt ist nicht vom Typ Schaf
-            setText("Unknown Type?");
         }
         return c;
     }
