@@ -85,9 +85,8 @@ public class main extends javax.swing.JFrame {
         // Sort List
         Collections.sort(schafe, new SortByZugang());
         Collections.sort(schafe, new SortByAbgang());
-        
-        // Set Table Data
 
+        // Set Table Data
         DefaultListModel listModel = new DefaultListModel();
         listModel.addAll(schafe);
         jTable.setModel(new GUITableModel(schafe));

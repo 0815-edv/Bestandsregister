@@ -23,7 +23,6 @@
  */
 package de.edv.bestandsregister.GUI;
 
-import de.edv.bestandsregister.Schaf;
 import java.awt.Color;
 import java.awt.Component;
 import java.sql.Date;
