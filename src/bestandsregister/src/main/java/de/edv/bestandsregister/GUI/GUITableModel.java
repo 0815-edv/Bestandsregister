@@ -24,6 +24,7 @@
 package de.edv.bestandsregister.GUI;
 
 import de.edv.bestandsregister.Schaf;
+import java.util.Collections;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -34,11 +35,13 @@ import javax.swing.table.AbstractTableModel;
 public class GUITableModel extends AbstractTableModel {
 
     private List<Schaf> schafe;
-    
-    public GUITableModel(List<Schaf> schafe){
+
+    public GUITableModel(List<Schaf> schafe) {
+        Collections.sort(schafe, new SortByZugang());
+        Collections.sort(schafe, new SortByAbgang());
         this.schafe = schafe;
     }
-    
+
     @Override
     public int getRowCount() {
         return schafe.size();
@@ -50,24 +53,36 @@ public class GUITableModel extends AbstractTableModel {
     }
 
     @Override
-    public String getColumnName(int index){
-        String [] name = {"ID", "Zugang", "Abgang"};
+    public String getColumnName(int index) {
+        String[] name = {"ID", "Zugang", "Abgang"};
         return name[index];
     }
-    
+
     @Override
     public Object getValueAt(int rowIndex, int columIndex) {
-        if(columIndex < 3){
-            switch(columIndex){
+        if (columIndex < 3) {
+            switch (columIndex) {
                 case 0:
                     return schafe.get(rowIndex).getKennung();
                 case 1:
-                    return schafe.get(rowIndex).getDatumZugang();
+                    if (schafe.get(rowIndex).getDatumZugang() != null) {
+                        if (schafe.get(rowIndex).getDatumZugang().getTime() != 0) {
+                            return schafe.get(rowIndex).getDatumZugang();
+                        }
+                    }
+                    return null;
+
                 case 2:
-                    return schafe.get(rowIndex).getDatumAbgang();
+                    if (schafe.get(rowIndex).getDatumAbgang() != null) {
+                        if (schafe.get(rowIndex).getDatumAbgang().getTime() != 0) {
+                            return schafe.get(rowIndex).getDatumAbgang();
+                        }
+                    }
+                    return null;
+
             }
         }
         return "Fehler";
     }
-    
+
 }

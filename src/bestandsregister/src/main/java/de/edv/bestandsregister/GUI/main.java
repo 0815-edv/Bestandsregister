@@ -83,7 +83,9 @@ public class main extends javax.swing.JFrame {
         // Get Schafe from DB
         schafe = select.schafe();
         // Sort List
+        Collections.sort(schafe, new SortByZugang());
         Collections.sort(schafe, new SortByAbgang());
+        
         // Set Table Data
 
         DefaultListModel listModel = new DefaultListModel();
@@ -1459,14 +1461,15 @@ public class main extends javax.swing.JFrame {
                         schaf.setDatumZugang(new java.sql.Date(((GregorianCalendar) jDateZugangsdatum.getModel().getValue()).getTimeInMillis()));
                     }
 
-                    Icon icon = JPicture.getIcon();
-                    schaf.setBild(ImageConverter.iconToImage(icon));
+                    if (JPicture.getIcon() != null) {
+                        Icon icon = JPicture.getIcon();
+                        schaf.setBild(ImageConverter.iconToImage(icon));
 
-                    // Scale Picture after DB Inset
-                    ImageIcon image = (ImageIcon) icon;
-                    Image inew = image.getImage().getScaledInstance(pWithd, pHeight, java.awt.Image.SCALE_SMOOTH);
-                    JPicture.setIcon(new ImageIcon(inew));
-
+                        // Scale Picture after DB Inset
+                        ImageIcon image = (ImageIcon) icon;
+                        Image inew = image.getImage().getScaledInstance(pWithd, pHeight, java.awt.Image.SCALE_SMOOTH);
+                        JPicture.setIcon(new ImageIcon(inew));
+                    }
                     update.schaf(schaf);
                     updateListView(schaf, true);
                     updateListView(schaf);
