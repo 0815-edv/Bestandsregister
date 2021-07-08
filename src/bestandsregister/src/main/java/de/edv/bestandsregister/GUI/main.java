@@ -1202,14 +1202,15 @@ public class main extends javax.swing.JFrame {
                     if (jDateAbgang.getModel().getValue() != null) {
                         schaf.setDatumZugang(new java.sql.Date(((GregorianCalendar) jDateZugangsdatum.getModel().getValue()).getTimeInMillis()));
                     }
-                    Icon icon = JPicture.getIcon();
-                    schaf.setBild(ImageConverter.iconToImage(icon));
+                    if (JPicture.getIcon() != null) {
+                        Icon icon = JPicture.getIcon();
+                        schaf.setBild(ImageConverter.iconToImage(icon));
 
-                    // Scale Picture after DB Inset
-                    ImageIcon image = (ImageIcon) icon;
-                    Image inew = image.getImage().getScaledInstance(pWithd, pHeight, java.awt.Image.SCALE_SMOOTH);
-                    JPicture.setIcon(new ImageIcon(inew));
-
+                        // Scale Picture after DB Inset
+                        ImageIcon image = (ImageIcon) icon;
+                        Image inew = image.getImage().getScaledInstance(pWithd, pHeight, java.awt.Image.SCALE_SMOOTH);
+                        JPicture.setIcon(new ImageIcon(inew));
+                    }
                     insert.schaf(schaf);
                     updateListView(schaf);
                 } else {
