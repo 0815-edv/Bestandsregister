@@ -194,7 +194,7 @@ public class main extends javax.swing.JFrame {
         jLabel22.setText("jLabel22");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Bestandsregister v2.0.0-pre1");
+        setTitle("Bestandsregister v2.0.0");
         setLocation(new java.awt.Point(350, 200));
         setResizable(false);
 
@@ -843,12 +843,12 @@ public class main extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable.setDefaultRenderer(Object.class, new CellRenderer());
         jTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableMouseClicked(evt);
             }
         });
-        jTable.setDefaultRenderer(Object.class, new CellRenderer());
         jScrollPane11.setViewportView(jTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1109,7 +1109,7 @@ public class main extends javax.swing.JFrame {
                 // Entwurmen
                 case 1:
                     Entwurmen entwurmen = new Entwurmen(schafID);
-                    if (jDateSchur.getModel().getValue() != null) {
+                    if (jDateEntwurmen.getModel().getValue() != null) {
                         entwurmen.setDatum(new java.sql.Date(((GregorianCalendar) jDateEntwurmen.getModel().getValue()).getTimeInMillis()));
 
                         insert.entwurmen(entwurmen);
@@ -1201,7 +1201,7 @@ public class main extends javax.swing.JFrame {
                     if (jDateAbgang.getModel().getValue() != null) {
                         schaf.setDatumAbgang(new java.sql.Date(((GregorianCalendar) jDateAbgang.getModel().getValue()).getTimeInMillis()));
                     }
-                    if (jDateAbgang.getModel().getValue() != null) {
+                    if (jDateZugangsdatum.getModel().getValue() != null) {
                         schaf.setDatumZugang(new java.sql.Date(((GregorianCalendar) jDateZugangsdatum.getModel().getValue()).getTimeInMillis()));
                     }
                     if (JPicture.getIcon() != null) {
